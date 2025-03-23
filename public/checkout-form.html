@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Formulario de compra en PAWPrints. Ingresa tus datos para completar la compra de tus productos.">
+    <meta name="keywords" content="PAWPrints, compra, libros, checkout, formulario">
+    <meta name="author" content="PAWPrints">
+    <title>Finalizar Compra - PAWPrints</title>
+</head>
+<body>
+    <header>
+        <h1>PAWPrints</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Libros</a></li>
+                <li><a href="#">Novedades</a></li>
+                <li><a href="#">Ofertas</a></li>
+                <li><a href="#">Más vendidos</a></li>
+                <li><a href="#">Sucursales</a></li>
+                <li><a href="#">Nosotros</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section>
+            <h2>Formulario de compra</h2>
+            <form>
+                <label for="nombre">Nombre y apellido</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Cosme Fulanito" required>
+                
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="email@gmail.com" required>
+                
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" name="telefono" placeholder="+54 xxxxxxxxxx" required>
+                
+                <fieldset>
+                    <legend>Opciones de entrega</legend>
+                    <label><input type="radio" name="entrega" value="domicilio" checked> Entrega a domicilio</label>
+                    <label><input type="radio" name="entrega" value="sucursal"> Retiro en sucursal</label>
+                </fieldset>
+                
+                <button type="submit">Realizar compra</button>
+            </form>
+        </section>
+        
+        <aside>
+            <h2>Detalle</h2>
+            <ul>
+                <li>
+                    <img src="imagen-placeholder.jpg" alt="Imagen del producto">
+                    <p>Título</p>
+                    <p>Cantidad: xx</p>
+                    <p>Precio: $xxxxxxxx</p>
+                </li>
+                <li>
+                    <img src="imagen-placeholder.jpg" alt="Imagen del producto">
+                    <p>Título</p>
+                    <p>Cantidad: xx</p>
+                    <p>Precio: $xxxxxxxx</p>
+                </li>
+                <li>
+                    <img src="imagen-placeholder.jpg" alt="Imagen del producto">
+                    <p>Título</p>
+                    <p>Cantidad: xx</p>
+                    <p>Precio: $xxxxxxxx</p>
+                </li>
+            </ul>
+            <p>Total: $xxxxxxxx</p>
+        </aside>
+    </main>
+</body>
+</html>
