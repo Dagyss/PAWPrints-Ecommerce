@@ -10,7 +10,7 @@
     --muted-text-color: #000000;
     --background-contents: #B46BF2; /* Para contenido como forms, sections*/
     --buttons-color: #5C068C; /* Para el color de botones*/
-    --buttons-text-color: #ffffff;
+    --contrast-text-color: #ffffff;
 }
 
 /* Estilos básicos generales */
@@ -56,7 +56,7 @@ a:hover {
 button {
     font-family: inherit;
     background-color: var(--buttons-color);
-    color: var(--buttons-text-color);
+    color: var(--contrast-text-color);
     padding: 0.75rem 1.5rem;
     border: none;
     border-radius: 5px;
