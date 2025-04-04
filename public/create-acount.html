@@ -6,8 +6,62 @@
     <meta name="description" content="Formulario para crear una cuenta en PAWPrints">
     <meta name="keywords" content="Registro, Crear cuenta, PAWPrints, Libros">
     <title>Crear Cuenta - PAWPrints</title>
+    <link rel="stylesheet" href="../public/styles/create-acount.css">
 </head>
 <body>
+    <header id="header">
+        <section class="hamburger-menu">
+            <button type="button">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </section>
+        <h1>
+            <a href="./index.html">
+                PAWPrints
+                <img src="../icons/PAWPrintsVioletIcon.svg" id="enterprise-icon"/>
+            </a>
+        </h1>
+    
+        <search class="header-search">
+            <form class="header-search__form">
+                <input type="search" placeholder="¿Qué estás buscando?" />
+                <button type="submit" aria-label="Buscar">
+                    <img src="../icons/magnifying-glass.png" alt="Buscar"/>
+                </button>
+            </form>
+        </search>
+    
+        <section class="header-my-account">
+            <button type="button" aria-label="Abrir menú de cuenta">
+                <img src="../icons/UserIcon.png" class="icon">
+                Mi cuenta
+            </button>
+            <ul>
+                <li><a href="./login.html">Iniciar sesión</a></li>
+                <li><a href="./create-acount.html">Crear cuenta</a></li>
+                <li><a href="./purchase-history.html">Historial de compras</a></li>
+                <li><a href="./index.html">Cerrar sesión</a></li>
+            </ul>
+            <a href="./shopping-cart.html" class="header-shopping-cart-link">
+                <img src="../icons/shopping-cart.png" alt="Carrito de compras" class="icon"/>
+            </a>
+        </section>
+    
+        <nav>
+            <ul>
+                <li><a href="./books.html">Libros</a></li>
+                <li><a href="./books.html">Novedades</a></li>
+                <li><a href="./books.html">Ofertas</a></li>
+                <li><a href="./books.html">Más vendidos</a></li>
+                <li><a href="./sucursales.html">Sucursales</a></li>
+                <li><a href="#">Nosotros</a></li>
+            </ul>
+        </nav>
+    
+    </header>
+
     <main>
         <nav aria-label="breadcrumb">
             <ul>
@@ -45,9 +99,9 @@
         <section>
             <h2>Síguenos en redes</h2>
             <ul>
-                <li><a href="#" aria-label="Instagram"><img src="../icons/instagram-icon.png" alt="Instagram"></a></li>
-                <li><a href="#" aria-label="Facebook"><img src="../icons/facebook-icon.png" alt="Facebook"></a></li>
-                <li><a href="#" aria-label="YouTube"><img src="../icons/youtube-icon.png" alt="YouTube"></a></li>
+                <li><a href="#" aria-label="Instagram"><img src="../icons/instagram-icon.png" alt="Instagram" class="icon"></a></li>
+                <li><a href="#" aria-label="Facebook"><img src="../icons/facebook-icon.png" alt="Facebook" class="icon"></a></li>
+                <li><a href="#" aria-label="YouTube"><img src="../icons/youtube-icon.png" alt="YouTube" class="icon"></a></li>
             </ul>
         </section>
     
