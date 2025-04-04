@@ -70,3 +70,81 @@ button:hover {
 input{
     border-radius: .5rem;
 }
+
+
+main {
+    margin-top: 3rem;
+}
+
+main nav {
+    display: none;
+}
+
+.container {
+    background-color: var(--background-contents);
+    width: 20rem;
+    margin: 5rem auto 0;
+    text-align: center;
+    border-radius: 1rem;
+}
+
+.container h1 {
+    display: inline-block;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.container form {
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.container form label {
+    font-weight: bold;
+    align-self: flex-start;
+    margin-left: 1.5rem;
+}
+
+.container form input {
+    width: 18rem;
+    height: 3rem;
+    margin-bottom: 1rem;
+    padding-right: 3rem;
+}
+
+.container form button {
+    width: 10rem;
+}
+
+.container form input::placeholder {
+    padding: 0 1rem;
+}
+
+.container p {
+    margin-top: 1rem;
+}
+
+.container p a {
+    display: block;
+    text-decoration: underline;
+    font-weight: bold;
+    margin-top: 0.3rem;
+    color: var(--link-color);
+}
+
+.icon {
+    width: 2rem;
+}
+.icon-forms {
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    height: auto;
+    cursor: pointer;
+    width: 2rem;
+}
+
