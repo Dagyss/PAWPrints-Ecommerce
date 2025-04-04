@@ -1,11 +1,8 @@
 <header id="header">
-    <section class="hamburger-menu">
-        <button type="button">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-    </section>
+    <input type="checkbox" id="hamburger-checkbox" class="hamburger-checkbox">
+    <label for="hamburger-checkbox" class="hamburger-menu">
+        <img src="../icons/hamburguer-menu.png" alt="Menú" class="icon">
+    </label>
     <h1>
         <a href="./index.html">
             PAWPrints
@@ -38,7 +35,10 @@
         </a>
     </section>
 
-    <nav>
+    <nav class="mobile-menu">
+        <label for="hamburger-checkbox" class="close-menu">
+            <img src="../icons/go-gack-arrow.png" alt="Cerrar" class="icon">
+        </label>
         <ul>
             <li><a href="./books.html">Libros</a></li>
             <li><a href="./books.html">Novedades</a></li>
