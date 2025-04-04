@@ -1,0 +1,43 @@
+@import url('./base.css');
+@import url('./header.css');
+@import url('./footer.css');
+
+
+.purchase-datails-container{
+    margin: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: flex-start;
+}
+
+.purchase-datails {
+    display: flex;
+    width: 100%;
+}
+
+.purchase-datails .icon {
+    margin-top: 1rem;
+    width: 5rem;
+}
+
+.purchase-details-content {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1rem;
+    flex-grow: 1;
+}
+
+.purchase-details-content p {
+    margin: 0.2rem 0;
+}
+
+.purchase-details-content p:last-of-type {
+    margin-top: auto;
+    font-weight: bold;
+    text-align: right;
+    flex-grow: 1;
+    border-top: 1px dotted var(--primary-color);
+    padding-top: 0.5rem;
+}
