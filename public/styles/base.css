@@ -1,15 +1,15 @@
 @import url('./reset.css');
-@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@300;400;500;700&display=swap');
 
 :root {
     --primary-color: #843DA1;
-    --secondary-color: hsl(279, 43%, 64%);
-    --background-color: #ffffff;
+    --secondary-color: #AE7BCA;
+    --background-color: #EBDCF9;
     --text-color : #000000;
     --link-color: #000000;
     --muted-text-color: #000000;
-    --background-contents: #B46BF2; /* Para contenido como forms, sections*/
-    --buttons-color: #5C068C; /* Para el color de botones*/
+    --background-contents: #AE7BCA; /* Para contenido como forms, sections*/
+    --buttons-color: #6C5C7A; /* Para el color de botones*/
     --contrast-text-color: #ffffff;
 }
 
@@ -27,14 +27,14 @@ html {
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     color: var(--text-color);
     background-color: var(--background-color);
     line-height: 1.6;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Archivo Black', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     color: var(--text-color);
     margin-bottom: 0.5rem;
 }
