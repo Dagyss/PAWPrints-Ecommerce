@@ -2,15 +2,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@300;400;500;700&display=swap');
 
 :root {
+    /* Colores principales */
     --primary-color: #843DA1;
     --secondary-color: #AE7BCA;
+
+    /* Colores de fondo */
     --background-color: #EBDCF9;
-    --text-color : #000000;
-    --link-color: #000000;
+    --background-contents: #AE7BCA;/* Para contenido como forms, sections*/
+
+    /* Colores de texto */
+    --text-color: #000000;
     --muted-text-color: #000000;
-    --background-contents: #AE7BCA; /* Para contenido como forms, sections*/
-    --buttons-color: #6C5C7A; /* Para el color de botones*/
     --contrast-text-color: #ffffff;
+    --link-color: #000000;
+    
+    /* Colores de botones */
+    --buttons-color: #6C5C7A; /* Para el color de botones */
+    --footer-background-color: #6C5C7A;
 }
 
 /* Estilos básicos generales */
@@ -55,10 +63,10 @@ a:hover {
 
 button {
     font-family: inherit;
-    background-color: var(--buttons-color);
+    background-color: var(--primary-color);
     color: var(--contrast-text-color);
     padding: 0.75rem 1.5rem;
-    border: none;
+    border: 1px solid var(--contrast-text-color);
     border-radius: 5px;
     cursor: pointer;
 }
@@ -78,6 +86,10 @@ main {
 
 main nav {
     display: none;
+}
+
+footer {
+    background-color: var(--footer-background-color);
 }
 
 .container {
