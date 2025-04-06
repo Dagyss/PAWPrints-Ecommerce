@@ -7,6 +7,7 @@
     <meta name="keywords" content="PAWPrints, compra, libros, checkout, formulario">
     <meta name="author" content="PAWPrints">
     <title>Finalizar Compra - PAWPrints</title>
+    <link rel="stylesheet" href="../public/styles/checkout-form.css">
 </head>
 <body>
     <header id="header">
@@ -62,65 +63,87 @@
     
     </header>
     
+    <nav class="breadcrumb" aria-label="breadcrumb">
+        <ul>
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./checkout-form.html">Finalizar compra</a></li>
+        </ul>
+    </nav>
+
     <main>
-        <section>
-            <h2>Formulario de compra</h2>
-            <form>
-                <label for="nombre">Nombre y apellido</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Cosme Fulanito" required>
-                
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="email@gmail.com" required>
-                
-                <label for="telefono">Teléfono</label>
-                <input type="tel" id="telefono" name="telefono" placeholder="+54 xxxxxxxxxx" required>
-                
-                <fieldset>
-                    <legend>Opciones de entrega</legend>
-                    <label><input type="radio" name="entrega" value="domicilio" checked> Entrega a domicilio</label>
-                    <label><input type="radio" name="entrega" value="sucursal"> Retiro en sucursal</label>
-                </fieldset>
-                
-                <button type="submit">Realizar compra</button>
-            </form>
-        </section>
         
-        <section>
-            <h2>Detalle</h2>
-            <article>
-                <figure>
-                    <img src="" alt="Portada del libro">
-                </figure>
-                <h3>Título</h3>
-                <p>Cantidad: xx</p>
-                <p>$XXXXX</p>
-            </article>
-             <article>
-                <figure>
-                    <img src="" alt="Portada del libro">
-                </figure>
-                <h3>Título</h3>
-                <p>Cantidad: xx</p>
-                <p>$XXXXX</p>
-            </article>
-             <article>
-                <figure>
-                    <img src="" alt="Portada del libro">
-                </figure>
-                <h3>Título</h3>
-                <p>Cantidad: xx</p>
-                <p>$XXXXX</p>
-            </article>
-             <nav>
-                <button>&lt;</button>
-                <button>1</button>
-                <button>2</button>
-                <button>3</button>
-                <button>&gt;</button>
-            </nav>
-            <p>Total: $xxxxxxxx</p>
-        </section>
-    </main>
+        <div class="checkout-container">
+            <section class="order-summary">
+              <h2>Detalle</h2>
+              <article class="order-summary-item">
+                  <figure>
+                      <img src="../icons/book.png" alt="Portada del libro">
+                  </figure>
+                  <div>
+                      <h3>Título</h3>
+                      <p>Cantidad: xx</p>
+                      <p>$XXXXX</p>
+                  </div>
+              </article>
+              <article class="order-summary-item">
+                  <figure>
+                      <img src="../icons/book.png" alt="Portada del libro">
+                  </figure>
+                  <div>
+                      <h3>Título</h3>
+                      <p>Cantidad: xx</p>
+                      <p>$XXXXX</p>
+                  </div>
+              </article>
+              <article class="order-summary-item">
+                  <figure>
+                      <img src="../icons/book.png" alt="Portada del libro" >
+                  </figure>
+                  <div>
+                      <h3>Título</h3>
+                      <p>Cantidad: xx</p>
+                      <p>$XXXXX</p>
+                  </div>
+              </article>
+              <nav class="pagination">
+                  <button>&lt;</button>
+                  <button>1</button>
+                  <button>2</button>
+                  <button>3</button>
+                  <button>&gt;</button>
+              </nav>
+              <p class="total">Total: $xxxxxxxx</p>
+
+          </section>
+          <section class="checkout-form">
+              <h2>Formulario de compra</h2>
+              <form>
+                  <div class="form-section">
+                      <label for="nombre">Nombre y apellido</label>
+                      <input type="text" id="nombre" name="nombre" placeholder="Cosme Fulanito" required>
+                  </div>
+                  <div class="form-section">
+                      <label for="email">Email</label>
+                      <input type="email" id="email" name="email" placeholder="email@gmail.com" required>
+                  </div>
+                  <div class="form-section">
+                      <label for="telefono">Teléfono</label>
+                      <input type="tel" id="telefono" name="telefono" placeholder="+54 xxxxxxxxxx" required>
+                  </div>
+                  <fieldset class="form-section">
+                      <label><input type="radio" name="entrega" value="domicilio" checked> Entrega a domicilio</label>
+                      <label><input type="radio" name="entrega" value="sucursal"> Retiro en sucursal</label>
+                  </fieldset>
+                  <div class="form-actions">
+                        <button type="submit">Realizar compra</button>
+                        <p>¿Ya tenés una cuenta? <a href="./login.html"><u>Iniciar sesión</u></a></p>
+                    </div>
+              </form>
+          </section>
+      
+          
+        </div>
+      </main>
 
     <footer>
         <section>
