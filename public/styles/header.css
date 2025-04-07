@@ -41,10 +41,10 @@ h1 a{
 }
 
 .header-search__form input{
-    border: 1px solid #000;
+    border: 3px solid var(--muted-text-color);
     width: inherit;
     height: inherit;
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     color: var(--contrast-text-color);
 }
 
@@ -101,7 +101,7 @@ h1 a{
     background-color: var(--background-contents);
     transition: left 0.3s ease;
     z-index: 1000;
-    color: #000;
+    color: var(--muted-text-color);
     overflow-y: auto;
     display: flex;
     flex-direction: column;
