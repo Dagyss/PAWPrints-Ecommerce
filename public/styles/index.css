@@ -3,7 +3,7 @@
 @import url('./footer.css');
 
 .banner {
-    background-color: #AE7BCA;
+    background-color: var(--background-contents);
     text-align: center;
     padding: 2rem;
     font-weight: bold;
@@ -44,7 +44,7 @@
 .book-card {
   flex: 0 0 auto;
   width: 180px; 
-  background-color: #b276c9;
+  background-color: var(--background-contents);
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
@@ -59,7 +59,7 @@
 .book-card button {
   width: 100%;
   padding: 10px 0;
-  background-color: #843DA1; 
+  background-color: var(--primary-color); 
   color: white;
   border: none;
   border-radius: 5px;
