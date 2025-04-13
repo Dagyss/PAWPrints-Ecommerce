@@ -170,5 +170,12 @@ fieldset.form-section label {
         flex-direction: column;
     }
 
-   
 }
+@media screen and (max-width: 1024px) and (orientation:landscape){
+    .checkout-container {
+        flex-direction: column;
+        max-width: 50%;
+    }
+
+}
+
