@@ -7,6 +7,7 @@
     <meta name="keywords" content="PAWPrints, carrito de compras, libros, ebooks, productos">
     <meta name="author" content="PAWPrints">
     <title>Carrito de Compras - PAWPrints</title>
+    <link rel="stylesheet" href="../public/styles/shopping-cart.css">
 </head>
 <body>
     <header id="header">
@@ -73,55 +74,83 @@
     
     </header>
 
-    <section role="dialog" aria-labelledby="cart-title">
-        <header>
-            <h2>Carrito de Compras</h2>
-        </header>
-        <ul>
-            <li>
-                <article>
-                    <figure>
-                        <img src="image-placeholder.jpg" alt="Imagen del producto">
-                    </figure>
-                    <h3>Título del Producto</h3>
-                    <label for="quantity1">Cantidad:</label>
-                    <input type="number" name="quantity1" min="1" value="1">
-                    <p>Precio: $xxxxxxxx</p>
-                    <button type="button" aria-label="Eliminar producto"><img src="../icons/trash.png" alt=""></button>
-                </article>
-            </li>
-            <li>
-                <article>
-                    <figure>
-                        <img src="image-placeholder.jpg" alt="Imagen del producto">
-                    </figure>
-                    <h3>Título del Producto</h3>
-                    <label for="quantity2">Cantidad:</label>
-                    <input type="number" name="quantity2" min="1" value="1">
-                    <p>Precio: $xxxxxxxx</p>
-                    <button type="button" aria-label="Eliminar producto"><img src="../icons/trash.png" alt=""></button>
-                </article>
-            </li>
-            <li>
-                <article>
-                    <figure>
-                        <img src="image-placeholder.jpg" alt="Imagen del producto">
-                    </figure>
-                    <h3>Título del Producto</h3>
-                    <label for="quantity3">Cantidad:</label>
-                    <input type="number" name="quantity3" min="1" value="1">
-                    <p>Precio: $xxxxxxxx</p>
-                    <button type="button" aria-label="Eliminar producto"><img src="../icons/trash.png" alt=""></button>
-                </article>
-            </li>
-        </ul>
 
-        <footer>
-            <h3>Total:</h3>
-            <p>$X,XXX.XX</p>
-            <button type="button">Finalizar compra</button>
-        </footer>
-    </section>
+    <main>
+        <div class="cart-container">
+            <section class="cart">
+                <h2>Carrito de compra</h2>
+                <article class="cart-item">
+                    <figure>
+                        <a href="./book.html">
+                            <img src="../icons/book.png" alt="Portada del libro" >
+                        </a>
+                    </figure>
+
+                    <div class="cart-item-content">
+                        <div class="cart-item-header">
+                            <h3> <a href="./book.html">Título</a></h3>
+                            <button class="cart-remove-btn" aria-label="Eliminar producto">
+                                <img src="../icons/trash.png" alt="Eliminar">
+                            </button>
+                        </div>
+
+                        <div class="cart-controls">
+                            <label for="quantity1" class="visually-hidden">Cantidad</label>
+                            <input type="number" id="quantity1" min="1" value="1" class="cart-quantity">
+                            <p>$XXXXX</p>
+                        </div>
+                    </div>
+                </article>
+                <article class="cart-item">
+                    <figure>
+                        <a href="./book.html">
+                            <img src="../icons/book.png" alt="Portada del libro" >
+                        </a>
+                    </figure>
+
+                    <div class="cart-item-content">
+                        <div class="cart-item-header">
+                            <h3> <a href="./book.html">Título</a></h3>
+                            <button class="cart-remove-btn" aria-label="Eliminar producto">
+                                <img src="../icons/trash.png" alt="Eliminar">
+                            </button>
+                        </div>
+
+                        <div class="cart-controls">
+                            <label for="quantity1" class="visually-hidden">Cantidad</label>
+                            <input type="number" id="quantity1" min="1" value="1" class="cart-quantity">
+                            <p>$XXXXX</p>
+                        </div>
+                    </div>
+                </article>
+                <article class="cart-item">
+                    <figure>
+                        <a href="./book.html">
+                            <img src="../icons/book.png" alt="Portada del libro" >
+                        </a>
+                    </figure>
+
+                    <div class="cart-item-content">
+                        <div class="cart-item-header">
+                            <h3> <a href="./book.html">Título</a></h3>
+                            <button class="cart-remove-btn" aria-label="Eliminar producto">
+                                <img src="../icons/trash.png" alt="Eliminar">
+                            </button>
+                        </div>
+
+                        <div class="cart-controls">
+                            <label for="quantity1" class="visually-hidden">Cantidad</label>
+                            <input type="number" id="quantity1" min="1" value="1" class="cart-quantity">
+                            <p>$XXXXX</p>
+                        </div>
+                    </div>
+                </article>
+              <p class="total">Total: $xxxxxxxx</p>
+              <a href="checkout-form.html" class="checkout-button">Finalizar compra</a>
+            </div>
+        </main>
+
+
 
     <footer>
         <section>
