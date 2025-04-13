@@ -3,7 +3,7 @@
 @import url('./footer.css');
 
 
-.purchase-datails-container{
+.purchase-details-container{
     margin: 1rem;
     padding: 1rem;
     border: 1px solid var(--primary-color);
@@ -12,12 +12,12 @@
     align-items: flex-start;
 }
 
-.purchase-datails {
+.purchase-details {
     display: flex;
     width: 100%;
 }
 
-.purchase-datails .icon {
+.purchase-details .icon {
     margin-top: 1rem;
     width: 5rem;
 }
