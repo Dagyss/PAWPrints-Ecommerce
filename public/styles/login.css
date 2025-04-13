@@ -12,3 +12,12 @@
 .login-container form input[type="password"] + .icon-forms {
     display: block;
 }
+
+
+
+@media (min-width: 814px) {
+    .login-container form input[type="password"] + .icon-forms {
+        position: absolute;
+        right: 1rem
+    }
+}
