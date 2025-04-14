@@ -7,6 +7,7 @@
     <meta name="description" content="Libros en venta en PAWPrints. Consulta los libros disponibles en PAWPrints." />
     <meta name="keywords" content="PAWPrints, compra, libros, ebooks, productos" />
     <meta name="author" content="PAWPrints" />
+    <link rel="stylesheet" href="./styles/books.css" />
     <title>Libros - PAWPrints</title>
 </head>
 
@@ -19,7 +20,7 @@
         <h1>
             <a href="./index.html">
                 PAWPrints
-                <img src="../icons/PAWPrintsWhite.svg" id="enterprise-icon"/>
+                <img src="../icons/PAWPrintsVioletIcon.svg" id="enterprise-icon"/>
             </a>
         </h1>
     
@@ -85,116 +86,172 @@
         </nav>
     
         <h2>Libros</h2>
-    
-        <search>
+        
+        <section class="content">
 
-            <form>
-                <fieldset>
-                    <legend>Ordenar</legend>
-                    <label>Ordenar por:</label>
-                    <select>
-                        <option selected>Novedades</option>
-                        <option>Ofertas</option>
-                        <option>Más vendidos</option>
-                        <option>Precio: Menor a mayor</option>
-                        <option>Precio: Mayor a menor</option>
-                    </select>
-                </fieldset>
-    
-                <fieldset>
-                    <legend>Categorías</legend>
-                    <ul>
-                        <l1><label><input type="checkbox"> Ficción</label></l1>
-                        <l1><label><input type="checkbox"> No Ficción</label></l1>
-                        <l1><label><input type="checkbox"> Otros</label></l1>
-                    </ul>
-                </fieldset>
-    
-                <fieldset>
-                    <legend>Precio</legend>
-                    <label>Desde</label>
-                    <input type="number" placeholder="$ Precio mínimo">
-                    <label>Hasta</label>
-                    <input type="number" placeholder="$ Precio máximo">
-                </fieldset>
-    
-                <fieldset>
-                    <legend>Autor</legend>
-                    <label>Buscar autor:</label>
-                    <input type="text" placeholder="Buscar autor">
-                    <select multiple aria-label="Autores">
-                        <option value="coincidencia">Primera coincidencia</option>
-                        <option value="coincidencia">Segunda coincidencia</option>
-                        <option value="coincidencia">Tercera coincidencia</option>
-                    </select>
-                </fieldset>
-    
-                <fieldset>
-                    <legend>Idioma</legend>
-                    <ul>
-                        <li><label><input type="checkbox"> Inglés</label></li>
-                        <li><label><input type="checkbox"> Español</label></li>
-                        <li><label><input type="checkbox"> Francés</label></li>
-                        <li><label><input type="checkbox"> Otros</label></li>
-                    </ul>
-                </fieldset>
+            
+            <section class="filtros">
+                <button class="buttom-filtros" type="button" aria-label="Abrir menú de filtros">Filtrar</button>
+                <button class="button-ordenar" type = "button" aria-label="Abrir menu de Ordenar Por">Ordenar Por</button>
+            </section>
+            
+            <search>
                 
-                <fieldset>
-                    <legend>Formato</legend>
-                    <label><input type="checkbox"> E-book</label>
-                    <label><input type="checkbox"> Físico</label>
-                </fieldset>
-    
-                <button type="submit">Aplicar filtros</button>
-            </form>
+                <form>
+                    <fieldset>
+                        <legend>Ordenar</legend>
+                        <label>Ordenar por:</label>
+                        <select>
+                            <option selected>Novedades</option>
+                            <option>Ofertas</option>
+                            <option>Más vendidos</option>
+                            <option>Precio: Menor a mayor</option>
+                            <option>Precio: Mayor a menor</option>
+                        </select>
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend>Categorías</legend>
+                        <ul>
+                            <li><label><input class="hola" type="checkbox"> Ficción</label></li>
+                            <li><label><input type="checkbox"> No Ficción</label></li>
+                            <li><label><input type="checkbox"> Otros</label></li>
+                        </ul>
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend>Precio</legend>
+                        <label>Desde</label>
+                        <input type="number" placeholder="$ Precio mínimo">
+                        <label>Hasta</label>
+                        <input type="number" placeholder="$ Precio máximo">
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend>Autor</legend>
+                        <label>Buscar autor:</label>
+                        <input type="text" placeholder="Buscar autor">
+                        <select multiple aria-label="Autores">
+                            <option value="coincidencia">Primera coincidencia</option>
+                            <option value="coincidencia">Segunda coincidencia</option>
+                            <option value="coincidencia">Tercera coincidencia</option>
+                        </select>
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend>Idioma</legend>
+                        <ul>
+                            <li><label><input type="checkbox"> Inglés</label></li>
+                            <li><label><input type="checkbox"> Español</label></li>
+                            <li><label><input type="checkbox"> Francés</label></li>
+                            <li><label><input type="checkbox"> Otros</label></li>
+                        </ul>
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend>Formato</legend>
+                        <label><input type="checkbox"> E-book</label>
+                        <label><input type="checkbox"> Físico</label>
+                    </fieldset>
+                    
+                    <button type="submit">Aplicar filtros</button>
+                </form>
+                
+            </search>
+            
+            <section class="books">
 
-        </search>
-    
-        <section>
-
-            <article>
-                <figure>
-                    <a href="">
-                        <img src="" alt="Portada del libro">
-                    </a>
-                </figure>
-                <h3><a href="">Título</a></h3>
-                <p>Nombre del autor</p>
-                <p>$XXXXX</p>
-                <button type="button">Comprar</button>
-            </article>
-
-            <article>
-                <figure>
-                    <a href="">
-                        <img src="" alt="Portada del libro">
-                    </a>
-                </figure>
-                <h3><a href="">Título</a></h3>
-                <p>Nombre del autor</p>
-                <p>$XXXXX</p>
-                <button type="button">Comprar</button>
-            </article>
-
-            <article>
-                <figure>
-                    <a href="">
-                        <img src="" alt="Portada del libro">
-                    </a>
-                </figure>
-                <h3><a href="">Título</a></h3>
-                <p>Nombre del autor</p>
-                <p>$XXXXX</p>
-                <button type="button">Comprar</button>
-            </article>
-
-        </section>
-
-    </main>
+                <article class="book">
+                    <figure>
+                        <a href="">
+                            <img src="../icons/libro-ejemplo.jpg" alt="Portada del libro" >
+                        </a>
+                    </figure>
+                    <h3><a href="">Título</a></h3>
+                    <p>Nombre del autor</p>
+                    <p>$XXXXX</p>
+                    <button type="button">Comprar</button>
+                </article>
+                
+                <article class="book">
+                    <figure>
+                        <a href="">
+                            <img src="../icons/libro-ejemplo.jpg" alt="Portada del libro">
+                        </a>
+                    </figure>
+                    <h3><a href="">Título</a></h3>
+                    <p>Nombre del autor</p>
+                    <p>$XXXXX</p>
+                    <button type="button">Comprar</button>
+                </article>
+                
+                <article class="book">
+                    <figure>
+                        <a href="">
+                            <img src="../icons/libro-ejemplo.jpg" alt="Portada del libro">
+                        </a>
+                    </figure>
+                    <h3><a href="">Título</a></h3>
+                    <p>Nombre del autor</p>
+                    <p>$XXXXX</p>
+                    <button type="button">Comprar</button>
+                </article>
+                
+                <article class="book">
+                    <figure>
+                        <a href="">
+                            <img src="../icons/libro-ejemplo.jpg" alt="Portada del libro" >
+                        </a>
+                    </figure>
+                    <h3><a href="">Título</a></h3>
+                    <p>Nombre del autor</p>
+                    <p>$XXXXX</p>
+                    <button type="button">Comprar</button>
+                </article>
+                
+                <article class="book">
+                    <figure>
+                        <a href="">
+                            <img src="../icons/libro-ejemplo.jpg" alt="Portada del libro">
+                        </a>
+                    </figure>
+                    <h3><a href="">Título</a></h3>
+                    <p>Nombre del autor</p>
+                    <p>$XXXXX</p>
+                    <button type="button">Comprar</button>
+                </article>
+                
+                <article class="book">
+                    <figure>
+                        <a href="">
+                            <img src="../icons/libro-ejemplo.jpg" alt="Portada del libro">
+                        </a>
+                    </figure>
+                    <h3><a href="">Título</a></h3>
+                    <p>Nombre del autor</p>
+                    <p>$XXXXX</p>
+                    <button type="button">Comprar</button>
+                </article>
+                
+                <article class="book">
+                    <figure>
+                        <a href="">
+                            <img src="../icons/libro-ejemplo.jpg" alt="Portada del libro">
+                        </a>
+                    </figure>
+                    <h3><a href="">Título</a></h3>
+                    <p>Nombre del autor</p>
+                    <p>$XXXXX</p>
+                    <button type="button">Comprar</button>
+                </article>
+                
+            </section>
+        </section>    
+        </main>
 
     <footer>
         <section>
-            <h2>Seguinos en redes</h2>
+            <h2>Síguenos en redes</h2>
             <ul>
                 <li><a href="#" aria-label="Instagram"><img src="../icons/instagram-icon.png" alt="Instagram" class="icon"></a></li>
                 <li><a href="#" aria-label="Facebook"><img src="../icons/facebook-icon.png" alt="Facebook" class="icon"></a></li>
@@ -231,7 +288,7 @@
             </form>
         </section>
     
-        <p><small>&copy; Copyright</small></p>
+        <p><small>&copy; 2025 Nombre de la Empresa. Todos los derechos reservados.</small></p>
     </footer>
     
 </body>
