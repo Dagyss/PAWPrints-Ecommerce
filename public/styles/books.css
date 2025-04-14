@@ -1,7 +1,7 @@
 @import url('base.css');
 @import url('header.css');
 @import url('footer.css');
-@import url('book.css');
+@import url('book-component.css');
 
 .filtros {
     display: flex;
