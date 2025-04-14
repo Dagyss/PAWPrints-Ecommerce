@@ -1,12 +1,7 @@
+@import url('./base.css');
 @import url('./index.css');
 @import url('./header.css');
 @import url('./footer.css');
-
-
-form {
-    display: flex;
-    flex-direction: column;
-}
 
 main :not(h2) {
     display: grid;
