@@ -150,17 +150,18 @@ form {
         width: 70%;
         height: 100vh; 
         margin: auto;
-
     }
 
     .city-search {
         grid-area: city-search;
         margin: 0;
+        border-radius: 20px 0 0 0;
     }
     
     .map-container {
         grid-area: map-container;
         height: 100%;
+        border-radius: 0 20px 20px 0;
     }
     
     .branches {
@@ -168,6 +169,7 @@ form {
         overflow-y: auto;
         max-height: 100%;
         padding-right: 0.5rem;
+        border-radius: 0 0 0 20px;
     }
 
     .branches::-webkit-scrollbar {
