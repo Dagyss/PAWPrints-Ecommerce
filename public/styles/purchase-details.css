@@ -2,14 +2,17 @@
 @import url('./header.css');
 @import url('./footer.css');
 
+main h1 {
+    margin-left: 2rem;
+}
 
 .purchase-details-container{
     margin: 1rem;
-    padding: 1rem;
+    padding: .5rem;
     border: 1px solid var(--primary-color);
-    border-radius: 0.5rem;
     display: flex;
     align-items: flex-start;
+    background-color: var(--background-color);
 }
 
 .purchase-details {
@@ -40,4 +43,51 @@
     flex-grow: 1;
     border-top: 1px dotted var(--primary-color);
     padding-top: 0.5rem;
+}
+
+
+@media (min-width: 814px) and (max-width: 1139px) {
+    .container h2{
+        position: relative;
+        right: 5rem;
+    }
+
+    .container ul{
+        width: 30rem;
+    }
+
+    .purchase-details-content {
+        gap: 1rem;
+    }
+
+    .purchase-details .icon {
+        width: 8rem;
+    }
+
+    .purchase-details-content p:last-of-type {
+        border: none;
+    }
+}
+
+@media (min-width: 1140px) {
+    .container h2{
+        position: relative;
+        right: 12rem;
+    } 
+
+    .container ul{
+        width: 45rem;
+    }
+
+    .purchase-details-content {
+        margin-top: 1rem;
+        gap: 1.5rem;
+    }
+    .purchase-details .icon {
+        width: 10rem;
+    }
+
+    .purchase-details-content p:last-of-type {
+        border: none;
+    }
 }

@@ -66,7 +66,7 @@ button {
     color: var(--contrast-text-color);
     padding: 0.75rem 1.5rem;
     border: 1px solid var(--contrast-text-color);
-    border-radius: 5px;
+    border-radius: 2rem;
     cursor: pointer;
 }
 
@@ -128,6 +128,7 @@ footer {
     height: 3rem;
     margin-bottom: 1rem;
     padding-right: 3rem;
+    border-radius: 2rem;
 }
 
 .container form button {
@@ -200,6 +201,9 @@ footer {
 }
 
 @media (min-width: 814px) and (max-width: 1139px) {
+    html{
+        font-size: 1.2rem;
+    }
     .container{
         width: 30rem;
     }
@@ -222,8 +226,11 @@ footer {
 }
 
 @media (min-width: 1140px) {
+    html{
+        font-size: 1.5rem;
+    }
     .container{
-        width: 50rem;
+        width: 45rem;
     }
 
     .container form{
