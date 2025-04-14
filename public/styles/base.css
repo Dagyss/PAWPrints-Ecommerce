@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@300;400;500;700&display=swap');
 
 :root {
-    /* Colores principales */
+    /* Colores principales*/
     --primary-color: #843DA1;
     --secondary-color: #5C068C; /*Color violeta del logo*/
     /* Colores de fondo */
@@ -95,7 +95,7 @@ footer {
 .container {
     background-color: var(--background-contents);
     width: 20rem;
-    margin: 5rem auto 0;
+    margin: 3rem auto 0;
     text-align: center;
     border-radius: 1rem;
     display: flex;
@@ -200,9 +200,91 @@ footer {
     text-decoration: underline;
 }
 
-@media (min-width: 814px) and (max-width: 1139px) {
+@media (min-width: 842px) and (max-width: 1139px) {
     html{
         font-size: 1.2rem;
+    }
+    main nav {
+        display: block;
+        margin-left: 1rem;
+    }
+    
+    main nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        color: var(--primary-color);
+    }
+    
+    main nav li {
+        display: flex;
+        align-items: center;
+    }
+    
+    main nav li::after {
+        content: ">";
+        margin: 0 0.5rem;
+    }
+    
+    main nav li:last-child::after {
+        content: "";
+    }
+
+    main nav li:last-child{
+        font-weight: bold;
+    }
+    
+    main nav a {
+        text-decoration: none;
+        color: var(--background-contents);
+    }
+    
+    main nav a:hover {
+        text-decoration: underline;
+    }
+    main nav {
+        display: block;
+        margin-left: 1rem;
+    }
+    
+    main nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        color: var(--primary-color);
+    }
+    
+    main nav li {
+        display: flex;
+        align-items: center;
+    }
+    
+    main nav li::after {
+        content: ">";
+        margin: 0 0.5rem;
+    }
+    
+    main nav li:last-child::after {
+        content: "";
+    }
+
+    main nav li:last-child{
+        font-weight: bold;
+    }
+
+    main nav a {
+        text-decoration: none;
+        color: var(--background-contents);
+    }
+    
+    main nav a:hover {
+        text-decoration: underline;
     }
     .container{
         width: 30rem;
@@ -229,6 +311,50 @@ footer {
     html{
         font-size: 1.5rem;
     }
+
+    main nav {
+        display: block;
+        margin-left: 1rem;
+    }
+    
+    main nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        color: var(--primary-color);
+    }
+    
+    main nav li {
+        display: flex;
+        align-items: center;
+    }
+    
+    main nav li::after {
+        content: ">";
+        margin: 0 0.5rem;
+    }
+    
+    main nav li:last-child::after {
+        content: "";
+    }
+
+    main nav li:last-child{
+        font-weight: bold;
+    }
+    
+    main nav a {
+        text-decoration: none;
+        color: var(--background-contents);
+    }
+    
+    main nav a:hover {
+        text-decoration: underline;
+        color: var(--secondary-color);
+    }
+
     .container{
         width: 45rem;
     }
