@@ -76,15 +76,18 @@ fieldset label {
     gap: 5px;
 }
 
+form button[type="submit"]{
+    border-radius: 0;
+}
+
 .books {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    justify-content: start;
+    margin: 10px;
+    justify-content: space-between;
 }
 
 @media (min-width: 900px) {
@@ -131,6 +134,7 @@ fieldset label {
         grid-template-columns: repeat(3, 1fr);
         gap: 10px;
         justify-content: start;
+        margin: auto;
         margin-top: 10px;
     }
 
@@ -165,7 +169,7 @@ fieldset label {
     }
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1150px) {
     .books {
         grid-template-columns: repeat(2, 1fr);
     }

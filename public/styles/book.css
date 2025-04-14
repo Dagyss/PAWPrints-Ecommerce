@@ -31,6 +31,13 @@
     overflow: hidden; 
 }
 
+.book button{
+    border-radius: 0;
+    padding: 5px;
+    margin: 5px 0;
+    font-size: 0.9rem;
+}
+
 @media (min-width: 900px) {
     .book {
         width: 100%;
