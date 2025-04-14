@@ -5,7 +5,6 @@
     /* Colores principales */
     --primary-color: #843DA1;
     --secondary-color: #5C068C; /*Color violeta del logo*/
-
     /* Colores de fondo */
     --background-color: #EBDCF9;
     --background-contents: #AE7BCA;/* Para contenido como forms, sections*/
@@ -67,7 +66,7 @@ button {
     color: var(--contrast-text-color);
     padding: 0.75rem 1.5rem;
     border: 1px solid var(--contrast-text-color);
-    border-radius: 5px;
+    border-radius: 2rem;
     cursor: pointer;
 }
 
@@ -89,6 +88,7 @@ main nav {
 }
 
 footer {
+    margin-top: 3rem;
     background-color: var(--footer-background-color);
 }
 
@@ -98,6 +98,9 @@ footer {
     margin: 5rem auto 0;
     text-align: center;
     border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .container h1 {
@@ -125,6 +128,7 @@ footer {
     height: 3rem;
     margin-bottom: 1rem;
     padding-right: 3rem;
+    border-radius: 2rem;
 }
 
 .container form button {
@@ -194,4 +198,54 @@ footer {
 
 .breadcrumb a:hover {
     text-decoration: underline;
+}
+
+@media (min-width: 814px) and (max-width: 1139px) {
+    html{
+        font-size: 1.2rem;
+    }
+    .container{
+        width: 30rem;
+    }
+
+    .container form{
+        width: 20rem;
+    }
+
+    .container form label {
+        margin: 0 .5rem;
+    }
+
+    .container form input {
+        width: 20rem;
+    }
+
+    .container form button {
+        width: 13rem;
+    }
+}
+
+@media (min-width: 1140px) {
+    html{
+        font-size: 1.5rem;
+    }
+    .container{
+        width: 45rem;
+    }
+
+    .container form{
+        width: 30rem;
+    }
+
+    .container form label {
+        margin: 0 .5rem;
+    }
+
+    .container form input {
+        width: 30rem;
+    }
+
+    .container form button {
+        width: 15rem;
+    }
 }

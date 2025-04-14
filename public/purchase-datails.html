@@ -7,7 +7,7 @@
     <meta name="keywords" content="PAWPrints, compra, historial, ebooks, productos">
     <meta name="author" content="PAWPrints">
     <title>Detalle de Compra - PAWPrints</title>
-    <link rel="stylesheet" href="../public/styles/purchase-datails.css">
+    <link rel="stylesheet" href="../public/styles/purchase-details.css">
 </head>
 <body>
     <header id="header">
@@ -38,7 +38,7 @@
             </button>
             <ul>
                 <li><a href="./login.html">Iniciar sesión</a></li>
-                <li><a href="./create-acount.html">Crear cuenta</a></li>
+                <li><a href="./create-account.html">Crear cuenta</a></li>
                 <li><a href="./purchase-history.html">Historial de compras</a></li>
                 <li><a href="./index.html">Cerrar sesión</a></li>
             </ul>
@@ -49,7 +49,7 @@
     
         <nav class="mobile-menu">
             <label for="hamburger-checkbox" class="close-menu">
-                <img src="../icons/go-gack-arrow.png" alt="Cerrar" class="icon">
+                <img src="../icons/go-back-arrow.png" alt="Cerrar" class="icon">
             </label>
             <ul>
                 <li><a href="./books.html">Libros</a></li>
@@ -60,6 +60,16 @@
                 <li><a href="./about-us.html">Nosotros</a></li>
             </ul>
             <img src="../icons/PAWPrintsWhite.svg" class="enterprise-icon" alt="Logo de la Empresa"/>
+        </nav>
+        <nav class="desktop-nav">
+            <ul>
+                <li><a href="./books.html">Libros</a></li>
+                <li><a href="./books.html">Novedades</a></li>
+                <li><a href="./books.html">Ofertas</a></li>
+                <li><a href="./books.html">Más vendidos</a></li>
+                <li><a href="./sucursales.html">Sucursales</a></li>
+                <li><a href="./about-us.html">Nosotros</a></li>
+            </ul>
         </nav>
     
     </header>
@@ -75,12 +85,12 @@
         </nav>
         <h1>Detalle: num-compra</h1>
 
-        <section>
+        <section class="container">
             <h2>Productos adquiridos</h2>
 
             <ul>
-                <li class="purchase-datails-container">
-                    <article class="purchase-datails">
+                <li class="purchase-details-container">
+                    <article class="purchase-details">
                         <figure>
                             <img src="../icons/book.png" alt="Imagen del producto" class="icon">
                         </figure>
@@ -90,12 +100,12 @@
                             </header>
                             <p>Cantidad: xx</p>
                             <p>Formato: Ebook</p>
-                            <p>Precio
+                            <p>$ XXXXX </p>
                         </section>
                     </article>
                 </li>
-                <li class="purchase-datails-container">
-                    <article class="purchase-datails">
+                <li class="purchase-details-container">
+                    <article class="purchase-details">
                         <figure>
                             <img src="../icons/book.png" alt="Imagen del producto" class="icon">
                         </figure>
@@ -105,12 +115,12 @@
                             </header>
                             <p>Cantidad: xx</p>
                             <p>Formato: Ebook</p>
-                            <p>Precio
+                            <p>$ XXXXX </p>
                         </section>
                     </article>
                 </li>
-                <li class="purchase-datails-container">
-                    <article class="purchase-datails">
+                <li class="purchase-details-container">
+                    <article class="purchase-details">
                         <figure>
                             <img src="../icons/book.png" alt="Imagen del producto" class="icon">
                         </figure>
@@ -119,8 +129,7 @@
                                 <h3>Título del producto</h3>
                             </header>
                             <p>Cantidad: xx</p>
-                            <p>Formato: Ebook</p>
-                            <p>Precio
+                            <p>$ XXXXX </p>
                         </section>
                     </article>
                 </li>
@@ -162,14 +171,13 @@
         <section>
             <h2>Newsletter</h2>
             <form>
-                <label for="email">Suscríbete a nuestras novedades</label>
                 <input type="email" id="email" name="email" placeholder="Tu correo electrónico" required>
                 <button type="submit">Suscribirse</button>
             </form>
         </section>
     
         <p><small>&copy; Copyright</small></p>
-    </footer> 
+    </footer>
 
 </body>
 </html>

@@ -7,19 +7,27 @@
     display: flex;
     
     justify-content: space-between;
-    max-width: 1200px;
+    max-width: 80%;
     margin: 2rem auto;
     padding: 1rem;
     gap: 2rem;
+    
 }
+
 
 /* Formulario */
 .checkout-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
     flex: 2;
     background-color: var(--background-contents);
-    padding: 2rem;
     border-radius: 28px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .checkout-form h2 {
@@ -29,6 +37,8 @@
 
 .form-section {
     margin-bottom: 2rem;
+    width: 100%;
+
 }
 
 .form-section label {
@@ -90,13 +100,21 @@ fieldset.form-section label {
     background-color: var(--background-contents);
     padding: 1.5rem;
     border-radius: 28px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+.order-summary-item img {
+    width: 100%;
+    height: 80%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
 
 .order-summary h3 {
     margin-bottom: 1rem;
-    color: #333;
+    color: var(--text-color);
 }
+
 
 .order-summary-item {
     display: flex;
@@ -108,25 +126,39 @@ fieldset.form-section label {
     gap: 1rem;
 }
 
+.order-summary-details{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+}
+
+.order-summary-price{
+    text-align: right;
+}
+
 .pagination {
     display: flex;
     justify-content: center;
     gap: 0.5rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin: 1rem 0;
 }
 
 .pagination button {
+    padding: 0.5rem;
     border: none;
-    border-radius: 50%;
-    background-color: var(--background-color);
+    background-color: var(--background-contents);
     cursor: pointer;
     color: var(--text-color);
+    font-size: 1rem;
+
 }
 
 .order-summary .total {
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1rem;
     text-align: center;
     border-top: 2px solid #ccc;
     margin-top: 1rem;
@@ -137,4 +169,13 @@ fieldset.form-section label {
     .checkout-container {
         flex-direction: column;
     }
+
 }
+@media screen and (max-width: 1024px) and (orientation:landscape){
+    .checkout-container {
+        flex-direction: column;
+        max-width: 50%;
+    }
+
+}
+
