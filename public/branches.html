@@ -8,6 +8,7 @@
         content="Sucursales físicas de PAWPrints. Consulta la ubicación de nuestras sucursales." />
     <meta name="keywords" content="PAWPrints, sucursales, lugares físicos" />
     <meta name="author" content="PAWPrints" />
+    <link rel="stylesheet" href="./styles/branches.css" />
     <title>Sucursales - PAWPrints</title>
 </head>
 
@@ -88,26 +89,66 @@
 
         <h2>Sucursales</h2>
 
-        <section>
-            <search>
-                <form>
-                    <label>Selecciona una ciudad:</label>
-                    <select>
+        <section class="content">
+            <section class="city-search">
+                <form class="city-search__form">
+                    <label for="city-select">Selecciona una ciudad:</label>
+                    <select id="city-select" name="city">
                         <option value="Buenos Aires">Buenos Aires</option>
                         <option value="Cordoba">Córdoba</option>
                         <option value="Etc..">Etc</option>
                     </select>
-                    <button type="submit">Filtrar</button>
+                    <button type="submit" class="city-search__button">Buscar</button>
                 </form>
-            </search>
+            </section>
 
-            <section>
+            <section class="map-container">
+                <div class="zoom-controls">
+                    <button type="button" aria-label="Acercar">+</button>
+                    <button type="button" aria-label="Alejar">−</button>
+                </div>
+                <div class="map">
+                    Acá el mapa
+                </div>
+            </section>
+
+            <section class="branches">
+                <h2>Resultado de busqueda</h2>
                 <article>
                     <h3>Nombre Sucursal</h3>
-                    <p>Dirección</p>
+                    <p> <strong>Dirección</strong></p>
                     <p>Teléfono</p>
-                    <button type="button">Ver ubicación</button>
-                    <a href="www.googlemaps.com">Más info</a>
+                    <section class="contact">
+                        <button type="button">Ver ubicación</button>
+                        <a href="www.googlemaps.com">Más info</a>
+                    </section>
+                </article>
+                <article>
+                    <h3>Nombre Sucursal</h3>
+                    <p> <strong>Dirección</strong></p>
+                    <p>Teléfono</p>
+                    <section class="contact">
+                        <button type="button">Ver ubicación</button>
+                        <a href="www.googlemaps.com">Más info</a>
+                    </section>
+                </article>
+                <article>
+                    <h3>Nombre Sucursal</h3>
+                    <p> <strong>Dirección</strong></p>
+                    <p>Teléfono</p>
+                    <section class="contact">
+                        <button type="button">Ver ubicación</button>
+                        <a href="www.googlemaps.com">Más info</a>
+                    </section>
+                </article>
+                <article>
+                    <h3>Nombre Sucursal</h3>
+                    <p> <strong>Dirección</strong></p>
+                    <p>Teléfono</p>
+                    <section class="contact">
+                        <button type="button">Ver ubicación</button>
+                        <a href="www.googlemaps.com">Más info</a>
+                    </section>
                 </article>
                 <article>
                     <h3>Nombre Sucursal</h3>
@@ -124,14 +165,6 @@
                     <a href="www.googlemaps.com">Más info</a>
                 </article>
             </section>
-        </section>
-
-        <section>
-            <button type="button" aria-label="Acercar">+</button>
-            <button type="button" aria-label="Alejar">−</button>
-            <canvas aria-label="Mapa de sucursales">
-                Acá el mapa
-            </canvas>
         </section>
 
     </main>
