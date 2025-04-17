@@ -17,5 +17,6 @@
 │   ├── Views/
 │   └── Router.php
 ├── storage/
-└── .env
+├── .env
+└── composer.json
 ```
