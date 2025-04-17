@@ -1,0 +1,23 @@
+@import url('./base.css');
+@import url('./header.css');
+@import url('./footer.css');
+
+
+/* MAIN */
+
+.login-container form .icon-forms {
+    top: 62%;
+}
+
+.login-container form input[type="password"] + .icon-forms {
+    display: block;
+}
+
+
+
+@media (min-width: 814px) {
+    .login-container form input[type="password"] + .icon-forms {
+        position: absolute;
+        right: 1rem
+    }
+}

@@ -1,0 +1,36 @@
+@import url('./base.css');
+@import url('./header.css');
+@import url('./footer.css');
+
+main :not(h2) {
+    display: grid;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #6C5C7A;
+    margin-left:15%;
+    margin-right:15%;
+  }
+.flex-container > section{
+    margin-top:1%;
+    margin-left:3%;
+    margin-right:3%;
+}
+
+.flex-container > section > p{
+    text-align: justify;
+}
+
+nav[aria-label="breadcrumb"] {
+    width: 70%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+main h2 {
+    width: 70%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}

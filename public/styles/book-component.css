@@ -1,0 +1,45 @@
+.book {
+    position: relative;
+    background-color: var(--background-contents);
+    padding: 10px 15px 5px;
+    margin: 2px;
+    box-shadow: 0px 5px 4px 1px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 45%;
+    max-width: 250px;
+}
+
+.book p {
+    margin: 0;
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+.book figure img {
+    width: 100%;
+}
+
+.book figure {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+}
+
+.book button{
+    border-radius: 0;
+    padding: 5px;
+    margin: 5px 0;
+    font-size: 0.9rem;
+}
+
+@media (min-width: 900px) {
+    .book {
+        width: 100%;
+    }
+}
