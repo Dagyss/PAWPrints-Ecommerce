@@ -1,17 +1,16 @@
 <?php
-require __DIR__ . '/../vendor/autoload.php';
 
+require __DIR__ . "/../src/bootstrap.php";
 use Paw\App\Controller\PageController;
 use Paw\App\Controller\ErrorController;
-
-$whoops = new \Whoops\Run;
-$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-$whoops->register();
 
 #Ejemplo de uso de errores
 #throw new \Exception('ERROR');
 
+
 $route = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+
+$log->info("Petición a: {$route}");
 
 $controller = new PageController;
 
