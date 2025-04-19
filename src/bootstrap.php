@@ -1,33 +1,32 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
-#En producción, cambiar DEBUG A False
-#Y en development si tenemos el Error 500 ver los logs en el archivo /logs/app.log
-define('DEBUG', true);
 
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
-use Paw\Core\Router;  
+use Paw\Core\Router;
 
-$log = new Logger('mvc-app');
-$log->pushHandler(new StreamHandler(__DIR__ . "/../logs/app.log", Logger::DEBUG));
+// Cargamos configuración
+$config = require __DIR__ . '/../src/Config/config.php';
 
+define('DEBUG', $config['debug']);
+
+// Logger
+$log = new Logger($config['log']['name']);
+$log->pushHandler(new StreamHandler($config['log']['path'], $config['log']['level']));
+
+// Whoops (sólo en modo desarrollo)
 if (DEBUG) {
     $whoops = new \Whoops\Run;
     $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
     $whoops->register();
 } else {
-    // Ocultamos todos los errores en producción
     ini_set('display_errors', '0');
     ini_set('display_startup_errors', '0');
     error_reporting(0);
 }
 
-#Para agregar paths nuevos
+// Cargamos rutas desde config
 $router = new Router;
-$router->loadRoutes("/", "PageController@index");
-$router->loadRoutes("/about-us", "PageController@aboutUs");
-$router->loadRoutes("/books", "PageController@books");
-$router->loadRoutes("/login", "PageController@login");
-$router->loadRoutes("/create-account", "PageController@createAccount");
-$router->loadRoutes("not_found", "ErrorController@notFound");
-$router->loadRoutes("internal_error", "ErrorController@internalError");
+foreach ($config['routes'] as $path => $controllerAction) {
+    $router->loadRoutes($path, $controllerAction);
+}
