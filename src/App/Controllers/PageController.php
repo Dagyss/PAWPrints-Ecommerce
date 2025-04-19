@@ -1,5 +1,5 @@
 <?php
-namespace Paw\App\Controller;
+namespace Paw\App\Controllers;
 
 class PageController{
     public string $viewsDir = "";

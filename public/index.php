@@ -1,60 +1,28 @@
 <?php
 
 require __DIR__ . "/../src/bootstrap.php";
-use Paw\App\Controller\PageController;
-use Paw\App\Controller\ErrorController;
+use Paw\Core\Exceptions\RouteNotFoundException;
+
 
 #Ejemplo de uso de errores
 #throw new \Exception('ERROR');
 
 
-$route = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+$path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+$log->info("Petición a: {$path}");
 
-$log->info("Petición a: {$route}");
 
-$controller = new PageController;
 
-switch ($route) {
-    case '/':
-        $controller->index();
-        break;
-
-    case '/books':
-        $controller->books();
-        break;
-
-    case '/news':
-        require __DIR__ . '/../src/Views/books.php';
-        break;
-
-    case '/offer':
-        require __DIR__ . '/../src/Views/books.php';
-        break;
-
-    case '/best-seller':
-        require __DIR__ . '/../src/Views/books.php';
-        break;
-
-    case '/branches':
-        require __DIR__ . '/../src/Views/branches.php';
-        break;
-
-    case '/about-us':
-        $controller->aboutUs();
-        break;
-    
-    case '/login':
-        $controller->login();
-        break;
-
-    case '/create-account':
-        $controller->createAccount();
-        break;
-
-    default:
-        $controller = new ErrorController;
-        $controller->notFound();
-        break;
+try{
+    $router->direct($path);
+    $log->info("Status Code: 200 - {$path}");
+} catch(RouteNotFoundException $e){
+    $router->direct('not_found');
+    $log->info("Status Code: 404 - Route Not Found", ["Error" => $e] );
+} catch(Exception $e){
+    $router->direct("internar_error");
+    $log->error("Status Code: 500 - Internal Server Error", ["Error" => $e]);
 }
+
 ?>
 
