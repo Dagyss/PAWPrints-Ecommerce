@@ -20,7 +20,7 @@ try{
     $router->direct('not_found');
     $log->info("Status Code: 404 - Route Not Found", ["Error" => $e] );
 } catch(Exception $e){
-    $router->direct("internar_error");
+    $router->direct("internal_error");
     $log->error("Status Code: 500 - Internal Server Error", ["Error" => $e]);
 }
 

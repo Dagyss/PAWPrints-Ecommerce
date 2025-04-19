@@ -40,7 +40,7 @@ class ErrorController{
         require $this->viewsDir . 'not-found.php';
     }
 
-    public function internarError(){
+    public function internalError(){
         http_response_code(500);
         require $this->viewsDir . 'internal-error.php';
     }
