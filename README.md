@@ -1,6 +1,6 @@
-# TP3
+# TP3 - programación backend 1
 
-## Estructura del Proyecto
+## Estructura del Proyecto PawPrint
 
 ```bash
 .
@@ -10,12 +10,14 @@
 │   ├── js/
 │   └── index.php
 ├── src/
-│   ├── Config/
-│   ├── Controller/
-│   ├── Model/
-│   ├── Utils/
-│   ├── Views/
-│   └── Router.php
+│   ├── App/
+│   │   ├── Controller/
+│   │   ├── Views/
+│   │   │   ├── Parts/
+│   ├── Core/
+│   │   ├── Exceptions/
+│   │   ├── Router.php
+│   └── bootstrap.php
 ├── storage/
 ├── .env
 └── composer.json
