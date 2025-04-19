@@ -9,7 +9,6 @@ use Monolog\Handler\StreamHandler;
 use Paw\Core\Router;  
 
 $log = new Logger('mvc-app');
-#En producción cambiar DEBUG de la siguiente linea:
 $log->pushHandler(new StreamHandler(__DIR__ . "/../logs/app.log", Logger::DEBUG));
 
 if (DEBUG) {
