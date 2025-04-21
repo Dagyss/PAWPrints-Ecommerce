@@ -13,12 +13,14 @@ return [
 
     // Configuración de rutas iniciales
     'routes' => [
-        '/' => 'PageController@index',
-        '/about-us' => 'PageController@aboutUs',
-        '/login' => 'PageController@login',
-        '/create-account' => 'PageController@createAccount',
-        '/books' => 'BooksController@index'
+        ['path' => '/', 'action' => 'PageController@index', 'method' => 'GET'],
+        ['path' => '/about-us', 'action' => 'PageController@aboutUs', 'method' => 'GET'],
+        ['path' => '/login', 'action' => 'PageController@login', 'method' => 'GET'],
+        ['path' => '/create-account', 'action' => 'PageController@createAccount', 'method' => 'GET'],
+        ['path' => '/books', 'action' => 'BooksController@index', 'method' => 'GET'],
+        ['path' => '/books', 'action' => 'BooksController@store', 'method' => 'POST'],
     ],
+
 
     'database' => [
         'host' => getenv('DB_HOST'),

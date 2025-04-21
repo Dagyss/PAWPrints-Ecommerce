@@ -40,6 +40,7 @@ $request = new Request;
 $router = new Router();
 $router->setLogger($log);
 
-foreach ($config['routes'] as $path => $controllerAction) {
-    $router->loadRoutes($path, $controllerAction);
+foreach ($config['routes'] as $route) {
+    $router->loadRoutes($route['path'], $route['action'], $route['method']);
 }
+
