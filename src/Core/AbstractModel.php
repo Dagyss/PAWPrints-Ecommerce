@@ -11,7 +11,7 @@ class AbstractModel{
 
     private $queryBuilder;
 
-    public function __construct(QueryBuilder $queryBuilder) {
+    public function __construct(?QueryBuilder $queryBuilder = null) {
         $this->queryBuilder = $queryBuilder;
     }
 

@@ -9,6 +9,7 @@ class AbstractController{
     public string $viewsDir = "";
     public array $menu_nav = [];
     public ?string $modelName = null;
+    public ?object $model = null;
 
     public function __construct(){
         global $connection, $log;
@@ -40,20 +41,17 @@ class AbstractController{
             ],
         ];
 
-        /* para conectar a la base de datos
         if(!is_null($this->modelName)){
-            $qb = new QueryBuilder($connection, $log);
+            //$qb = new QueryBuilder($connection, $log);
             $model = new $this->modelName;
-            $model->setQueryBuilder($qb);
+            //$model->setQueryBuilder($qb);
             $this->setModel($model);
-        }*/
+        }
     }
 
-    /*
-    public function setModel(AbstractModel $model){
+    public function setModel(?object $model){
         $this->model = $model;
     }
-    */
 
 }
 

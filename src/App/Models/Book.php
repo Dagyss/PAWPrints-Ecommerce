@@ -109,7 +109,7 @@ class Book extends AbstractModel {
         }
         $this->fields["updated_at"] = $updated_at->format('Y-m-d H:i:s');
     }
-
+    
     public function set(array $values): void {
         foreach (array_keys($this->fields) as $field) {
             if (!isset($values[$field])) {

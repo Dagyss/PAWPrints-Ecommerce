@@ -12,7 +12,7 @@ class BooksCollection extends AbstractModel{
 
     public $table = "book";
 
-    public function getAll(){
+    public function getAll(): array{
         $filePath = __DIR__ . '/../../Storage/books.json';
         if (file_exists($filePath)) {
             $booksJson = file_get_contents($filePath);
@@ -20,7 +20,7 @@ class BooksCollection extends AbstractModel{
             $booksCollection = [];
     
             foreach ($booksData as $bookData) {
-                $book = new Book($bookData);
+                $book = new Book();
                 $book->set($bookData);
                 $booksCollection[] = $book;
             }
