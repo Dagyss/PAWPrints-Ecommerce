@@ -13,27 +13,31 @@ class BooksController extends AbstractController{
     public function index() {
 
         list($paginaActual, $librosPorPagina) = $this->getPaginationData();
-    
+
         if ($librosPorPagina <= 0) {
             $librosPorPagina = $this->sizePage;
         }       
-    
+        
         $filtros = $this->getFilters();
-
+        
         $totalLibros = $this->model->count($filtros);
         $totalPaginas = ceil($totalLibros / $librosPorPagina);
         $offset = ($paginaActual - 1) * $librosPorPagina;
-    
+        
         $books = $this->model->getPaginated($librosPorPagina, $offset, $filtros);
-
+        
         $maxPagesToShow = 5;
         $startPage = max(1, $paginaActual - floor($maxPagesToShow / 2));
         $endPage = min($totalPaginas, $startPage + $maxPagesToShow - 1);
-    
+        
         if ($endPage - $startPage < $maxPagesToShow - 1) {
             $startPage = max(1, $endPage - $maxPagesToShow + 1);
         }
-    
+
+        if (isset($_GET['export']) && $_GET['export'] === 'csv') {
+            return $this->exportCsv($books);
+        }
+        
         require $this->viewsDir . 'books.php';
     }
 
@@ -65,6 +69,28 @@ class BooksController extends AbstractController{
             isset($_GET['page']) ? (int) $_GET['page'] : 1 ,
             isset($_GET['size']) ? (int) $_GET['size'] : $this->sizePage
         ];
+    }
+
+    private function exportCsv($books) {
+        header('Content-Type: text/csv; charset=utf-8');
+        header('Content-Disposition: attachment; filename=catalogo.csv');
+
+        $output = fopen('php://output', 'w');
+
+        fputcsv($output, ['ID', 'Título', 'Autor', 'Editorial', 'Precio']);
+
+        foreach ($books as $book) {
+            fputcsv($output, [
+                $book->__get('id'),
+                $book->__get('titulo'),
+                $book->__get('autor'),
+                $book->__get('editorial'),
+                number_format($book->__get('precio'), 2, ',', '')
+            ]);
+        }
+
+        fclose($output);
+        exit;
     }
 }
 
