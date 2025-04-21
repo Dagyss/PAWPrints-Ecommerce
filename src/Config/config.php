@@ -18,7 +18,7 @@ return [
         ['path' => '/login', 'action' => 'PageController@login', 'method' => 'GET'],
         ['path' => '/create-account', 'action' => 'PageController@createAccount', 'method' => 'GET'],
         ['path' => '/books', 'action' => 'BooksController@index', 'method' => 'GET'],
-        ['path' => '/books', 'action' => 'BooksController@store', 'method' => 'POST'],
+        ['path' => '/book', 'action' => 'BooksController@show', 'method' => 'GET']
     ],
 
 

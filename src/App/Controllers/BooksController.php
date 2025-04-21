@@ -11,7 +11,7 @@ class BooksController extends AbstractController{
     private int $sizePage = 6;
 
     public function index() {
-        
+
         list($paginaActual, $librosPorPagina) = $this->getPaginationData();
     
         if ($librosPorPagina <= 0) {
@@ -25,7 +25,7 @@ class BooksController extends AbstractController{
         $offset = ($paginaActual - 1) * $librosPorPagina;
     
         $books = $this->model->getPaginated($librosPorPagina, $offset, $filtros);
-    
+
         $maxPagesToShow = 5;
         $startPage = max(1, $paginaActual - floor($maxPagesToShow / 2));
         $endPage = min($totalPaginas, $startPage + $maxPagesToShow - 1);
@@ -35,6 +35,16 @@ class BooksController extends AbstractController{
         }
     
         require $this->viewsDir . 'books.php';
+    }
+
+    public function show() {
+        $id = $_GET['id'];
+        $book = $this->model->getById($id);
+        if(is_null($book)){
+            require $this->viewsDir . 'not-found.php';
+            exit;
+        }
+        require $this->viewsDir . 'book.php';
     }
 
     private function getFilters(): array {

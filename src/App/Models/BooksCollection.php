@@ -31,6 +31,16 @@ class BooksCollection extends AbstractModel{
         }
     }
     
+    public function getById(int $id): ?Book {
+        $books = $this->getAll();
+        foreach ($books as $book) {
+            if ($book->__get('id') === $id) {
+                return $book;
+            }
+        }
+        return null;
+    }
+
     public function getPaginated(int $limit, int $offset): array {
         $allBooks = $this->getAll();
         return array_slice($allBooks, $offset, $limit);

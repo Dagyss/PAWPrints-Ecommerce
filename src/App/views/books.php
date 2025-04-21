@@ -102,7 +102,7 @@
             <section class="books">
 
                 <?php if (empty($books)): ?>
-                    <section class = "no_content">
+                    <section class="no_content">
                         <img src="../icons/no_content.png" alt="No hay libros">
                         <p> No se encontraron libros </p>
                     </section>
@@ -111,17 +111,17 @@
                 <?php foreach ($books as $book): ?>
                     <article class="book">
                         <figure>
-                            <a href="./book.php?id=<?= htmlspecialchars($book->fields['id']) ?>">
-                                <img src="<?= htmlspecialchars($book->fields['imagen']) ?>" alt="Portada del libro">
+                            <a href="./book?id=<?= htmlspecialchars($book->__get('id')) ?>">
+                                <img src="<?= htmlspecialchars($book->__get('imagen')) ?>" alt="Portada del libro">
                             </a>
                         </figure>
                         <h3>
-                            <a href="./book.php?id=<?= htmlspecialchars($book->fields['id']) ?>">
-                                <?= htmlspecialchars($book->fields['titulo']) ?>
+                            <a href="./book?id=<?= htmlspecialchars($book->__get('id')) ?>">
+                                <?= htmlspecialchars($book->__get('titulo')) ?>
                             </a>
                         </h3>
-                        <p><?= htmlspecialchars($book->fields['autor']) ?></p>
-                        <p>$<?= number_format($book->fields['precio'], 2, ',', '.') ?></p>
+                        <p><?= htmlspecialchars($book->__get('autor')) ?></p>
+                        <p>$<?= number_format($book->__get('precio'), 2, ',', '.') ?></p>
                         <button type="button">Comprar</button>
                     </article>
                 <?php endforeach; ?>

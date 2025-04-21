@@ -25,7 +25,11 @@ class Book extends AbstractModel {
         "formato_id" => null
     ];
 
-    public function setNombre(string $titulo){
+    public function setId(int $id){
+        $this->fields["id"] = $id;
+    }
+
+    public function setTitulo(string $titulo){
         if(strlen($titulo) > 60){
             throw new InvalidValueFormatException("El nombre del libro no puede tener más de 60 caracteres");
         }
