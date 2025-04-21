@@ -13,7 +13,7 @@
 
 <body>
     <?php
-        require "parts/header.php";
+    require "parts/header.php";
     ?>
 
     <main>
@@ -24,19 +24,19 @@
                 <li><span>Libros</span></li>
             </ul>
         </nav>
-    
+
         <h2>Libros</h2>
-        
+
         <section class="content">
 
-            
+
             <section class="filtros">
                 <button class="buttom-filtros" type="button" aria-label="Abrir menú de filtros">Filtrar</button>
-                <button class="button-ordenar" type = "button" aria-label="Abrir menu de Ordenar Por">Ordenar Por</button>
+                <button class="button-ordenar" type="button" aria-label="Abrir menu de Ordenar Por">Ordenar Por</button>
             </section>
-            
+
             <search>
-                
+
                 <form>
                     <fieldset>
                         <legend>Ordenar</legend>
@@ -49,7 +49,7 @@
                             <option>Precio: Mayor a menor</option>
                         </select>
                     </fieldset>
-                    
+
                     <fieldset>
                         <legend>Categorías</legend>
                         <ul>
@@ -58,7 +58,7 @@
                             <li><label><input type="checkbox"> Otros</label></li>
                         </ul>
                     </fieldset>
-                    
+
                     <fieldset>
                         <legend>Precio</legend>
                         <label>Desde</label>
@@ -66,7 +66,7 @@
                         <label>Hasta</label>
                         <input type="number" placeholder="$ Precio máximo">
                     </fieldset>
-                    
+
                     <fieldset>
                         <legend>Autor</legend>
                         <label>Buscar autor:</label>
@@ -77,7 +77,7 @@
                             <option value="coincidencia">Tercera coincidencia</option>
                         </select>
                     </fieldset>
-                    
+
                     <fieldset>
                         <legend>Idioma</legend>
                         <ul>
@@ -87,112 +87,61 @@
                             <li><label><input type="checkbox"> Otros</label></li>
                         </ul>
                     </fieldset>
-                    
+
                     <fieldset>
                         <legend>Formato</legend>
                         <label><input type="checkbox"> E-book</label>
                         <label><input type="checkbox"> Físico</label>
                     </fieldset>
-                    
+
                     <button type="submit">Aplicar filtros</button>
                 </form>
-                
+
             </search>
-            
+
             <section class="books">
-
-                <article class="book">
-                    <figure>
-                        <a href="./book.html">
-                            <img src="../icons/libro-ejemplo.jpg" alt="Portada del libro" >
-                        </a>
-                    </figure>
-                    <h3><a href="./book.html">Título</a></h3>
-                    <p>Nombre del autor</p>
-                    <p>$XXXXX</p>
-                    <button type="button">Comprar</button>
-                </article>
-                
-                <article class="book">
-                    <figure>
-                        <a href="./book.html">
-                            <img src="../icons/libro-ejemplo.jpg" alt="Portada del libro" >
-                        </a>
-                    </figure>
-                    <h3><a href="./book.html">Título</a></h3>
-                    <p>Nombre del autor</p>
-                    <p>$XXXXX</p>
-                    <button type="button">Comprar</button>
-                </article>
-                
-                <article class="book">
-                    <figure>
-                        <a href="./book.html">
-                            <img src="../icons/libro-ejemplo.jpg" alt="Portada del libro" >
-                        </a>
-                    </figure>
-                    <h3><a href="./book.html">Título</a></h3>
-                    <p>Nombre del autor</p>
-                    <p>$XXXXX</p>
-                    <button type="button">Comprar</button>
-                </article>
-                
-                <article class="book">
-                    <figure>
-                        <a href="./book.html">
-                            <img src="../icons/libro-ejemplo.jpg" alt="Portada del libro" >
-                        </a>
-                    </figure>
-                    <h3><a href="./book.html">Título</a></h3>
-                    <p>Nombre del autor</p>
-                    <p>$XXXXX</p>
-                    <button type="button">Comprar</button>
-                </article>
-                
-                <article class="book">
-                    <figure>
-                        <a href="./book.html">
-                            <img src="../icons/libro-ejemplo.jpg" alt="Portada del libro" >
-                        </a>
-                    </figure>
-                    <h3><a href="./book.html">Título</a></h3>
-                    <p>Nombre del autor</p>
-                    <p>$XXXXX</p>
-                    <button type="button">Comprar</button>
-                </article>
-
-                <article class="book">
-                    <figure>
-                        <a href="./book.html">
-                            <img src="../icons/libro-ejemplo.jpg" alt="Portada del libro" >
-                        </a>
-                    </figure>
-                    <h3><a href="./book.html">Título</a></h3>
-                    <p>Nombre del autor</p>
-                    <p>$XXXXX</p>
-                    <button type="button">Comprar</button>
-                </article>
-                
-                <article class="book">
-                    <figure>
-                        <a href="./book.html">
-                            <img src="../icons/libro-ejemplo.jpg" alt="Portada del libro" >
-                        </a>
-                    </figure>
-                    <h3><a href="./book.html">Título</a></h3>
-                    <p>Nombre del autor</p>
-                    <p>$XXXXX</p>
-                    <button type="button">Comprar</button>
-                </article>
-                
+                <?php foreach ($books as $book): ?>
+                    <article class="book">
+                        <figure>
+                            <a href="./book.php?id=<?= htmlspecialchars($book->fields['id']) ?>">
+                                <img src="<?= htmlspecialchars($book->fields['imagen']) ?>" alt="Portada del libro">
+                            </a>
+                        </figure>
+                        <h3>
+                            <a href="./book.php?id=<?= htmlspecialchars($book->fields['id']) ?>">
+                                <?= htmlspecialchars($book->fields['titulo']) ?>
+                            </a>
+                        </h3>
+                        <p><?= htmlspecialchars($book->fields['autor']) ?></p>
+                        <p>$<?= number_format($book->fields['precio'], 2, ',', '.') ?></p>
+                        <button type="button">Comprar</button>
+                    </article>
+                <?php endforeach; ?>
             </section>
-        </section>    
-        </main>
+        </section>
+        <nav class="pagination">
+            <?php if ($paginaActual > 1): ?>
+                <a href="?page=<?= $paginaActual - 1 ?>&size=<?= $librosPorPagina ?>">&lt;</a>
+            <?php endif; ?>
+
+            <?php for ($i = $startPage; $i <= $endPage; $i++): ?>
+                <?php if ($i == $paginaActual): ?>
+                    <strong><?= $i ?></strong>
+                <?php else: ?>
+                    <a href="?page=<?= $i ?>&size=<?= $librosPorPagina ?>"><?= $i ?></a>
+                <?php endif; ?>
+            <?php endfor; ?>
+
+            <?php if ($paginaActual < $totalPaginas): ?>
+                <a href="?page=<?= $paginaActual + 1 ?>&size=<?= $librosPorPagina ?>">&gt;</a>
+            <?php endif; ?>
+        </nav>
+    </main>
 
     <?php
-        require "parts/footer.php";
+    require "parts/footer.php";
     ?>
-    
+
 </body>
 
 </html>

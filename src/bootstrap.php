@@ -4,6 +4,8 @@ require __DIR__ . '/../vendor/autoload.php';
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Paw\Core\Router;
+use Paw\Core\Request;
+use Paw\Core\Database\ConnectionBuilder;
 
 // Cargamos configuración
 $config = require __DIR__ . '/../src/Config/config.php';
@@ -25,8 +27,19 @@ if (DEBUG) {
     error_reporting(0);
 }
 
+
+/* conexión para proxima entrega
+$connectionBuilder = new ConnectionBuilder;
+$connectionBuilder->setLogger($log);
+$connection = $connectionBuilder->make($config['database']);
+*/
+
+$request = new Request;
+
 // Cargamos rutas desde config
-$router = new Router;
+$router = new Router();
+$router->setLogger($log);
+
 foreach ($config['routes'] as $path => $controllerAction) {
     $router->loadRoutes($path, $controllerAction);
 }
