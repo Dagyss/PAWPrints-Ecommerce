@@ -29,7 +29,8 @@ if (DEBUG) {
 $request = new Request;
 
 // Cargamos rutas desde config
-$router = new Router($log);
+$router = new Router();
+$router->setLogger($log);
 
 foreach ($config['routes'] as $path => $controllerAction) {
     $router->loadRoutes($path, $controllerAction);

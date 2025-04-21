@@ -3,13 +3,13 @@
 namespace Paw\Core;
 
 use Exception;
-use Monolog\Logger;
 use Paw\Core\Exceptions\RouteNotFoundException;
 use Paw\Core\Request;
+use Paw\Core\Traits\Loggeable;
 
 class Router {
 
-    protected $log;
+    use Loggeable;
     public array $routes = [
         "GET" => [],
         "POST" => [],
@@ -20,9 +20,8 @@ class Router {
     public string $notFound = "not_found";
     public string $internalError = "internal_error";
 
-    public function __construct($log)
+    public function __construct()
     {
-        $this->log = $log;
         $this->get($this->notFound, 'ErrorController@notFound');
         $this->get($this->internalError, 'ErrorController@internalError');
     }
@@ -69,13 +68,13 @@ class Router {
     {
         $controller_name = "Paw\\App\\Controllers\\{$controller}";
         $objController = new $controller_name;
-        $this->log->info("Llamando al controlador: {$controller} y método: {$method}");
+        $this->logger->info("Llamando al controlador: {$controller} y método: {$method}");
         $objController->$method();
     }
 
     public function direct(Request $request)
     {
-        $this->log->info("Ruta: {$request->uri()} y método HTTP: {$request->method()}");
+        $this->logger->info("Ruta: {$request->uri()} y método HTTP: {$request->method()}");
 
         try {
             $route = $request->route();
@@ -84,11 +83,11 @@ class Router {
             list($controller, $method) = $this->getController("/" . $path, $http_method);
             $this->call($controller, $method);
         } catch (RouteNotFoundException $e) {
-            $this->log->error("Ruta no encontrada: " . $e->getMessage());
+            $this->logger->error("Ruta no encontrada: " . $e->getMessage());
             list($controller, $method) = $this->getController($this->notFound, "GET");
             $this->call($controller, $method);
         } catch (Exception $e) {
-            $this->log->error("Error: {$e->getMessage()}");
+            $this->logger->error("Error: {$e->getMessage()}");
             list($controller, $method) = $this->getController($this->internalError, "GET");
             $this->call($controller, $method);
         }
