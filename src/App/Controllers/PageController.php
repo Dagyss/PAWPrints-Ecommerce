@@ -1,39 +1,9 @@
 <?php
 namespace Paw\App\Controllers;
 
-class PageController{
-    public string $viewsDir = "";
-    public array $menu_nav = [];
+use Paw\Core\AbstractController;
 
-    public function __construct(){
-        $this->viewsDir = __DIR__ . "/../views/";
-        $this->menu_nav = [
-            [
-                "href" => "/books",
-                "route_name" => "Libros"
-            ],
-            [
-                "href" => "/News",
-                "route_name" => "Novedades"
-            ],
-            [
-                "href" => "/offer",
-                "route_name" => "Ofertas"
-            ],
-            [
-                "href" => "/best-seller",
-                "route_name" => "Más vendidos"
-            ],
-            [
-                "href" => "/branches",
-                "route_name" => "Sucursales"
-            ],
-            [
-                "href" => "/about-us",
-                "route_name" => "Nosotros"
-            ],
-        ];
-    }
+class PageController extends AbstractController{
 
     public function index(){
         require $this->viewsDir . 'home.php';
@@ -41,10 +11,6 @@ class PageController{
 
     public function aboutUs(){
         require $this->viewsDir . 'about-us.php';
-    }
-
-    public function books(){
-        require $this->viewsDir . 'books.php';
     }
 
     public function login(){
