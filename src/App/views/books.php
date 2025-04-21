@@ -118,7 +118,24 @@
                     </article>
                 <?php endforeach; ?>
             </section>
+        </section>
+        <nav class="pagination">
+            <?php if ($paginaActual > 1): ?>
+                <a href="?page=<?= $paginaActual - 1 ?>&size=<?= $librosPorPagina ?>">&lt;</a>
+            <?php endif; ?>
 
+            <?php for ($i = $startPage; $i <= $endPage; $i++): ?>
+                <?php if ($i == $paginaActual): ?>
+                    <strong><?= $i ?></strong>
+                <?php else: ?>
+                    <a href="?page=<?= $i ?>&size=<?= $librosPorPagina ?>"><?= $i ?></a>
+                <?php endif; ?>
+            <?php endfor; ?>
+
+            <?php if ($paginaActual < $totalPaginas): ?>
+                <a href="?page=<?= $paginaActual + 1 ?>&size=<?= $librosPorPagina ?>">&gt;</a>
+            <?php endif; ?>
+        </nav>
     </main>
 
     <?php

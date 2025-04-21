@@ -30,6 +30,15 @@ class BooksCollection extends AbstractModel{
             throw new Exception("Books JSON file not found.");
         }
     }
+    
+    public function getPaginated(int $limit, int $offset): array {
+        $allBooks = $this->getAll();
+        return array_slice($allBooks, $offset, $limit);
+    }
+    
+    public function count(): int {
+        return count($this->getAll());
+    }
 }
 
 
