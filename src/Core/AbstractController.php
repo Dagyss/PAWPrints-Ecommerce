@@ -2,9 +2,13 @@
 
 namespace Paw\Core;
 
+use Paw\Core\AbstractModel;
+use Paw\Core\Database\QueryBuilder;
+
 class AbstractController{
     public string $viewsDir = "";
     public array $menu_nav = [];
+    public ?string $modelName = null;
 
     public function __construct(){
         global $connection, $log;
@@ -35,7 +39,22 @@ class AbstractController{
                 "route_name" => "Nosotros"
             ],
         ];
+
+        /* para conectar a la base de datos
+        if(!is_null($this->modelName)){
+            $qb = new QueryBuilder($connection, $log);
+            $model = new $this->modelName;
+            $model->setQueryBuilder($qb);
+            $this->setModel($model);
+        }*/
     }
+
+    /*
+    public function setModel(AbstractModel $model){
+        $this->model = $model;
+    }
+    */
+
 }
 
 ?>

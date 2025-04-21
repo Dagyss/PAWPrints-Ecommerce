@@ -15,8 +15,17 @@ return [
     'routes' => [
         '/' => 'PageController@index',
         '/about-us' => 'PageController@aboutUs',
-        '/books' => 'PageController@books',
         '/login' => 'PageController@login',
-        '/create-account' => 'PageController@createAccount'
+        '/create-account' => 'PageController@createAccount',
+        '/books' => 'BooksController@index'
     ],
+
+    'database' => [
+        'host' => getenv('DB_HOST'),
+        'port' => getenv('DB_PORT'),
+        'dbname' => getenv('DB_DBNAME'),
+        'username' => getenv('DB_USERNAME'),
+        'password' => getenv('DB_PASSWORD'),
+        'charset' => getenv('DB_CHARSET')
+    ]
 ];
