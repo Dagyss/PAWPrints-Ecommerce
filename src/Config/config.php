@@ -17,8 +17,6 @@ return [
         '/about-us' => 'PageController@aboutUs',
         '/books' => 'PageController@books',
         '/login' => 'PageController@login',
-        '/create-account' => 'PageController@createAccount',
-        'not_found' => 'ErrorController@notFound',
-        'internal_error' => 'ErrorController@internalError',
+        '/create-account' => 'PageController@createAccount'
     ],
 ];

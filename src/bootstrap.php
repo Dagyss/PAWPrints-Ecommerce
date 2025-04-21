@@ -4,6 +4,7 @@ require __DIR__ . '/../vendor/autoload.php';
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Paw\Core\Router;
+use Paw\Core\Request;
 
 // Cargamos configuración
 $config = require __DIR__ . '/../src/Config/config.php';
@@ -25,8 +26,11 @@ if (DEBUG) {
     error_reporting(0);
 }
 
+$request = new Request;
+
 // Cargamos rutas desde config
-$router = new Router;
+$router = new Router($log);
+
 foreach ($config['routes'] as $path => $controllerAction) {
     $router->loadRoutes($path, $controllerAction);
 }

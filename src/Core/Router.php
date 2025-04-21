@@ -1,24 +1,96 @@
 <?php
 
 namespace Paw\Core;
-use Paw\Core\Exceptions\RouteNotFoundException; 
 
-class Router{
+use Exception;
+use Monolog\Logger;
+use Paw\Core\Exceptions\RouteNotFoundException;
+use Paw\Core\Request;
 
-    public array $routes;
+class Router {
 
-    public function loadRoutes($path, $action){
-        $this->routes[$path] = $action;
+    protected $log;
+    public array $routes = [
+        "GET" => [],
+        "POST" => [],
+        "PUT" => [],
+        "DELETE" => []
+    ];
+
+    public string $notFound = "not_found";
+    public string $internalError = "internal_error";
+
+    public function __construct($log)
+    {
+        $this->log = $log;
+        $this->get($this->notFound, 'ErrorController@notFound');
+        $this->get($this->internalError, 'ErrorController@internalError');
     }
 
-    public function direct($path){
-        if (!array_key_exists($path, $this->routes)){
-            throw new RouteNotFoundException("No existe ruta para esta Path");
-        }
+    public function loadRoutes($path, $action, $method = "GET")
+    {
+        $this->routes[$method][$path] = $action;
+    }
 
-        list($controller, $method) = explode("@", $this->routes[$path]);
+    public function get($path, $action)
+    {
+        $this->routes["GET"][$path] = $action;
+    }
+
+    public function post($path, $action)
+    {
+        $this->routes["POST"][$path] = $action;
+    }
+
+    public function put($path, $action)
+    {
+        $this->routes["PUT"][$path] = $action;
+    }
+
+    public function delete($path, $action)
+    {
+        $this->routes["DELETE"][$path] = $action;
+    }
+
+    public function exists($path, $method)
+    {
+        return array_key_exists($path, $this->routes[$method]);
+    }
+
+    public function getController($path, $http_method)
+    {
+        if (!array_key_exists($path, $this->routes[$http_method])) {
+            throw new RouteNotFoundException("No existe ruta para esta Path y método HTTP");
+        }
+        return explode("@", $this->routes[$http_method][$path]);
+    }
+
+    public function call($controller, $method)
+    {
         $controller_name = "Paw\\App\\Controllers\\{$controller}";
         $objController = new $controller_name;
+        $this->log->info("Llamando al controlador: {$controller} y método: {$method}");
         $objController->$method();
+    }
+
+    public function direct(Request $request)
+    {
+        $this->log->info("Ruta: {$request->uri()} y método HTTP: {$request->method()}");
+
+        try {
+            $route = $request->route();
+            $path = $route['uri'];
+            $http_method = $route['method'];
+            list($controller, $method) = $this->getController("/" . $path, $http_method);
+            $this->call($controller, $method);
+        } catch (RouteNotFoundException $e) {
+            $this->log->error("Ruta no encontrada: " . $e->getMessage());
+            list($controller, $method) = $this->getController($this->notFound, "GET");
+            $this->call($controller, $method);
+        } catch (Exception $e) {
+            $this->log->error("Error: {$e->getMessage()}");
+            list($controller, $method) = $this->getController($this->internalError, "GET");
+            $this->call($controller, $method);
+        }
     }
 }
