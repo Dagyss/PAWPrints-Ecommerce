@@ -81,14 +81,14 @@ class Router {
             $path = $route['uri'];
             $http_method = $route['method'];
             list($controller, $method) = $this->getController("/" . $path, $http_method);
-            $this->call($controller, $method);
         } catch (RouteNotFoundException $e) {
             $this->logger->error("Ruta no encontrada: " . $e->getMessage());
             list($controller, $method) = $this->getController($this->notFound, "GET");
-            $this->call($controller, $method);
         } catch (Exception $e) {
             $this->logger->error("Error: {$e->getMessage()}");
             list($controller, $method) = $this->getController($this->internalError, "GET");
+            $this->call($controller, $method);
+        } finally {
             $this->call($controller, $method);
         }
     }
