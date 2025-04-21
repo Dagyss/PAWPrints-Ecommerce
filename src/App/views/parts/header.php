@@ -4,7 +4,7 @@
             <img src="../icons/hamburguer-menu.png" alt="Menú" class="icon">
         </label>
         <h1>
-            <a href="./home.html">
+            <a href="./">
                 PAWPrints
                 <img src="../icons/PAWPrintsWhite.svg" id="enterprise-icon"/>
             </a>
