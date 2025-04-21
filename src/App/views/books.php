@@ -37,61 +37,61 @@
 
             <search>
 
-                <form>
+                <form method="GET">
                     <fieldset>
                         <legend>Ordenar</legend>
                         <label>Ordenar por:</label>
-                        <select>
-                            <option selected>Novedades</option>
-                            <option>Ofertas</option>
-                            <option>Más vendidos</option>
-                            <option>Precio: Menor a mayor</option>
-                            <option>Precio: Mayor a menor</option>
+                        <select name="orden">
+                            <option value="novedades" selected>Novedades</option>
+                            <option value="ofertas">Ofertas</option>
+                            <option value="mas_vendidos">Más vendidos</option>
+                            <option value="precio_asc">Precio: Menor a mayor</option>
+                            <option value="precio_desc">Precio: Mayor a menor</option>
                         </select>
                     </fieldset>
 
                     <fieldset>
                         <legend>Categorías</legend>
                         <ul>
-                            <li><label><input class="hola" type="checkbox"> Ficción</label></li>
-                            <li><label><input type="checkbox"> No Ficción</label></li>
-                            <li><label><input type="checkbox"> Otros</label></li>
+                            <li><label><input type="checkbox" name="categorias[]" value="1"> Ficción</label></li>
+                            <li><label><input type="checkbox" name="categorias[]" value="2"> No Ficción</label></li>
+                            <li><label><input type="checkbox" name="categorias[]" value="3"> Otros</label></li>
                         </ul>
                     </fieldset>
 
                     <fieldset>
                         <legend>Precio</legend>
                         <label>Desde</label>
-                        <input type="number" placeholder="$ Precio mínimo">
+                        <input type="number" name="precio_min" placeholder="$ Precio mínimo">
                         <label>Hasta</label>
-                        <input type="number" placeholder="$ Precio máximo">
+                        <input type="number" name="precio_max" placeholder="$ Precio máximo">
                     </fieldset>
 
                     <fieldset>
                         <legend>Autor</legend>
                         <label>Buscar autor:</label>
-                        <input type="text" placeholder="Buscar autor">
-                        <select multiple aria-label="Autores">
-                            <option value="coincidencia">Primera coincidencia</option>
-                            <option value="coincidencia">Segunda coincidencia</option>
-                            <option value="coincidencia">Tercera coincidencia</option>
+                        <input type="text" name="autor" placeholder="Buscar autor">
+                        <select name="coincidencias_autor[]" multiple aria-label="Autores">
+                            <option value="1">Primera coincidencia</option>
+                            <option value="2">Segunda coincidencia</option>
+                            <option value="3">Tercera coincidencia</option>
                         </select>
                     </fieldset>
 
                     <fieldset>
                         <legend>Idioma</legend>
                         <ul>
-                            <li><label><input type="checkbox"> Inglés</label></li>
-                            <li><label><input type="checkbox"> Español</label></li>
-                            <li><label><input type="checkbox"> Francés</label></li>
-                            <li><label><input type="checkbox"> Otros</label></li>
+                            <li><label><input type="checkbox" name="idiomas[]" value="1"> Inglés</label></li>
+                            <li><label><input type="checkbox" name="idiomas[]" value="2"> Español</label></li>
+                            <li><label><input type="checkbox" name="idiomas[]" value="3"> Francés</label></li>
+                            <li><label><input type="checkbox" name="idiomas[]" value="4"> Otros</label></li>
                         </ul>
                     </fieldset>
 
                     <fieldset>
                         <legend>Formato</legend>
-                        <label><input type="checkbox"> E-book</label>
-                        <label><input type="checkbox"> Físico</label>
+                        <label><input type="checkbox" name="formatos[]" value="ebook"> E-book</label>
+                        <label><input type="checkbox" name="formatos[]" value="fisico"> Físico</label>
                     </fieldset>
 
                     <button type="submit">Aplicar filtros</button>
@@ -100,6 +100,14 @@
             </search>
 
             <section class="books">
+
+                <?php if (empty($books)): ?>
+                    <section class = "no_content">
+                        <img src="../icons/no_content.png" alt="No hay libros">
+                        <p> No se encontraron libros </p>
+                    </section>
+                <?php endif; ?>
+
                 <?php foreach ($books as $book): ?>
                     <article class="book">
                         <figure>

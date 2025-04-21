@@ -82,6 +82,20 @@ form button[type="submit"] {
     justify-content: space-between;
 }
 
+.no_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.no_content > img {
+    width: 70vh;
+    height: auto;
+    max-width: 700px;
+}
+
 .pagination {
     display: flex;
     justify-content: center;
