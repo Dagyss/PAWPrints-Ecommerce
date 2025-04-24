@@ -86,13 +86,14 @@
             </ul>
         </nav>
         <h2>Información</h2>
-        <section class="flex-container">
+        <section class="content">
+            <section class="book-image">
             <img src="../icons/libro-ejemplo.jpg" alt="Portada del Libro"/>
+            </section>
             <section>
-                <h2>Titulo del Libro</h2>
-                <p>Nombre del Autor</p>
-                <p>Precio</p>
-                <p>XXXXXX</p>
+                <h3 class="book-title">Titulo del Libro</h3>
+                <p class="book-author">Nombre del Autor</p>
+                <p class="book-price">Precio: $XXXXXX</p>
                 <fieldset>
                     <legend>Elige el formato:</legend>
                 
@@ -102,27 +103,28 @@
                     <input type="radio" id="electronico" name="formato-libro" value="e" />
                     <label for="electronico">Electronico</label>
                 </fieldset>
-                <input type="number" id="cantidad" name="cantidad" placeholder="1" min="1"/>
+                <input type="number" id="cantidad" name="cantidad"  class="book-quantity" placeholder="1" min="1"/>
     
-                <input type="button" value="Al carrito" />
+                <input type="button" class="check-button" value="Al carrito" />
     
             </section>
-            <section>
-                <h2>descripcion</h2>
-                <p>Formato:LIBROS</p>
-                <p>Editorial:Molinos</p>
-                <p>Idioma:Español</p>
-                <p>ISBN:9789878121383</p>
-                <p>N° Páginas: 496</p>
-                <p>Fecha Publicación: xx/xxxx</p>
+            <section class="book-description">
+                <h3>Descripcion</h3>
+                <ul>
+                    <li>Formato: LIBROS</li>
+                    <li>Editorial: Molinos</li>
+                    <li>Idioma: Español</li>
+                    <li>ISBN: 9789878121383</li>
+                    <li>N° Páginas: 496</li>
+                    <li>Fecha Publicación: xx/xxxx</li>
+                </ul>
             </section>
-            <section>
-                <h2>Sinopsis</h2>
+            <section class="book-sinopsis" >
+                <h3>Sinopsis</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non.</p>
     
             </section>
-            
-        </section>
+    </section>
 
     </main>
 
