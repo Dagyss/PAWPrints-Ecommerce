@@ -3,7 +3,7 @@ namespace Paw\App\Controllers;
 
 use Paw\Core\AbstractController;
 use Paw\Core\Request;
-
+use Paw\App\Controllers\ErrorController;
 
 class CheckoutController extends AbstractController
 {
@@ -36,15 +36,15 @@ class CheckoutController extends AbstractController
         }
 
         if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-            $errors['email'] = 'Email inválido.';
+            $errors['email'] = 'Email invalido.';
         }
 
         if ($data['telefono'] !== '' && !preg_match('/^\+?\d{7,15}$/', $data['telefono'])) {
-            $errors['telefono'] = 'Teléfono inválido.';
+            $errors['telefono'] = 'Teléfono invalido.';
         }
         
         if (!in_array($data['entrega'], ['domicilio','sucursal'])) {
-            $errors['entrega'] = 'Opción de entrega inválida.';
+            $errors['entrega'] = 'Opción de entrega invalida.';
         }
 
         if (!file_exists($this->jsonFile) || !is_readable($this->jsonFile)) {
@@ -54,15 +54,22 @@ class CheckoutController extends AbstractController
             $json = file_get_contents($this->jsonFile);
             $cartItems = json_decode($json, true) ?: [];
             if (empty($cartItems)) {
-                $errors[] = 'El carrito está vacío.';
+                $errors[] = 'El carrito está vacio.';
             }
         }
 
         if (count($errors) > 0) {
+            $errorController = new ErrorController();
+            $errorController->internalError();
+            exit;
             
+            /*
+            //Esto te devuelve un 422 y un json con los errores que fueron saltando con este estilo 
+            // {"success":false,"errors":{"nombre":"Debe ingresar un nombre.","email":"Email invalido."}}
             header('Content-Type: application/json', true, 422);
             echo json_encode(['success' => false, 'errors' => $errors]);
             exit;
+            */
         }
 
         $nombre = $data['nombre'] ?? 'Cliente';
@@ -97,10 +104,13 @@ class CheckoutController extends AbstractController
         );
         $body .= "\nTotal: \$" . number_format($total, 2, ',', '.') . "\n";
 
-        $headers  = "From: ventas@pawprints.local\r\n"; //Cambiar por variable de entorno
-        $headers .= "Reply-To: {$data['email']}\r\n";
+        $headers  = "From: no-reply@localhost\r\n"; 
+        $headers .= "Reply-To: ventas@pawprints.local\r\n";
         $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-        mail($to, $subject, $body, $headers);
+        $ok = mail($to, $subject, $body, $headers);
+        if (!$ok) {
+            error_log("Falló el envío de mail: " . print_r(error_get_last(), true));
+        }
 
         //Confirmacion
         require $this->viewsDir . 'checkout-success.php';
