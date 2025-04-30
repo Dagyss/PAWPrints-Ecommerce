@@ -30,7 +30,7 @@
                 <li><a href="./purchase-history.html">Historial de compras</a></li>
                 <li><a href="./index.html">Cerrar sesión</a></li>
             </ul>
-            <a href="./shopping-cart.html" class="header-shopping-cart-link">
+            <a href="./shopping-cart" class="header-shopping-cart-link">
                 <img src="../icons/shopping-cart.png" alt="Carrito de compras" class="icon"/>
             </a>
         </section>

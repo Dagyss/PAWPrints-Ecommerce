@@ -6,6 +6,7 @@ use Exception;
 use Paw\Core\Exceptions\RouteNotFoundException;
 use Paw\Core\Request;
 use Paw\Core\Traits\Loggeable;
+use ReflectionMethod;
 
 class Router {
 
@@ -64,12 +65,24 @@ class Router {
         return explode("@", $this->routes[$http_method][$path]);
     }
 
-    public function call($controller, $method)
+    public function call(string $controller, string $method, Request $request)
     {
         $controller_name = "Paw\\App\\Controllers\\{$controller}";
-        $objController = new $controller_name;
+        $objController   = new $controller_name;
+
         $this->logger->info("Llamando al controlador: {$controller} y método: {$method}");
-        $objController->$method();
+
+        // Usamos reflection para ver cuántos parámetros espera el método
+        $refMethod = new ReflectionMethod($objController, $method);
+        $numParams = $refMethod->getNumberOfParameters();
+
+        if ($numParams === 1) {
+            // Si pide 1, le pasamos el Request
+            return $objController->$method($request);
+        }
+
+        // Si no pide (o pide defaultables), lo llamamos sin args
+        return $objController->$method();
     }
 
     public function direct(Request $request)
@@ -78,18 +91,18 @@ class Router {
 
         try {
             $route = $request->route();
-            $path = $route['uri'];
+            $path  = "/" . $route['uri'];
             $http_method = $route['method'];
-            list($controller, $method) = $this->getController("/" . $path, $http_method);
+            list($controller, $method) = $this->getController($path, $http_method);
         } catch (RouteNotFoundException $e) {
             $this->logger->error("Ruta no encontrada: " . $e->getMessage());
             list($controller, $method) = $this->getController($this->notFound, "GET");
         } catch (Exception $e) {
             $this->logger->error("Error: {$e->getMessage()}");
             list($controller, $method) = $this->getController($this->internalError, "GET");
-            $this->call($controller, $method);
         } finally {
-            $this->call($controller, $method);
+            // Ahora le pasamos el $request en la llamada
+            $this->call($controller, $method, $request);
         }
     }
 }

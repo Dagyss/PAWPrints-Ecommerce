@@ -18,7 +18,10 @@ return [
         ['path' => '/login', 'action' => 'PageController@login', 'method' => 'GET'],
         ['path' => '/create-account', 'action' => 'PageController@createAccount', 'method' => 'GET'],
         ['path' => '/books', 'action' => 'BooksController@index', 'method' => 'GET'],
-        ['path' => '/book', 'action' => 'BooksController@show', 'method' => 'GET']
+        ['path' => '/book', 'action' => 'BooksController@show', 'method' => 'GET'],
+        ['path' => '/shopping-cart', 'action' => 'CartController@show', 'method' => 'GET'],
+        ['path' => '/checkout-form', 'action' => 'CheckoutController@showForm', 'method' => 'GET'],
+        ['path' => '/checkout-form', 'action' => 'CheckoutController@submit', 'method' => 'POST']
     ],
 
 
@@ -29,5 +32,8 @@ return [
         'username' => getenv('DB_USERNAME'),
         'password' => getenv('DB_PASSWORD'),
         'charset' => getenv('DB_CHARSET')
-    ]
+    ],
+
+    // Email configurado en .env o sino uno por defecto, en este caso puse el mismo igual
+    'checkout_email' => getenv('CHECKOUT_EMAIL') ?: 'ventas@pawprints.local'
 ];
