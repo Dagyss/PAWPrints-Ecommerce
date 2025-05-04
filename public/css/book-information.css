@@ -1,0 +1,84 @@
+@import url('./base.css');
+@import url('./header.css');
+@import url('./footer.css');
+
+main :not(h2) {
+    display: grid;
+}
+
+nav[aria-label="breadcrumb"] {
+    width: 70%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+main h2 {
+    width: 70%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+
+.content{
+  display: grid;
+  grid-template-columns: auto auto;
+  border: 1px solid var(--primary-color);
+  border-style: solid;
+  padding-right: 25px;
+  padding-left: 25px;
+  width: 70%;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+  .book-image > img {
+    width: 100%;
+    height: auto;
+   
+  }
+
+  .book-title {
+    text-align: center;
+    
+  }
+  .book-author {
+    text-align: center;
+  }
+
+  .book-price {
+    text-align: center;
+  }
+
+  .book-sinopsis > p {
+    text-align:justify;
+  }
+  .check-button {
+    align-items: center;
+    gap:1rem;
+    margin-top: 2rem;
+    background-color: var(--primary-color);
+    color: #fff;
+    border:1px solid #fff;
+    padding:1rem 2rem;
+    border-radius:28px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin:2rem auto 1rem auto;
+    max-width: 60%;
+
+  }
+
+  .book-quantity {
+    width: 50px;
+    height: 50px;
+    padding:0.25rem;
+    border-radius:5px;
+    border:1px solid #aaa;
+    text-align: center;
+  }
+
+  @media (max-width: 1150px) {
+    .content{
+       grid-template-columns: repeat(1, 1fr);
+    }
+ }
