@@ -19,8 +19,8 @@
 
         <nav aria-label="breadcrumb">
             <ul>
-                <li><a href="./">Home</a></li>
-                <li><a href="./books">Libros</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/books">Libros</a></li>
                 <li><span>Libro</span></li>
             </ul>
         </nav>
