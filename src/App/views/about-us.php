@@ -17,7 +17,7 @@
     <main>
         <nav aria-label="breadcrumb">
             <ul>
-                <li><a href="./index.html">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li><span>Nosotros</span></li>
             </ul>
         </nav>
