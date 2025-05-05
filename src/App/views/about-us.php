@@ -25,15 +25,17 @@
         <section class="flex-container">
             <section>
                 <h3>Nuestra Mision</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit vehicula ut penatibus, ac pretium tempor ridiculus maecenas duis risus primis taciti lectus, habitant habitasse turpis nulla egestas fermentum non arcu quam. Curabitur facilisi ante aliquet odio commodo mattis leo, gravida quisque varius sagittis consequat luctus, tortor neque dictum ut fermentum fusce. </p>
+                <p>En PAWPrints, nuestra misión es fomentar el amor por la lectura y el conocimiento, ofreciendo a nuestra comunidad acceso a una amplia y cuidadosamente seleccionada variedad de libros. Buscamos ser un espacio de encuentro cultural, donde cada lector —desde el más joven hasta el más experimentado— pueda descubrir nuevas ideas, autores y mundos.</p>
             </section>
             <section>
                 <h3>Un poco de historia...</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit vehicula ut penatibus, ac pretium tempor ridiculus maecenas duis risus primis taciti lectus, habitant habitasse turpis nulla egestas fermentum non arcu quam. Curabitur facilisi ante aliquet odio commodo mattis leo, gravida quisque varius sagittis consequat luctus, tortor neque dictum ut fermentum fusce. Iaculis hac sociis dis consequat nisl eros ullamcorper torquent ridiculus, molestie scelerisque porttitor eleifend neque feugiat pulvinar mus placerat, tempus sapien morbi ultricies donec tristique sed blandit.</p>
+                <p>PAWPrints nació en el año 2000, fruto del sueño de sus fundadores de crear un espacio donde los libros fueran protagonistas y pudieran transformar vidas. Comenzamos como un pequeño local con estanterías modestas, pero con una gran pasión por la literatura y el aprendizaje.
+                <p>A lo largo de los años, hemos crecido gracias al apoyo de una comunidad lectora fiel y entusiasta. Hoy, además de ofrecer una variada selección de libros, organizamos actividades culturales, clubes de lectura, presentaciones de autores y espacios para que grandes y chicos se acerquen a la lectura.</p>
+                <p>Seguimos creyendo en el poder de los libros para conectar personas, abrir mentes y enriquecer corazones.</p>
             </section>
             <section>
                 <h3>Nuestros servicios a la comunidad</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit vehicula ut penatibus, ac pretium tempor ridiculus maecenas duis risus primis taciti lectus, habitant habitasse turpis nulla egestas fermentum non arcu quam. Curabitur facilisi ante aliquet odio commodo mattis leo, gravida quisque varius sagittis consequat luctus, tortor neque dictum ut fermentum fusce. Iaculis hac sociis dis consequat nisl eros ullamcorper torquent ridiculus, molestie scelerisque porttitor eleifend neque feugiat pulvinar mus placerat, tempus sapien morbi ultricies donec tristique sed blandit.</p>
+                <p>Nuestra librería ofrece una variedad de servicios orientados a promover la lectura, la educación y la participación ciudadana. Entre ellos se incluyen el préstamo de libros, talleres de lectura y escritura, actividades culturales para todas las edades y espacios acogedores para el estudio y la reflexión. Buscamos ser un punto de encuentro accesible donde la cultura y el conocimiento estén al alcance de toda la comunidad</p>
             </section>
 
         </section>
