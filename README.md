@@ -1,6 +1,6 @@
-# TP3 - programación backend 1
+# TP3 - Programación Backend (Parte 1)
 
-## Estructura del Proyecto PawPrint
+## Estructura del Proyecto PAWPrints
 
 ```bash
 .
@@ -99,7 +99,12 @@ composer start
 
 Esto iniciará un servidor PHP local en `http://localhost:9999`, sirviendo desde el directorio `public/`.
 
+## Aplicación Web - Hosting
+[PAWPrints](https://darkblue-snake-691068.hostingersite.com/) 
+
 ## Recursos del proyecto
 
 - Trello del Proyecto: https://trello.com/b/LiHe9WLz/tp3-3era-entrega
 - Drive del Proyecto TP3: https://drive.google.com/drive/folders/1-klkiw0SnbFlU5Uoi3_pyPiZa_urC-zp
+
+
