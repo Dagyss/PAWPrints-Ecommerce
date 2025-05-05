@@ -18,6 +18,9 @@ class Book extends AbstractModel {
         "stock" => null,
         "imagen" => null,
         "descripcion" => null,
+        "isbn" => null,
+        "fecha_publicacion" => null,
+        "nro_paginas" => null,
         "categoria_id" => null,
         "created_at" => null,
         "updated_at" =>null,
@@ -78,6 +81,27 @@ class Book extends AbstractModel {
         $this->fields["descripcion"] = $descripcion;
     }
 
+    public function setISBN(string $isbn){
+        if(strlen($isbn) != 13){
+            throw new InvalidValueFormatException("El ISBN debe contener 13 digitos");
+        }
+        $this->fields["isbn"] = $isbn;
+    }
+
+    public function setFechaPublicacion(Datetime $fecha_publicacion){
+        if(!$fecha_publicacion instanceof Datetime){
+            throw new InvalidValueFormatException("Objeto Date invalido para la fecha de publicacion");
+        }
+        $this->fields["fecha_publicacion"] = $fecha_publicacion;
+    }
+
+    public function setNroPaginas(int $nro_paginas){
+        if($nro_paginas <= 1){
+            throw new InvalidValueFormatException("El numero de paginas debe ser positivo");
+        }
+        $this->fields["nro_paginas"] = $nro_paginas;
+    }
+
     public function setCategoriaId(int $categoria_id){
         if($categoria_id < 0){
             throw new InvalidValueFormatException("El id de la categoría no puede ser negativo");
@@ -115,13 +139,25 @@ class Book extends AbstractModel {
     }
     
     public function set(array $values): void {
+        $arr = array('fecha_publicacion', 'created_at', 'updated_at');
+        
         foreach (array_keys($this->fields) as $field) {
             if (!isset($values[$field])) {
                 continue;
             }
-            $method = "set" . ucfirst($field);
+            
+            $partial = ucwords(str_replace("_", " ", $field));
+            $method = "set" . str_replace(" ", "", $partial);
+
             if (method_exists($this, $method)) {
-                $this->$method($values[$field]);
+
+                $param = $values[$field];
+
+                if (in_array($field, $arr)) {
+                    $param = new DateTime($values[$field]);
+                }
+                
+                $this->$method($param);
             }
         }
     }
