@@ -35,39 +35,39 @@
                         $total   += $subtotal;
                     ?>
                         <article class="cart-item">
-                            <figure>
-                                <a href="./book?id=<?= $id ?>">
-                                    <img src="<?= $imagen ?>" alt="Portada de <?= $titulo ?>">
-                                </a>
-                            </figure>
-    
+                        <figure>
+                            <a href="./book?id=<?= $id ?>">
+                            <img src="<?= $imagen ?>" alt="Portada de <?= $titulo ?>">
+                            </a>
+                        </figure>
+
                             <div class="cart-item-content">
                                 <div class="cart-item-header">
-                                    <h3>
-                                        <a href="./book?id=<?= $id ?>"><?= $titulo ?></a>
-                                    </h3>
-                                    <button 
-                                        class="cart-remove-btn" 
-                                        aria-label="Eliminar producto"
-                                        onclick="location.href='?remove=<?= $id ?>'">
-                                        <img src="../icons/trash.png" alt="Eliminar">
-                                    </button>
+                                <h3>
+                                    <a href="./book?id=<?= $id ?>"><?= $titulo ?></a>
+                                </h3>
+                                <button 
+                                    class="cart-remove-btn" 
+                                    aria-label="Eliminar producto"
+                                    onclick="location.href='?remove=<?= $id ?>'">
+                                    <img src="../icons/trash.png" alt="Eliminar">
+                                </button>
                                 </div>
-    
+
                                 <div class="cart-controls">
-                                    <label for="quantity<?= $index ?>" class="visually-hidden">Cantidad</label>
-                                    <input 
-                                        type="number" 
-                                        id="quantity<?= $index ?>" 
-                                        min="1" 
-                                        value="<?= $cantidad ?>" 
-                                        class="cart-quantity"
-                                        disabled
-                                    >
-                                    <p>$<?= $precio ?> c/u</p>
-                                    <p class="subtotal">
-                                        Subtotal: $<?= number_format($subtotal, 2, ',', '.') ?>
-                                    </p>
+                                <label for="quantity<?= $index ?>" class="visually-hidden">Cantidad</label>
+                                <input 
+                                    type="number" 
+                                    id="quantity<?= $index ?>" 
+                                    min="1" 
+                                    value="<?= $cantidad ?>" 
+                                    class="cart-quantity"
+                                    disabled
+                                >
+                                <p class="cart-price">$<?= $precio ?> c/u</p>
+                                <p class="subtotal">
+                                    Subtotal: $<?= number_format($subtotal, 2, ',', '.') ?>
+                                </p>
                                 </div>
                             </div>
                         </article>
