@@ -20,7 +20,7 @@
 
         <nav aria-label="breadcrumb">
             <ul>
-                <li><a href="./index.html">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li><span>Libros</span></li>
             </ul>
         </nav>
