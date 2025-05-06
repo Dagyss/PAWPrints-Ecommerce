@@ -35,7 +35,7 @@
             </section>
             <section>
                 <h3>Nuestros servicios a la comunidad</h3>
-                <p>Nuestra librería ofrece una variedad de servicios orientados a promover la lectura, la educación y la participación ciudadana. Entre ellos se incluyen el préstamo de libros, talleres de lectura y escritura, actividades culturales para todas las edades y espacios acogedores para el estudio y la reflexión. Buscamos ser un punto de encuentro accesible donde la cultura y el conocimiento estén al alcance de toda la comunidad</p>
+                <p>Nuestra librería ofrece una variedad de servicios orientados a promover la lectura, la educación y la participación ciudadana. Entre ellos se incluyen el préstamo de libros, talleres de lectura y escritura, actividades culturales para todas las edades y espacios acogedores para el estudio y la reflexión. Buscamos ser un punto de encuentro accesible donde la cultura y el conocimiento estén al alcance de toda la comunidad.</p>
             </section>
 
         </section>
