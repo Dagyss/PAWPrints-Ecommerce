@@ -1,0 +1,239 @@
+@import url("./reset.css");
+
+.carousel,
+.carousel-images img,
+.carousel-button,
+.carousel-thumbnails img,
+#progress-bar-container,
+h1 {
+  transition: all 0.4s ease-in-out;
+}
+
+
+body {
+    background-color: #111;
+    color: white;
+    text-align: center;
+}
+
+header {
+    padding: .5rem 0;
+}
+
+footer {
+    padding: 0 1rem;
+}
+
+.carousel {
+    position: relative;
+    max-width: 100%;
+    height: 30vh;
+    overflow: hidden;
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-images {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    height: 100%;
+    width: 100%;
+}
+
+.carousel-images img {
+    width: 100%;
+    height: 30vh;
+    object-fit: cover;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 15vh;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.7);
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: .5rem;
+    opacity: 0.5;
+}
+
+.carousel-button.prev {
+    left: .4rem;
+}
+
+.carousel-button.next {
+    right: .5rem;
+}
+
+.carousel-thumbnails {
+    position: absolute;
+    bottom: .5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.carousel-thumbnails img {
+    width: 40px;
+    height: 30px;
+    object-fit: cover;
+    cursor: pointer;
+    opacity: 0.6;
+    border: 2px solid transparent;
+    transition: border 0.3s, opacity 0.3s;
+    border-radius: .5rem;
+}
+
+.carousel-thumbnails img:hover {
+    border: .2rem solid rgb(7, 136, 7);
+    border-radius: .5rem;
+}
+
+.carousel-thumbnails img.active {
+    border: .2rem solid #007bff;
+    border-radius: .5rem;
+    opacity: 1;
+}
+
+#progress-bar-container {
+    position: absolute;
+    top: .5rem;
+    width: 100%;
+    height: 1.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+#progress-bar {
+    height: 100%;
+    width: 10%;
+    background: rgb(10, 136, 10);
+    transition: width 0.2s ease-in-out;
+    text-align: center;
+}
+
+.carousel-image {
+    width: 100%;
+    height: auto;
+    display: none;
+    transition: all 0.8s ease-in-out;
+    object-fit: cover;
+}
+
+.fade {
+    animation: fadeIn 0.8s;
+}
+
+.slide {
+    animation: slideIn 0.8s;
+}
+
+.zoom {
+    animation: zoomIn 0.8s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+#info {
+    background-color: #111;
+    color: white;
+}
+
+#info p {
+    margin: 1rem 0;
+    text-align: center;
+}
+
+@media (min-width: 600px) {
+    .carousel {
+        height: 30vh;
+    }
+
+    .carousel-images img {
+        height: 30vh;
+    }
+
+    .carousel-button {
+        top: 15vh;
+        padding: 0.75rem;
+    }
+
+    .carousel-thumbnails img {
+        width: 3.5rem;
+        height: 2rem;
+    }
+
+    #progress-bar-container {
+        height: 1.8rem;
+    }
+
+    h1 {
+        font-size: 1.7rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .carousel {
+        height: 70vh;
+    }
+
+    .carousel-images img {
+        height: 70vh;
+    }
+
+    .carousel-button {
+        top: 50%;
+        padding: 1rem;
+    }
+
+    .carousel-thumbnails img {
+        width: 5rem;
+        height: 3rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    #progress-bar-container {
+        height: 2rem;
+    }
+}
+
