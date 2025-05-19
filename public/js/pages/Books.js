@@ -1,15 +1,20 @@
-import BookComponent from '../components/BookComponent.js';
-import BookService from '../services/BookService.js';
+import BookController from '../controllers/BookController.js';
+import MobileToggleComponent from '../components/MobileFiltrosFuncionalidad.js';
 
-document.addEventListener('DOMContentLoaded', async () => {
-  try {
-    const books = await BookService.getBooks();
-    const container = document.getElementById('listaLibros');
-    if (!container) throw new Error("Container element '#listarLibros' not found");
-    
-    const listView = new BookComponent(books, container);
-    listView.render();
-  } catch (error) {
-    console.error('Failed to load books:', error);
-  }
+document.addEventListener('DOMContentLoaded', () => {
+  const bookContainer       = document.getElementById('listaLibros');
+  const filterForm          = document.getElementById('form-filtros');
+  const paginationContainer = document.getElementById('paginador');
+
+  const controller = new BookController({
+    bookContainer,
+    filterForm,
+    paginationContainer
+  });
+  controller.init().catch(console.error);
+
+  const filterBtn = document.querySelector('.buttom-filtros');
+  const orderBtn  = document.querySelector('.button-ordenar');
+  const filterContainer = document.getElementById('.filtros-container');
+  new MobileToggleComponent(filterBtn, orderBtn, filterForm, filterContainer);
 });

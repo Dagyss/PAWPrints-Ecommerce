@@ -74,41 +74,37 @@
                         </select>
                     </fieldset>
 
-                    <fieldset class="filtro">
+                    <fieldset class="filtro" id="filtro-idioma">
                         <legend>Idioma</legend>
                         <ul>
-                            <li><label><input type="checkbox" name="idiomas[]" value="1"> Inglés</label></li>
-                            <li><label><input type="checkbox" name="idiomas[]" value="2"> Español</label></li>
-                            <li><label><input type="checkbox" name="idiomas[]" value="3"> Francés</label></li>
-                            <li><label><input type="checkbox" name="idiomas[]" value="4"> Otros</label></li>
+                            <li><label><input type="checkbox" name="idiomas[]" value="ingles"> Inglés</label></li>
+                            <li><label><input type="checkbox" name="idiomas[]" value="español"> Español</label></li>
+                            <li><label><input type="checkbox" name="idiomas[]" value="frances"> Francés</label></li>
+                            <li><label><input type="checkbox" name="idiomas[]" value="portugues"> Portugues</label></li>
                         </ul>
                     </fieldset>
 
                     <fieldset class="filtro">
                         <legend>Formato</legend>
-                        <label><input type="checkbox" name="formatos[]" value="ebook"> E-book</label>
-                        <label><input type="checkbox" name="formatos[]" value="fisico"> Físico</label>
+                        <label><input type="checkbox" name="formatos[]" value="digital"> E-book</label>
+                        <label><input type="checkbox" name="formatos[]" value="físico"> Físico</label>
                     </fieldset>
 
-                    <fieldset class="modos-paginacion filtro">
-                        <legend>Modo de paginación</legend>
-                        <label><input id="modoTrad" type="radio" name="modo_pag" value="trad" checked> Tradicional</label>
-                        <label><input id="modoInf" type="radio" name="modo_pag" value="inf"> Scroll infinito</label>
-                    </fieldset>
-
-                    <button type="submit">Aplicar filtros</button>
+                    <!-- <button type="submit">Aplicar filtros</button> No hace falta el submit ahora-->
                 </form>
             </search>
 
-            <section class="books" id="listaLibros">
-                <!-- JS inyectará los libros aquí -->
+            <section class="books-wrapper">
+                <section class="books" id="listaLibros">
+                    <!-- Se cargan los libros  a través de JS -->
+                </section>
+                <nav class="pagination" id="paginador">
+                    <!-- Se carga el paginador a través de JS -->
+                </nav>
             </section>
 
         </section>
 
-        <nav class="pagination" id="paginador">
-            <!-- JS inyectará la paginación aquí -->
-        </nav>
     </main>
 
     <?php require "parts/footer.php"; ?>

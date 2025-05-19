@@ -7,7 +7,7 @@
     <meta name="description" content="Libros en venta en PAWPrints. Consulta los libros disponibles en PAWPrints." />
     <meta name="keywords" content="PAWPrints, compra, libros, ebooks, productos" />
     <meta name="author" content="PAWPrints" />
-    <link rel="stylesheet" href="./styles/book-information.css" />
+    <link rel="stylesheet" href="./css/book-information.css" />
     <title>Libros - PAWPrints</title>
 </head>
 
