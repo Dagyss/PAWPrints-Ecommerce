@@ -14,6 +14,7 @@ return [
     // Configuración de rutas iniciales
     'routes' => [
         ['path' => '/', 'action' => 'PageController@index', 'method' => 'GET'],
+        ['path' => '/books.json',   'action' => 'BooksController@indexJson', 'method' => 'GET'],
         ['path' => '/about-us', 'action' => 'PageController@aboutUs', 'method' => 'GET'],
         ['path' => '/login', 'action' => 'PageController@login', 'method' => 'GET'],
         ['path' => '/create-account', 'action' => 'PageController@createAccount', 'method' => 'GET'],

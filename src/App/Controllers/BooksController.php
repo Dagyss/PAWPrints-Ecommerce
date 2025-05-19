@@ -11,34 +11,14 @@ class BooksController extends AbstractController{
     private int $sizePage = 6;
 
     public function index() {
-
-        list($paginaActual, $librosPorPagina) = $this->getPaginationData();
-
-        if ($librosPorPagina <= 0) {
-            $librosPorPagina = $this->sizePage;
-        }       
-        
-        $filtros = $this->getFilters();
-        
-        $totalLibros = $this->model->count($filtros);
-        $totalPaginas = ceil($totalLibros / $librosPorPagina);
-        $offset = ($paginaActual - 1) * $librosPorPagina;
-        
-        $books = $this->model->getPaginated($librosPorPagina, $offset, $filtros);
-        
-        $maxPagesToShow = 5;
-        $startPage = max(1, $paginaActual - floor($maxPagesToShow / 2));
-        $endPage = min($totalPaginas, $startPage + $maxPagesToShow - 1);
-        
-        if ($endPage - $startPage < $maxPagesToShow - 1) {
-            $startPage = max(1, $endPage - $maxPagesToShow + 1);
-        }
-
-        if (isset($_GET['export']) && $_GET['export'] === 'csv') {
-            return $this->exportCsv($books);
-        }
         
         require $this->viewsDir . 'books.php';
+    }
+
+    public function indexJson() {
+        $books = $this->model->getAll();
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($books, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
     }
 
     public function show() {
