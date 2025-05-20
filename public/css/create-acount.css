@@ -1,0 +1,13 @@
+@import url('./base.css');
+@import url('./header.css');
+@import url('./footer.css');
+
+.register-container form .icon-password {
+    display: block;
+    top: 56.5%;
+}
+
+.register-container form .icon-confirm-password {
+    display: block;
+    top: 79.5%;
+}
