@@ -85,7 +85,7 @@ export default class BookController {
         }
         // muestra paginación, resetea página
         this.paginationContainer.style.display = '';
-        this.paginationComponent.setTotalItems(this.filteredBooks.length);
+        this.paginationComponent.setTotalLibros(this.filteredBooks.length);
         this.currentPage = 1;
         // renderiza los libros
         this.renderPage();

@@ -45,7 +45,7 @@ export default class PaginationComponent {
         const prevBtn = document.createElement('button');
         prevBtn.textContent = '«';
         prevBtn.disabled = this.currentPagina === 1;
-        prevBtn.classList.add('Pagina-btn');
+        prevBtn.classList.add('page-btn');
         prevBtn.addEventListener('click', () => this.goToPagina(this.currentPagina - 1));
         wrapper.appendChild(prevBtn);
 
@@ -54,7 +54,7 @@ export default class PaginationComponent {
             const btn = document.createElement('button');
             btn.textContent = i;
             btn.disabled = i === this.currentPagina;
-            btn.classList.add('Pagina-btn');
+            btn.classList.add('page-btn');
             if (i === this.currentPagina) btn.classList.add('active');
             btn.addEventListener('click', () => this.goToPagina(i));
             wrapper.appendChild(btn);
@@ -64,7 +64,7 @@ export default class PaginationComponent {
         const nextBtn = document.createElement('button');
         nextBtn.textContent = '»';
         nextBtn.disabled = this.currentPagina === maxPagina;
-        nextBtn.classList.add('Pagina-btn');
+        nextBtn.classList.add('page-btn');
         nextBtn.addEventListener('click', () => this.goToPagina(this.currentPagina + 1));
         wrapper.appendChild(nextBtn);
 

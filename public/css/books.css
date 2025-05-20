@@ -76,7 +76,7 @@ form button[type="submit"] {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     gap: 10px;
     margin: 10px;
     justify-content: space-between;
@@ -90,44 +90,44 @@ form button[type="submit"] {
     padding: 1rem;
 }
 
-.no_content > img {
+.no_content>img {
     width: 70vh;
     height: auto;
     max-width: 700px;
 }
 
 .pagination-buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
 }
 
 .page-btn {
-  padding: 0.5rem 0.75rem;
-  border: none;
-  border-radius: 5px;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  cursor: pointer;
-  transition: background-color 0.2s;
+    padding: 0.5rem 0.75rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
 .page-btn:hover:not(:disabled) {
-  background-color: var(--primary-color);
-  color: var(--contrast-text-color);
+    background-color: var(--primary-color);
+    color: var(--contrast-text-color);
 }
 
 .page-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .page-btn.active {
-  background-color: var(--primary-color);
-  color: var(--contrast-text-color);
+    background-color: var(--primary-color);
+    color: var(--contrast-text-color);
 }
 
 .pagination {
@@ -198,6 +198,7 @@ form button[type="submit"] {
     .books {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
+        align-items: start;
         gap: 10px;
         justify-content: start;
         margin: auto;

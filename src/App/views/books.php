@@ -49,9 +49,10 @@
                     <fieldset class="filtro">
                         <legend>Categorías</legend>
                         <ul>
-                            <li><label><input type="checkbox" name="categorias[]" value="1"> Ficción</label></li>
-                            <li><label><input type="checkbox" name="categorias[]" value="2"> No Ficción</label></li>
-                            <li><label><input type="checkbox" name="categorias[]" value="3"> Otros</label></li>
+                            <li><label><input type="checkbox" name="categorias[]" value="terror"> Terror</label></li>
+                            <li><label><input type="checkbox" name="categorias[]" value="ciencia ficción"> Ciencia Ficción</label></li>
+                            <li><label><input type="checkbox" name="categorias[]" value="misterio"> Misterio</label></li>
+                            <li><label><input type="checkbox" name="categorias[]" value="romance"> Romance</label></li>
                         </ul>
                     </fieldset>
 
@@ -67,11 +68,6 @@
                         <legend>Autor</legend>
                         <label>Buscar autor:</label>
                         <input id="autor" type="text" name="autor" placeholder="Buscar autor">
-                        <select id="coincidenciasAutor" name="coincidencias_autor[]" multiple aria-label="Autores">
-                            <option value="1">Primera coincidencia</option>
-                            <option value="2">Segunda coincidencia</option>
-                            <option value="3">Tercera coincidencia</option>
-                        </select>
                     </fieldset>
 
                     <fieldset class="filtro" id="filtro-idioma">
