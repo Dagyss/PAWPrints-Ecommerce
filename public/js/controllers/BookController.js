@@ -1,9 +1,10 @@
-// src/js/controllers/BookController.js
-
 import BookService from '../services/BookService.js';
 import BookComponent from '../components/BookComponent.js';
 import FilterComponent from '../components/FilterComponent.js';
 import PaginationComponent from '../components/PaginationComponent.js';
+import InfiniteScrollComponent from '../components/InfiniteScrollComponent.js';
+
+const MOBILE_QUERY = '(max-width: 899px)';
 
 export default class BookController {
     constructor({ bookContainer, filterForm, paginationContainer }) {
@@ -11,48 +12,105 @@ export default class BookController {
         this.filterForm = filterForm;
         this.paginationContainer = paginationContainer;
 
-        this.pageSize = 8;          // Libros por página
+        this.pageSize = 8;
         this.currentPage = 1;
+        // libros originales
         this.originalBooks = [];
+        // libros filtrados
         this.filteredBooks = [];
+        // libros a mostrar en la página actual (filtrados + paginados)
+        this.booksBuffer = [];
 
         this.bookComponent = null;
         this.paginationComponent = null;
+        this.scrollComponent = null;
+
+        // media query para saber si estamos en mobile
+        this.mql = window.matchMedia(MOBILE_QUERY);
+        // eventos para saber si estamos en mobile
+        this.handleViewportChange = this.handleViewportChange.bind(this);
     }
 
     async init() {
         // Carga datos
         this.originalBooks = await BookService.getBooks();
 
-        // Instancia vista libros
+        // Instancia de BookComponent para mostrar libros en el DOM
         this.bookComponent = new BookComponent([], this.bookContainer);
 
-        // Instancia filtros
+        // Instancia de FilterComponent para filtrar libros
         new FilterComponent(this.filterForm, filtros => {
             this.currentPage = 1;
-            this.onFilterChange(filtros);
+            this.filteredBooks = this.applyFilters(this.originalBooks, filtros);
+            this.handleViewportChange(this.mql);
         });
 
-        // Instancia paginación
+        // Instancia paginación tradicional
         this.paginationComponent = new PaginationComponent(
             this.paginationContainer,
             this.originalBooks.length,
             this.pageSize,
             page => {
+                // actualizar la página actual
                 this.currentPage = page;
+                // renderizar la página
                 this.renderPage();
             }
         );
 
-        // Render inicial
+        // MediaQuery listener
+        this.mql.addEventListener('change', this.handleViewportChange);
+
+        // libros iniciales
         this.filteredBooks = [...this.originalBooks];
+        // evento que decide si se muestra la paginación tradicional o el infinito
+        this.handleViewportChange(this.mql);
+    }
+
+    handleViewportChange(e) {
+        if (e.matches) {
+            // si es mobile, instanciamos el infinite scroll
+            this.enableInfiniteScroll();
+        } else {
+            // si es desktop, instanciamos la paginación
+            this.enablePagination();
+        }
+    }
+
+    enablePagination() {
+        // limpia scroll infinito
+        if (this.scrollComponent) {
+            this.scrollComponent.destroy?.();
+            this.scrollComponent = null;
+        }
+        // muestra paginación, resetea página
+        this.paginationContainer.style.display = '';
+        this.paginationComponent.setTotalItems(this.filteredBooks.length);
+        this.currentPage = 1;
+        // renderiza los libros
         this.renderPage();
     }
 
-    onFilterChange(filtros) {
-        this.filteredBooks = this.applyFilters(this.originalBooks, filtros);
-        this.paginationComponent.setTotalItems(this.filteredBooks.length);
-        this.renderPage();
+    enableInfiniteScroll() {
+        // oculta paginación de la versión desktop
+        this.paginationContainer.style.display = 'none';
+        // reseteo buffer de libros
+        this.currentPage = 1;
+        this.booksBuffer = [];
+        // instanciar scroll infinito
+        this.scrollComponent = new InfiniteScrollComponent(window, async () => {
+            const start = (this.currentPage - 1) * this.pageSize;
+            const nextItems = this.filteredBooks.slice(start, start + this.pageSize);
+            // si no hay mas libros, no hacer nada
+            if (nextItems.length === 0) return;
+            // agregar los libros al buffer
+            this.booksBuffer.push(...nextItems);
+            // actualizar el componente de libros con los libros del buffer y los renderiza
+            this.bookComponent.updateData(this.booksBuffer);
+            this.currentPage++;
+        });
+        // carga inicial
+        this.scrollComponent.onLoadMore();
     }
 
     renderPage() {

@@ -1,12 +1,13 @@
 export default class MobileToggleComponent {
 
-    constructor(filterBtn, orderBtn, form, container) {
+    constructor(filterBtn, orderBtn, form) {
         this.filterBtn = filterBtn;
         this.orderBtn = orderBtn;
         this.form = form;
         this.fieldsets = Array.from(form.querySelectorAll('fieldset'));
 
-        this.filterGroups = {
+        // grupo de filtros
+        this.filtergrupos = {
             ordenar: this.fieldsets.filter(fs =>
                 fs.querySelector('legend').textContent.trim() === 'Ordenar'
             ),
@@ -15,29 +16,35 @@ export default class MobileToggleComponent {
             )
         };
 
-        this.activeGroup = null;
-        this._bind();
-        this._reset();
+        this.grupoActivo = null
+        this.bind();
+        this.reset();
     }
 
-    _bind() {
-        this.filterBtn.addEventListener('click', () => this._toggleGroup('filtrar'));
-        this.orderBtn.addEventListener('click', () => this._toggleGroup('ordenar'));
+    bind() {
+        // Evento click para ocultar el grupo de filtros
+        this.filterBtn.addEventListener('click', () => this.ocultarGrupo('filtrar'));
+        this.orderBtn.addEventListener('click', () => this.ocultarGrupo('ordenar'));
     }
 
-    _reset() {
+    reset() {
+        // Resetear los campos de filtros cuando se oculta el grupo
         this.fieldsets.forEach(fs => fs.style.display = 'none');
-        this.activeGroup = null;
+        // Resetear el grupo activo para que no se quede abierto
+        this.grupoActivo = null
     }
 
-    _toggleGroup(group) {
-        if (this.activeGroup === group) {
-            this._reset();
+    ocultarGrupo(grupo) {
+        // Si el grupo activo es igual al grupo que se quiere ocultar, se oculta
+        if (this.grupoActivo === grupo) {
+            this.reset();
         } else {
+            // si no, se oculta el grupo activo y se muestra el grupo que se quiere ocultar
             this.fieldsets.forEach(fs => fs.style.display = 'none');
-            this.filterGroups[group].forEach(fs => fs.style.display = 'block');
+            this.filtergrupos[grupo].forEach(fs => fs.style.display = 'block');
             this.form.scrollIntoView({ behavior: 'smooth' });
-            this.activeGroup = group;
+            //  actualizamos el grupo activo
+            this.grupoActivo = grupo;
         }
     }
 }
