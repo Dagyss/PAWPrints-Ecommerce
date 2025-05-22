@@ -10,35 +10,26 @@ use Exception;
 
 class BooksCollection extends AbstractModel{
 
-    public $table = "book";
+    public $table = "Books";
 
     public function getAll(): array{
-        $filePath = __DIR__ . '/../../Storage/books.json';
-        if (file_exists($filePath)) {
-            $booksJson = file_get_contents($filePath);
-            $booksData = json_decode($booksJson, true);
-            $booksCollection = [];
+        $booksData = $this->getQueryBuilder()->select($this->table);
+        $booksCollection = [];
     
-            foreach ($booksData as $bookData) {
-                $book = new Book();
-                $book->set($bookData);
-                $booksCollection[] = $book;
-            }
-    
-            return $booksCollection;
-        } else {
-            throw new Exception("Books JSON file not found.");
+        foreach ($booksData as $bookData) {
+            $book = new Book();
+            $book->set($bookData);
+            $booksCollection[] = $book;
         }
+    
+        return $booksCollection;
     }
     
     public function getById(int $id): ?Book {
-        $books = $this->getAll();
-        foreach ($books as $book) {
-            if ($book->__get('id') === $id) {
-                return $book;
-            }
-        }
-        return null;
+        $bookData = $this->getQueryBuilder()->select($this->table, ["id" => $id]);
+        $book = new Book();
+        $book->set($bookData[0]);
+        return $book;
     }
 
     public function getPaginated(int $limit, int $offset): array {

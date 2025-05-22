@@ -27,12 +27,13 @@ return [
 
 
     'database' => [
-        'host' => getenv('DB_HOST'),
-        'port' => getenv('DB_PORT'),
-        'dbname' => getenv('DB_DBNAME'),
-        'username' => getenv('DB_USERNAME'),
-        'password' => getenv('DB_PASSWORD'),
-        'charset' => getenv('DB_CHARSET')
+        'DB_ADAPTER' => 'mysql',
+        'DB_HOSTNAME' => getenv('DB_HOST') ?: '127.0.0.1',
+        'DB_DATABASE' => getenv('DB_NAME'),
+        'DB_USERNAME' => getenv('DB_USER'),
+        'DB_PASSWORD' => getenv('DB_PASSWORD'),
+        'DB_PORT' => getenv('DB_PORT') ?: '3306',
+        'DB_CHARSET' => getenv('DB_CHARSET') ?: 'utf8mb4'
     ],
 
     // Email configurado en .env o sino uno por defecto, en este caso puse el mismo igual

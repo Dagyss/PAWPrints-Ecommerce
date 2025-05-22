@@ -2,18 +2,21 @@
 
 namespace Paw\Core;
 
-use Paw\Core\AbstractModel;
-use Paw\Core\Database\QueryBuilder;
+use Paw\Core\ModelFactory;
+use Monolog\Logger;
 
 class AbstractController{
     public string $viewsDir = "";
     public array $menu_nav = [];
     public ?string $modelName = null;
     public ?object $model = null;
+    protected ModelFactory $modelFactory;
+    protected Logger $logger;
 
-    public function __construct(){
-        global $connection, $log;
+    public function __construct(Logger $log){
+        $this->logger = $log;
         $this->viewsDir = __DIR__ . "/../App/views/";
+        $this->modelFactory = new ModelFactory($log);
         $this->menu_nav = [
             [
                 "href" => "/books",
@@ -42,17 +45,14 @@ class AbstractController{
         ];
 
         if(!is_null($this->modelName)){
-            //$qb = new QueryBuilder($connection, $log);
-            $model = new $this->modelName;
-            //$model->setQueryBuilder($qb);
-            $this->setModel($model);
+            $this->model = $this->modelFactory->make($this->modelName);
         }
     }
 
-    public function setModel(?object $model){
-        $this->model = $model;
+    public function getModel(string $modelClass): object
+    {
+        return $this->modelFactory->make($modelClass);
     }
-
 }
 
 ?>

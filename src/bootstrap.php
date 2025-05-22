@@ -5,7 +5,7 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Paw\Core\Router;
 use Paw\Core\Request;
-use Paw\Core\Database\ConnectionBuilder;
+use Paw\Core\Database\Database;
 
 // Cargamos configuración
 $config = require __DIR__ . '/../src/Config/config.php';
@@ -15,6 +15,9 @@ define('DEBUG', $config['debug']);
 // Logger
 $log = new Logger($config['log']['name']);
 $log->pushHandler(new StreamHandler($config['log']['path'], $config['log']['level']));
+
+// Inicializamos la base de datos
+Database::initialize($config['database'], $log );
 
 // Whoops (sólo en modo desarrollo)
 if (DEBUG) {
