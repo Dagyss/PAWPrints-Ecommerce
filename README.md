@@ -82,19 +82,14 @@ Descripción:
 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/tu_usuario/tp3-pawprint.git cd tp3-pawprint
+git clone https://github.com/Dagyss/PAWPrints-Ecommerce.git
 ```
 
-2. Instalar dependencias
+2. Levantar el proyecto localmente
 
 ```bash
-composer update
-```
-
-3. Levantar el entorno de desarrollo
-
-```bash
-composer start
+cd ~/PAWPrints-Ecommerce
+make up
 ```
 
 Esto iniciará un servidor PHP local en `http://localhost:9999`, sirviendo desde el directorio `public/`.
