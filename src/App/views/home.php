@@ -15,115 +15,80 @@
     
     <main>
         <div id="first-banner"></div>
+
         <section class="carousel-section">
             <h2>Sugerencias</h2>
-            <div class="carousel">
-                <article class="book-card">
+
+            <div class="carousel-wrapper">
+                <button class="nav prev">&#10094;</button>
+
+                <div class="books-carousel" id="books-carousel">
+                <?php foreach ($books as $book): ?>
+                    <article class="book-card">
                     <figure>
-                        <a href="./book.html">
-                            <img src="../icons/book.png" alt="Portada del libro">
+                        <a href="./book.php?id=<?= htmlspecialchars($book->id) ?>">
+                        <?php 
+                            $imagen = (strlen($book->imagen ?? '') > 10) 
+                                ? $book->imagen 
+                                : './icons/book.png';
+                        ?>
+                        <img src="<?= htmlspecialchars($imagen) ?>" alt="Portada del libro">                            
                         </a>
                     </figure>
-                    <h3><a href="./book.html">Título</a></h3>
-                    <p>Nombre del autor</p>
-                    <p>$XXXXX</p>
-                    <button type="button">Comprar</button>
-                </article>
-                <article class="book-card">
-                    <figure>
-                        <a href="./book.html">
-                            <img src="../icons/book.png" alt="Portada del libro">
-                        </a>
-                    </figure>
-                    <h3><a href="./book.html">Título</a></h3>
-                    <p>Nombre del autor</p>
-                    <p>$XXXXX</p>
-                    <button type="button">Comprar</button>
-                </article>
-                <article class="book-card">
-                    <figure>
-                        <a href="./book.html">
-                            <img src="../icons/book.png" alt="Portada del libro">
-                        </a>
-                    </figure>
-                    <h3><a href="./book.html">Título</a></h3>
-                    <p>Nombre del autor</p>
-                    <p>$XXXXX</p>
-                    <button type="button">Comprar</button>
-                </article>
-                <article class="book-card">
-                    <figure>
-                        <a href="./book.html">
-                            <img src="../icons/book.png" alt="Portada del libro">
-                        </a>
-                    </figure>
-                    <h3><a href="./book.html">Título</a></h3>
-                    <p>Nombre del autor</p>
-                    <p>$XXXXX</p>
-                    <button type="button">Comprar</button>
-                </article>
-            </div>
-            <div class="carousel-dots">
-                <span>&lt;</span>
-                <span class="dot selected"></span>
-                <span class="dot"></span>
-                <span>&gt;</span>
+                    <section class="book-card__footer">
+                        <h3>
+                            <a href="./book.php?id=<?= htmlspecialchars($book->id) ?>">
+                                <?= htmlspecialchars($book->titulo) ?>
+                            </a>
+                        </h3>
+                        <p><?= htmlspecialchars($book->autor) ?></p>
+                        <p>$<?= htmlspecialchars($book->precio) ?></p>
+                        <button type="button">Comprar</button>
+                    </section>
+                    </article>
+                <?php endforeach; ?>
+                </div>
+
+                <button class="nav next">&#10095;</button>
             </div>
         </section>
+
         <div id="second-banner"></div>
+
         <section class="carousel-section">
             <h2>Los mas vendidos</h2>
-            <div class="carousel">
-                <article class="book-card">
+
+            <div class="carousel-wrapper">
+                <button class="nav prev">&#10094;</button>
+
+                <div class="books-carousel" id="books-carousel">
+                <?php foreach ($books as $book): ?>
+                    <article class="book-card">
                     <figure>
-                        <a href="./book.html">
-                            <img src="../icons/book.png" alt="Portada del libro">
+                        <a href="./book.php?id=<?= htmlspecialchars($book->id) ?>">
+                        <?php 
+                            $imagen = (strlen($book->imagen ?? '') > 10) 
+                                ? $book->imagen 
+                                : './icons/book.png';
+                        ?>
+                        <img src="<?= htmlspecialchars($imagen) ?>" alt="Portada del libro">                            
                         </a>
                     </figure>
-                    <h3><a href="./book.html">Título</a></h3>
-                    <p>Nombre del autor</p>
-                    <p>$XXXXX</p>
-                    <button type="button">Comprar</button>
-                </article>
-                <article class="book-card">
-                    <figure>
-                        <a href="./book.html">
-                            <img src="../icons/book.png" alt="Portada del libro">
-                        </a>
-                    </figure>
-                    <h3><a href="./book.html">Título</a></h3>
-                    <p>Nombre del autor</p>
-                    <p>$XXXXX</p>
-                    <button type="button">Comprar</button>
-                </article>
-                <article class="book-card">
-                    <figure>
-                        <a href="./book.html">
-                            <img src="../icons/book.png" alt="Portada del libro">
-                        </a>
-                    </figure>
-                    <h3><a href="./book.html">Título</a></h3>
-                    <p>Nombre del autor</p>
-                    <p>$XXXXX</p>
-                    <button type="button">Comprar</button>
-                </article>
-                <article class="book-card">
-                    <figure>
-                        <a href="./book.html">
-                            <img src="../icons/book.png" alt="Portada del libro">
-                        </a>
-                    </figure>
-                    <h3><a href="./book.html">Título</a></h3>
-                    <p>Nombre del autor</p>
-                    <p>$XXXXX</p>
-                    <button type="button">Comprar</button>
-                </article>
-            </div>
-            <div class="carousel-dots">
-                <span>&lt;</span>
-                <span class="dot selected"></span>
-                <span class="dot"></span>
-                <span>&gt;</span>
+                    <section class="book-card__footer">
+                        <h3>
+                            <a href="./book.php?id=<?= htmlspecialchars($book->id) ?>">
+                                <?= htmlspecialchars($book->titulo) ?>
+                            </a>
+                        </h3>
+                        <p><?= htmlspecialchars($book->autor) ?></p>
+                        <p>$<?= htmlspecialchars($book->precio) ?></p>
+                        <button type="button">Comprar</button>
+                    </section>
+                    </article>
+                <?php endforeach; ?>
+                </div>
+
+                <button class="nav next">&#10095;</button>
             </div>
         </section>
     </main>
@@ -147,6 +112,22 @@
         interval: 4000,
         imagePath: "./images/"
         });
+
+        const booksCarousel = document.getElementById("books-carousel");
+        const next = document.querySelector(".nav.next");
+        const prev = document.querySelector(".nav.prev");
+
+        const cardWidth = booksCarousel.querySelector(".book-card").offsetWidth + 16;
+
+        next.addEventListener("click", () => {
+            console.log("Clickeando ando")
+            booksCarousel.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        });
+
+        prev.addEventListener("click", () => {
+            booksCarousel.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+        });
+
     </script>
 
 </body>

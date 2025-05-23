@@ -13,7 +13,7 @@ return [
 
     // Configuración de rutas iniciales
     'routes' => [
-        ['path' => '/', 'action' => 'PageController@index', 'method' => 'GET'],
+        ['path' => '/', 'action' => 'HomeController@index', 'method' => 'GET'],
         ['path' => '/books.json',   'action' => 'BooksController@indexJson', 'method' => 'GET'],
         ['path' => '/about-us', 'action' => 'PageController@aboutUs', 'method' => 'GET'],
         ['path' => '/login', 'action' => 'PageController@login', 'method' => 'GET'],

@@ -3,99 +3,74 @@
 @import url("./carousel.css");
 @import url('./footer.css');
 
-.carousel-section {
-    margin: 2rem;
+.carousel-section{
+  margin: 2rem 0;
+}
+.carousel-section h2{
+  margin-left: 2rem;
 }
 
-.carousel {
+.carousel-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.books-carousel {
+  margin: 0 4rem;
   display: flex;
   gap: 1rem;
+  scroll-behavior: smooth;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding: 1rem;
-  scroll-behavior: smooth;
 }
-
-.carousel-dots {
-    text-align: center;
-    margin-top: 1rem;
-}
-
-.carousel-dots .dot {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background: var(--buttons-color);
-    border-radius: 50%;
-    margin: 0 5px;
-}
-
-.carousel-dots .selected {
-    background: var(--primary-color);
-}
-
 
 .book-card {
-  flex: 0 0 auto;
-  width: 180px; 
-  background-color: var(--background-contents);
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  flex: 0 0 calc((100% - 4rem) / 5);
   scroll-snap-align: start;
-  text-align: center;
+  background-color: var(--background-contents);
+  border-radius: .2rem;
 }
 
-.book-card p {
-  color: black; 
-}
-
-.book-card button {
-  width: 100%;
-  padding: 10px 0;
-  background-color: var(--primary-color); 
-  color: white;
-  border: none;
-  border-radius: 5px;
-  text-align: center; 
-  display: flex;
-  justify-content: center; 
-  align-items: center;    
-  cursor: pointer;
-}
-
-.carousel .book-card figure {
-  width: 100%;
-  height: auto;
+.book-card figure {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden; 
+  margin: 0;
 }
 
-.carousel .book-card img {
-  max-width: 100%;
-  max-height: 100%; 
-  object-fit: contain; 
-  display: block;
+.book-card img {
+  width: 20rem;
+  height: 30rem;
 }
 
-@media (max-width: 768px) {
-  .book-card {
-    width: 140px;
-    padding: 0.8rem;
-  }
+.book-card img:hover {
+  border: .5rem solid var(--primary-color);
+}
 
-  .book-card h3 {
-    font-size: 1rem;
-  }
 
-  .book-card p {
-    font-size: 0.85rem;
-  }
+.book-card__footer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  .book-card button {
-    font-size: 0.9rem;
-    padding: 0.4rem 0.6rem;
-  }
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  z-index: 2;
+  font-size: 1.5rem;
+}
+
+.nav.prev {
+  left: .2rem;
+}
+
+.nav.next {
+  right: .2rem;
 }
