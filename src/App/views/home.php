@@ -14,11 +14,7 @@
     ?>
     
     <main>
-        <div id="banner">
-            <div id="progress-bar-container" aria-hidden="true">
-                <div id="progress-bar"></div>
-            </div>
-        </div>
+        <div id="banner"></div>
         <section class="carousel-section">
             <h2>Sugerencias</h2>
             <div class="carousel">
@@ -74,7 +70,7 @@
                 <span>&gt;</span>
             </div>
         </section>
-        
+
         <section class="carousel-section">
             <h2>Los mas vendidos</h2>
             <div class="carousel">

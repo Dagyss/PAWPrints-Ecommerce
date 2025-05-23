@@ -24,7 +24,11 @@ export class Carousel {
   async init() {
     try {
       const imageSources = await this.loadImageSources();
-      const imgs = await preloadImages(imageSources, this.options.imagePath);
+      const imgs = await preloadImages(
+        imageSources,
+        this.options.imagePath,
+        this.container
+      );
       this.images = imgs;
 
       this.renderStructure();
