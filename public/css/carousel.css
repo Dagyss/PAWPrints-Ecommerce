@@ -1,4 +1,5 @@
-#banner,
+#first-banner,
+#second-banner,
 .carousel-images img,
 .carousel-button,
 .carousel-thumbnails img,
@@ -6,7 +7,7 @@
   transition: all 0.4s ease-in-out;
 }
 
-#banner {
+#first-banner, #second-banner {
     position: relative;
     max-width: 100%;
     height: 30vh;
@@ -154,7 +155,7 @@
 }
 
 @media (min-width: 600px) {
-    #banner {
+    #first-banner, #second-banner {
         height: 30vh;
     }
 
@@ -179,7 +180,7 @@
 }
 
 @media (min-width: 769px) {
-    #banner {
+    #first-banner, #second-banner {
         height: 70vh;
     }
 
