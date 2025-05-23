@@ -49,7 +49,7 @@ insertar_datos_demo:
 
 # Ingresar a la shell de la base de datos
 db_shell:
-	docker exec -it match_making_db mysql -u $(DB_USER) -p$(DB_PASSWORD) $(DB_NAME)
+	docker exec -it paw_prints_db mysql -u $(DB_USER) -p$(DB_PASSWORD) $(DB_NAME)
 
 # Bajar contenedores
 down_db:
