@@ -26,6 +26,7 @@
                 <?php foreach ($books as $book): ?>
                     <article class="book-card">
                     <figure>
+                        <!-- TODO detalle del libro -->
                         <a href="./book.php?id=<?= htmlspecialchars($book->id) ?>">
                         <?php 
                             $imagen = (strlen($book->imagen ?? '') > 10) 
