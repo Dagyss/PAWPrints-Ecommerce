@@ -1,5 +1,13 @@
 USE paw_prints_db;
 
+CREATE TABLE Users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('cliente', 'empleado', 'admin') NOT NULL DEFAULT 'cliente',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE
     Books (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -25,9 +33,11 @@ CREATE TABLE
         nombre VARCHAR(100) NOT NULL,
         email VARCHAR(255) NOT NULL,
         telefono VARCHAR(20) NOT NULL,
+        user_id INT DEFAULT NULL,
         entrega ENUM ('domicilio', 'sucursal') NOT NULL,
         total DECIMAL(10, 2) NOT NULL,
-        created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+        created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES Users (id)
     );
 
 CREATE TABLE

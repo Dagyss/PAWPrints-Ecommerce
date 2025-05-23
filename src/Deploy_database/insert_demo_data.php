@@ -44,11 +44,12 @@
  
  $dataDir = __DIR__ . '/data';
  
- $orderedTables = [
-     'Books',
-     'Orders',
-     'Order_Items'
- ];
+$orderedTables = [
+    'Users',
+    'Books',
+    'Orders',
+    'Order_Items'
+];
  
  foreach ($orderedTables as $tableName) {
      $csvPath = "$dataDir/$tableName.csv";
@@ -77,8 +78,8 @@
      while (($data = fgetcsv($handle)) !== false) {
          $row = array_combine($headers, $data);
  
-         if (isset($row['contrasena'])) {
-             $row['contrasena'] = password_hash($row['contrasena'], PASSWORD_DEFAULT);
+         if (isset($row['password'])) {
+             $row['password'] = password_hash($row['password'], PASSWORD_DEFAULT);
          }
  
          $columns = [];
