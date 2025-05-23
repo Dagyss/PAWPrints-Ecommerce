@@ -1,7 +1,6 @@
 <?php
 namespace Paw\App\Controllers;
 
-use Monolog\Logger;
 use Paw\Core\AbstractController;
 use Paw\Core\Request;
 use Paw\App\Controllers\ErrorController;
@@ -45,8 +44,13 @@ class CheckoutController extends AbstractController
             $errors['telefono'] = 'Teléfono invalido.';
         }
 
-        if (!in_array($data['entrega'], ['domicilio','sucursal'])) {
+        if (!in_array($data['entrega'], ['domicilio', 'sucursal'])) {
             $errors['entrega'] = 'Opción de entrega invalida.';
+        }
+
+        if (!empty($stockErrors)) {
+            require $this->viewsDir . 'checkout-form.php';
+            return;
         }
 
         if (!file_exists($this->jsonFile) || !is_readable($this->jsonFile)) {
@@ -66,6 +70,15 @@ class CheckoutController extends AbstractController
             exit;
         }
 
+        $service     = new OrderService();
+        $stockErrors = $service->validateStock($cartItems);
+
+        if (!empty($stockErrors)) {
+            $cart = $cartItems;
+            require $this->viewsDir . 'checkout-form.php';
+            return;
+        }
+
         $order = new Order();
         $order->set([
             'nombre'   => $data['nombre'],
@@ -74,7 +87,7 @@ class CheckoutController extends AbstractController
             'entrega'  => $data['entrega'],
             'total'    => array_reduce(
                 $cartItems,
-                function($sum, $i) {
+                function ($sum, $i) {
                     $qty   = (int) ($i['cantidad'] ?? 1);
                     $price = (float) ($i['precio'] ?? 0);
                     return $sum + ($qty * $price);
@@ -91,17 +104,16 @@ class CheckoutController extends AbstractController
                 'book_id'    => $ci['id'],
                 'formato'    => $ci['formato'],
                 'cantidad'   => $ci['cantidad'],
-                'precio_unit'=> $ci['precio'],
+                'precio_unit' => $ci['precio'],
                 'descuento_unit' => $ci['descuento']
             ]);
-            $this->logger->info('Item descuento '.$ci['descuento']);
+            $this->logger->info('Item descuento ' . $ci['descuento']);
             $items[] = $item;
         }
 
-        $this->logger->info('Items: '.json_encode($cartItems));
-        $this->logger->info('Items: '.json_encode($items));
+        $this->logger->info('Items: ' . json_encode($cartItems));
+        $this->logger->info('Items: ' . json_encode($items));
 
-        $service = new OrderService();
         try {
             $service->createOrderWithItems($order, $items);
         } catch (\Exception $e) {
@@ -113,11 +125,11 @@ class CheckoutController extends AbstractController
         $to      = "ventas@pawprints.local";
         $subject = "Nueva reserva de {$data['nombre']}";
         $body    = "Se ha realizado una nueva reserva:\n\n"
-                 . "Nombre: {$data['nombre']}\n"
-                 . "Email: {$data['email']}\n"
-                 . "Teléfono: {$data['telefono']}\n"
-                 . "Entrega: {$data['entrega']}\n\n"
-                 . "Detalle de productos:\n";
+            . "Nombre: {$data['nombre']}\n"
+            . "Email: {$data['email']}\n"
+            . "Teléfono: {$data['telefono']}\n"
+            . "Entrega: {$data['entrega']}\n\n"
+            . "Detalle de productos:\n";
 
         foreach ($cartItems as $item) {
             $titulo   = $item['titulo'] ?? '—';
@@ -129,7 +141,7 @@ class CheckoutController extends AbstractController
 
         $total = array_reduce(
             $cartItems,
-            function($sum, $i) {
+            function ($sum, $i) {
                 $qty   = (int) ($i['cantidad'] ?? 1);
                 $price = (float) ($i['precio'] ?? 0);
                 return $sum + ($qty * $price);

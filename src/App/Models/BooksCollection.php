@@ -40,6 +40,10 @@ class BooksCollection extends AbstractModel{
     public function count(): int {
         return count($this->getAll());
     }
+
+    public function updateBook(Book $book){
+        $this->getQueryBuilder()->update($this->table, $book->fields, ["id" => $book->id]);
+    }
 }
 
 
