@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,9 +10,10 @@
     <title>Finalizar Compra - PAWPrints</title>
     <link rel="stylesheet" href="./css/checkout-form.css">
 </head>
+
 <body>
     <?php
-        require "parts/header.php";
+    require "parts/header.php";
     ?>
 
     <main>
@@ -22,9 +24,8 @@
             </ul>
         </nav>
         <div class="checkout-container">
-        <section class="order-summary">
+            <section class="order-summary">
                 <h2>Detalle de tu pedido</h2>
-
                 <?php if (!empty($cart)): ?>
                     <?php $total = 0; ?>
                     <?php foreach ($cart as $item): ?>
@@ -39,8 +40,14 @@
                                     <a href="/book?id=<?= htmlspecialchars($item['id']); ?>"><?= htmlspecialchars($item['titulo']); ?></a>
                                 </h3>
                                 <div class="order-summary-details">
-                                    <p>Cantidad: <?= (int) $item['cantidad']; ?></p>
+                                    <p>Cantidad: <?= (int)$item['cantidad']; ?></p>
                                     <p>Formato: <?= htmlspecialchars($item['formato']); ?></p>
+
+                                    <?php if (!empty($stockErrors[$item['id']])): ?>
+                                        <p class="stock-error">
+                                            <?= htmlspecialchars($stockErrors[$item['id']]); ?>
+                                        </p>
+                                    <?php endif; ?>
                                 </div>
                                 <div class="order-summary-price">
                                     <p>$<?= number_format($item['precio'], 2, ',', '.'); ?></p>
@@ -99,15 +106,16 @@
                     </div>
                 </form>
             </section>
-      
-          
+
+
         </div>
-      </main>
+    </main>
 
     <?php
     require "parts/footer.php";
     ?>
 
-    
+
 </body>
+
 </html>
