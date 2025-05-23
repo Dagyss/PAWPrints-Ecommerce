@@ -14,7 +14,11 @@
     ?>
     
     <main>
-        <div class="banner">Publicidad</div>
+        <div id="banner">
+            <div id="progress-bar-container" aria-hidden="true">
+                <div id="progress-bar"></div>
+            </div>
+        </div>
         <section class="carousel-section">
             <h2>Sugerencias</h2>
             <div class="carousel">
@@ -70,7 +74,6 @@
                 <span>&gt;</span>
             </div>
         </section>
-        <div class="banner">Publicidad</div>
         
         <section class="carousel-section">
             <h2>Los mas vendidos</h2>
@@ -131,6 +134,16 @@
     <?php
         require "parts/footer.php";
     ?>
+    <script type="module">
+        import { Carousel } from "./js/libraries/carousel.js";
+        new Carousel("#banner", {
+        images: "./images.json",
+        transition: "zoom",
+        autoplay: true,
+        interval: 4000,
+        imagePath: "./images/"
+        });
+    </script>
 
 </body>
 </html>
