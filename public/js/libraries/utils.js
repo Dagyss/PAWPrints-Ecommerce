@@ -2,11 +2,11 @@ export function delay(ms) {
   return new Promise((res) => setTimeout(res, ms));
 }
 
-export async function preloadImages(imageSources, path = "") {
+export async function preloadImages(imageSources, path = "", container) {
   let loaded = 0;
   const total = imageSources.length;
 
-  const progressBar = document.getElementById("progress-bar");
+  const { progressBarContainer, progressBar } = creatingProgressBar(container);
   const loadedImages = [];
 
   for (const src of imageSources) {
@@ -21,8 +21,7 @@ export async function preloadImages(imageSources, path = "") {
   }
 
   await delay(200);
-  document.getElementById("progress-bar-container").style.display = "none";
-
+  progressBarContainer.style.display = "none";
   return loadedImages;
 }
 
@@ -42,4 +41,16 @@ function simulateLoadImage(src, fakeDelay = 300) {
       );
     };
   });
+}
+
+function creatingProgressBar(container) {
+  container.innerHTML = `
+      <div class="progress-bar-container" aria-hidden="true">
+          <div class="progress-bar"></div>
+      </div>
+    `;
+  return {
+    progressBarContainer: container.querySelector(".progress-bar-container"),
+    progressBar: container.querySelector(".progress-bar"),
+  };
 }
