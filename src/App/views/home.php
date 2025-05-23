@@ -60,9 +60,9 @@
             <h2>Los mas vendidos</h2>
 
             <div class="carousel-wrapper">
-                <button class="nav prev">&#10094;</button>
+                <button class="nav prev-best-sales">&#10094;</button>
 
-                <div class="books-carousel" id="books-carousel">
+                <div class="books-carousel-best-sales" id="books-carousel-best-sales">
                 <?php foreach ($books as $book): ?>
                     <article class="book-card">
                     <figure>
@@ -89,7 +89,7 @@
                 <?php endforeach; ?>
                 </div>
 
-                <button class="nav next">&#10095;</button>
+                <button class="nav next-best-sales">&#10095;</button>
             </div>
         </section>
     </main>
@@ -114,24 +114,9 @@
         imagePath: "./images/"
         });
 
-        const booksCarousel = document.getElementById("books-carousel");
-        const next = document.querySelector(".nav.next");
-        const prev = document.querySelector(".nav.prev");
-
-        const cardWidth = booksCarousel.querySelector(".book-card").offsetWidth + 16;
-
-        next.addEventListener("click", () => {
-            console.log("Clickeando ando")
-            booksCarousel.scrollBy({ left: cardWidth, behavior: 'smooth' });
-        });
-
-        prev.addEventListener("click", () => {
-            booksCarousel.scrollBy({ left: -cardWidth, behavior: 'smooth' });
-        });
-
     </script>
+<script src="./js/pages/homeCarousel.js"></script>
+<script src="./js/pages/accountMenu.js"></script>
 
 </body>
 </html>
-
-

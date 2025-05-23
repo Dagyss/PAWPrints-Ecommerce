@@ -20,11 +20,11 @@
     </search>
 
     <section class="header-my-account">
-        <button type="button" aria-label="Abrir menú de cuenta">
+        <button type="button" aria-label="Abrir menú de cuenta" id="account-button">
             <img src="../icons/UserIcon.png" class="icon">
             Mi cuenta
         </button>
-        <ul>
+        <ul id="account-menu">
             <li><a href="./login.html">Iniciar sesión</a></li>
             <li><a href="./create-account.html">Crear cuenta</a></li>
             <li><a href="./purchase-history.html">Historial de compras</a></li>

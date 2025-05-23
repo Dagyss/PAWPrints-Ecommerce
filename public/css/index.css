@@ -15,7 +15,7 @@
   overflow: hidden;
 }
 
-.books-carousel {
+.books-carousel, .books-carousel-best-sales {
   margin: 0 4rem;
   display: flex;
   gap: 1rem;
@@ -67,10 +67,10 @@
   font-size: 1.5rem;
 }
 
-.nav.prev {
+.nav.prev, .nav.prev-best-sales {
   left: .2rem;
 }
 
-.nav.next {
+.nav.next, .nav.next-best-sales {
   right: .2rem;
 }

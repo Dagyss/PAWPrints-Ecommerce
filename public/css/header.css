@@ -177,6 +177,37 @@ h1 a{
     display: none;
 }
 
+#account-menu {
+    display: none;
+    position: absolute;
+    top: 4rem;
+    right: 1rem;
+    background-color: var(--footer-background-color);
+    border: 1px solid var(--muted-text-color);
+    border-radius: 0.5rem;
+    list-style: none;
+    padding: 0.5rem 0;
+    z-index: 1000;
+}
+
+#account-menu li {
+    padding: 0.5rem 1rem;
+}
+
+#account-menu li a {
+    text-decoration: none;
+    color: var(--contrast-text-color);
+    display: block;
+}
+
+#account-menu li a:hover {
+    background-color: var(--background-contents);
+}
+
+#account-menu.show {
+    display: block;
+}
+
 @media (min-width: 814px) {
     .hamburger-checkbox{
         display: none;
