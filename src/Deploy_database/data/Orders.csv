@@ -1,0 +1,6 @@
+order_id,nombre,email,telefono,entrega,total,created_at
+1,Ana Pérez,ana.perez@example.com,+5551234567,domicilio,45.49,2025-05-20 14:30:00
+2,Carlos Gómez,carlos.gomez@example.com,+541112223333,sucursal,29.98,2025-05-21 09:15:00
+3,María López,maria.lopez@example.com,+541112223333,domicilio,65.47,2025-05-21 18:45:00
+4,José Martínez,jose.martinez@example.com,+5559876543,sucursal,39.98,2025-05-22 11:00:00
+5,Lucía Fernández,lucia.fernandez@example.com,+5550001111,domicilio,22.90,2025-05-22 16:20:00

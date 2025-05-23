@@ -1,9 +1,13 @@
 <?php
 namespace Paw\App\Controllers;
 
+use Monolog\Logger;
 use Paw\Core\AbstractController;
 use Paw\Core\Request;
 use Paw\App\Controllers\ErrorController;
+use Paw\App\Models\Order;
+use Paw\App\Models\OrderItem;
+use Paw\App\Services\OrderService;   // ← añadido
 
 class CheckoutController extends AbstractController
 {
@@ -11,8 +15,6 @@ class CheckoutController extends AbstractController
 
     public function showForm()
     {
-        // Mas adelante recuperamos de la bd el carrito, por ahora hardcodeamos unos libritos:
-        // Leemos el carrito hardcodeado
         $json = file_get_contents($this->jsonFile);
         $cart = json_decode($json, true);
 
@@ -21,7 +23,7 @@ class CheckoutController extends AbstractController
 
     public function submit(Request $request)
     {
-        //Recuperacion de datos   
+        // Recuperación de datos
         $data = [
             'nombre'   => trim($request->post('nombre')),
             'email'    => trim($request->post('email')),
@@ -42,7 +44,7 @@ class CheckoutController extends AbstractController
         if ($data['telefono'] !== '' && !preg_match('/^\+?\d{7,15}$/', $data['telefono'])) {
             $errors['telefono'] = 'Teléfono invalido.';
         }
-        
+
         if (!in_array($data['entrega'], ['domicilio','sucursal'])) {
             $errors['entrega'] = 'Opción de entrega invalida.';
         }
@@ -62,28 +64,61 @@ class CheckoutController extends AbstractController
             $errorController = new ErrorController();
             $errorController->internalError();
             exit;
-            
-            /*
-            //Esto te devuelve un 422 y un json con los errores que fueron saltando con este estilo 
-            // {"success":false,"errors":{"nombre":"Debe ingresar un nombre.","email":"Email invalido."}}
-            header('Content-Type: application/json', true, 422);
-            echo json_encode(['success' => false, 'errors' => $errors]);
-            exit;
-            */
         }
 
-        $nombre = $data['nombre'] ?? 'Cliente';
+        $order = new Order();
+        $order->set([
+            'nombre'   => $data['nombre'],
+            'email'    => $data['email'],
+            'telefono' => $data['telefono'],
+            'entrega'  => $data['entrega'],
+            'total'    => array_reduce(
+                $cartItems,
+                function($sum, $i) {
+                    $qty   = (int) ($i['cantidad'] ?? 1);
+                    $price = (float) ($i['precio'] ?? 0);
+                    return $sum + ($qty * $price);
+                },
+                0
+            ),
+            'created_at' => date('Y-m-d H:i:s'),
+        ]);
 
-        // Correo
+        $items = [];
+        foreach ($cartItems as $ci) {
+            $item = new OrderItem();
+            $item->set([
+                'book_id'    => $ci['id'],
+                'formato'    => $ci['formato'],
+                'cantidad'   => $ci['cantidad'],
+                'precio_unit'=> $ci['precio'],
+                'descuento_unit' => $ci['descuento']
+            ]);
+            $this->logger->info('Item descuento '.$ci['descuento']);
+            $items[] = $item;
+        }
+
+        $this->logger->info('Items: '.json_encode($cartItems));
+        $this->logger->info('Items: '.json_encode($items));
+
+        $service = new OrderService();
+        try {
+            $service->createOrderWithItems($order, $items);
+        } catch (\Exception $e) {
+            (new ErrorController())->internalError();
+            $this->logger->error($e->getMessage());
+            exit;
+        }
+
         $to      = "ventas@pawprints.local";
-        $subject = "Nueva reserva de $nombre";
+        $subject = "Nueva reserva de {$data['nombre']}";
         $body    = "Se ha realizado una nueva reserva:\n\n"
-                 . "Nombre: $nombre\n"
+                 . "Nombre: {$data['nombre']}\n"
                  . "Email: {$data['email']}\n"
                  . "Teléfono: {$data['telefono']}\n"
                  . "Entrega: {$data['entrega']}\n\n"
-                 . "Detalle de productos:\n";    
-        
+                 . "Detalle de productos:\n";
+
         foreach ($cartItems as $item) {
             $titulo   = $item['titulo'] ?? '—';
             $cantidad = (int) ($item['cantidad'] ?? 1);
@@ -92,7 +127,6 @@ class CheckoutController extends AbstractController
             $body    .= "- {$titulo} x{$cantidad} ({$formato}): \${$precio} c/u\n";
         }
 
-        
         $total = array_reduce(
             $cartItems,
             function($sum, $i) {
@@ -104,7 +138,7 @@ class CheckoutController extends AbstractController
         );
         $body .= "\nTotal: \$" . number_format($total, 2, ',', '.') . "\n";
 
-        $headers  = "From: no-reply@localhost\r\n"; 
+        $headers  = "From: no-reply@localhost\r\n";
         $headers .= "Reply-To: ventas@pawprints.local\r\n";
         $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
         $ok = mail($to, $subject, $body, $headers);
@@ -112,7 +146,7 @@ class CheckoutController extends AbstractController
             error_log("Falló el envío de mail: " . print_r(error_get_last(), true));
         }
 
-        //Confirmacion
+        // Confirmación
         require $this->viewsDir . 'checkout-success.php';
     }
 }

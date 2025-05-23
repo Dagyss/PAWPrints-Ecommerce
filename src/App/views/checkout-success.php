@@ -14,7 +14,7 @@
     ?>
     <main class="success-container">
         <h2>¡Compra realizada!</h2>
-        <p>Gracias, <?= htmlspecialchars($nombre) ?>. Tu pedido fue recibido exitosamente.</p>
+        <p>Gracias, <?= htmlspecialchars($data['nombre']) ?>. Tu pedido fue recibido exitosamente.</p>
         <a href="/" class="button">Volver al inicio</a>
     </main>
     <?php

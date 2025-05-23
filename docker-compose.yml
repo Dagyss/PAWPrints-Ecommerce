@@ -16,5 +16,13 @@ services:
       - db_data:/var/lib/mysql
       - ./src/Deploy_database/database_schema.sql:/docker-entrypoint-initdb.d/database_schema.sql:ro
 
+  mailhog:
+    image: mailhog/mailhog
+    container_name: pawprints_mailhog
+    restart: unless-stopped
+    ports:
+      - "25:1025"
+      - "8025:8025"
+  
 volumes:
   db_data:

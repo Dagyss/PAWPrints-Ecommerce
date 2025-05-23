@@ -45,7 +45,9 @@
  $dataDir = __DIR__ . '/data';
  
  $orderedTables = [
-     'Books'
+     'Books',
+     'Orders',
+     'Order_Items'
  ];
  
  foreach ($orderedTables as $tableName) {

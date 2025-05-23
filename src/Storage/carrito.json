@@ -5,7 +5,8 @@
       "imagen": "https://covers.openlibrary.org/b/isbn/9780743273565-L.jpg",
       "cantidad": 1,
       "formato": "fisico",
-      "precio": 15.99
+      "precio": 15.99,
+      "descuento" : 15
     },
     {
       "id": 2,
@@ -13,7 +14,8 @@
       "imagen": "https://covers.openlibrary.org/b/isbn/9780451524935-L.jpg",
       "cantidad": 2,
       "formato": "ebook",
-      "precio": 12.99
+      "precio": 12.99,
+      "descuento" : 20
     },
     {
       "id": 20,
@@ -21,7 +23,8 @@
       "imagen": "https://covers.openlibrary.org/b/isbn/9780060883287-L.jpg",
       "cantidad": 1,
       "formato": "fisico",
-      "precio": 18.00
+      "precio": 18.00,
+      "descuento" : 5
     },
     {
       "id": 6,
@@ -29,6 +32,7 @@
       "imagen": "https://covers.openlibrary.org/b/isbn/9780547928227-L.jpg",
       "cantidad": 3,
       "formato": "ebook",
-      "precio": 17.95
+      "precio": 17.95,
+      "descuento" : 0
     }
   ]

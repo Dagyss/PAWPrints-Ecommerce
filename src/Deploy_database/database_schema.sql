@@ -2,7 +2,7 @@ USE paw_prints_db;
 
 CREATE TABLE
     Books (
-        id INT PRIMARY KEY,
+        id INT AUTO_INCREMENT PRIMARY KEY,
         titulo VARCHAR(255) NOT NULL,
         autor VARCHAR(255),
         editorial VARCHAR(255),
@@ -17,4 +17,28 @@ CREATE TABLE
         formato VARCHAR(100),
         cantidad_ventas INT,
         descuento TINYINT
+    );
+
+CREATE TABLE
+    Orders (
+        order_id INT AUTO_INCREMENT PRIMARY KEY,
+        nombre VARCHAR(100) NOT NULL,
+        email VARCHAR(255) NOT NULL,
+        telefono VARCHAR(20) NOT NULL,
+        entrega ENUM ('domicilio', 'sucursal') NOT NULL,
+        total DECIMAL(10, 2) NOT NULL,
+        created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
+
+CREATE TABLE
+    Order_Items (
+        order_id INT NOT NULL,
+        book_id INT NOT NULL,
+        formato VARCHAR(100) NOT NULL,
+        cantidad INT NOT NULL,
+        precio_unit DECIMAL(10, 2) NOT NULL,
+        descuento_unit TINYINT NOT NULL DEFAULT 0,
+        PRIMARY KEY (order_id, book_id, formato),
+        FOREIGN KEY (order_id) REFERENCES Orders (order_id),
+        FOREIGN KEY (book_id) REFERENCES Books (id)
     );
