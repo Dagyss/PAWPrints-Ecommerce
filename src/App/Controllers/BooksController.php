@@ -10,10 +10,6 @@ class BooksController extends AbstractController{
     public ?string $modelName = BooksCollection::class;
     private int $sizePage = 6;
 
-    function __construct() {
-        parent::__construct();
-    }
-
     public function index() {
         
         require $this->viewsDir . 'books.php';
