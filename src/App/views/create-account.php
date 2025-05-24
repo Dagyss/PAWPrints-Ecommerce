@@ -49,6 +49,6 @@
     <?php
         require "parts/footer.php";
     ?>
-    
+    <script src="./js/pages/accountMenu.js"></script>
 </body>
 </html>

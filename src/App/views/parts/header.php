@@ -1,3 +1,6 @@
+<?php
+    $loggedUser = $_SESSION['user'] ?? null;
+?>
 <header id="header">
     <input type="checkbox" id="hamburger-checkbox" class="hamburger-checkbox">
     <label for="hamburger-checkbox" class="hamburger-menu">
@@ -21,14 +24,23 @@
 
     <section class="header-my-account">
         <button type="button" aria-label="Abrir menú de cuenta" id="account-button">
-            <img src="../icons/UserIcon.png" class="icon">
-            Mi cuenta
+            <?php
+                $avatarSrc = '../icons/UserIcon.png';
+                if (isset($loggedUser) && !empty($loggedUser['avatar'])) {
+                    $avatarSrc = $loggedUser['avatar'];
+                }
+            ?>
+            <img src="<?= $avatarSrc ?>" class="icon" alt="Avatar">
+            <?= $loggedUser ? htmlspecialchars($loggedUser['username']) : 'Mi cuenta' ?>
         </button>
-        <ul id="account-menu">
-            <li><a href="./login.html">Iniciar sesión</a></li>
-            <li><a href="./create-account.html">Crear cuenta</a></li>
-            <li><a href="./purchase-history.html">Historial de compras</a></li>
-            <li><a href="./index.html">Cerrar sesión</a></li>
+         <ul id="account-menu">
+            <?php if ($loggedUser): ?>
+                <li><a href="/purchase-history">Historial de compras</a></li>
+                <li><a href="/logout">Cerrar sesión</a></li>
+            <?php else: ?>
+                <li><a href="/login">Iniciar sesión</a></li>
+                <li><a href="/create-account">Crear cuenta</a></li>
+            <?php endif; ?>
         </ul>
         <a href="./shopping-cart" class="header-shopping-cart-link">
             <img src="../icons/shopping-cart.png" alt="Carrito de compras" class="icon"/>

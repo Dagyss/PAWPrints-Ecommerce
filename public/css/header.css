@@ -62,6 +62,9 @@ h1 a{
 .header-search__form button{
     padding: 0;
 }
+.header-my-account .icon{
+        border-radius: 50%;
+    }
 
 .header-my-account{
     width: 9rem;
@@ -239,7 +242,7 @@ h1 a{
     .header-search {
         flex-grow: 1;
         max-width: 40rem;
-        margin: 0 2rem;
+        margin: 0 4rem 0 1.5rem ;
         position: static;
     }
 
@@ -283,10 +286,6 @@ h1 a{
 
     .header-my-account ul {
         display: none;
-    }
-
-    .header-my-account .icon{
-        margin-right: .7em;
     }
 
     .header-shopping-cart-link {

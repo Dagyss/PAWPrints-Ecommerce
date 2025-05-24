@@ -4,6 +4,7 @@ CREATE TABLE Users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
+    avatar LONGTEXT NULL,
     role ENUM('cliente', 'empleado', 'admin') NOT NULL DEFAULT 'cliente',
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );

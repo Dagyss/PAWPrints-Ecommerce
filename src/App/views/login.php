@@ -1,3 +1,7 @@
+<?php
+    $errors = $_SESSION['errors'] ?? [];
+    unset($_SESSION['errors']);
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,7 +17,7 @@
     <main>
         <nav aria-label="breadcrumb">
             <ul>
-                <li><a href="./index.html">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li><a href="#">Mi cuenta</a></li>
                 <li>Iniciar sesión</li>
             </ul>
@@ -21,7 +25,14 @@
         
         <section class="container login-container">
             <h1>Iniciar sesión</h1>
-            <form>
+            <?php if (!empty($errors)): ?>
+                <section class="error-messages">
+                    <?php foreach ($errors as $error): ?>
+                        <p class="error-text"><?php echo htmlspecialchars($error); ?></p>
+                    <?php endforeach; ?>
+                </section>
+            <?php endif; ?>
+            <form method="POST" action="/login">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="ej: ejemplo@gmail.com" required>
                 
@@ -40,6 +51,6 @@
     <?php
         require "parts/footer.php";
     ?>
-    
+    <script src="./js/pages/accountMenu.js"></script>
 </body>
 </html>

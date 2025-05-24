@@ -13,7 +13,14 @@
     display: block;
 }
 
+#email, #password{
+    padding-left: 1rem;
+}
 
+.error-messages .error-text {
+  color: red;
+  margin-bottom: .5rem;
+}
 
 @media (min-width: 814px) {
     .login-container form input[type="password"] + .icon-forms {

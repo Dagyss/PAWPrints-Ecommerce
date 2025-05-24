@@ -76,11 +76,17 @@ $orderedTables = [
  
      $rowCount = 0;
      while (($data = fgetcsv($handle)) !== false) {
-         $row = array_combine($headers, $data);
+        $row = array_combine($headers, $data);
  
-         if (isset($row['password'])) {
-             $row['password'] = password_hash($row['password'], PASSWORD_DEFAULT);
-         }
+        if (isset($row['password'])) {
+            $row['password'] = password_hash($row['password'], PASSWORD_DEFAULT);
+        }
+        if (isset($row['avatar']) && !empty($row['avatar'])) {
+            if (!preg_match('/^data:image\/[a-z]+;base64,/', $row['avatar'])) {
+                echo "Advertencia: avatar no tiene formato base64 válido en fila $rowCount. Se omite.\n";
+                $row['avatar'] = null;
+            }
+        }
  
          $columns = [];
          $placeholders = [];

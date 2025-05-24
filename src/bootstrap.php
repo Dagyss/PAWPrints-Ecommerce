@@ -1,6 +1,8 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
 
+session_start();
+
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Paw\Core\Router;
@@ -29,13 +31,6 @@ if (DEBUG) {
     ini_set('display_startup_errors', '0');
     error_reporting(0);
 }
-
-
-/* conexión para proxima entrega
-$connectionBuilder = new ConnectionBuilder;
-$connectionBuilder->setLogger($log);
-$connection = $connectionBuilder->make($config['database']);
-*/
 
 $request = new Request;
 
