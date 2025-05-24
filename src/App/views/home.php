@@ -27,7 +27,7 @@
                     <article class="book-card">
                     <figure>
                         <!-- TODO detalle del libro -->
-                        <a href="./book.php?id=<?= htmlspecialchars($book->id) ?>">
+                        <a href="./book?id=<?= htmlspecialchars($book->id) ?>">
                         <?php 
                             $imagen = (strlen($book->imagen ?? '') > 10) 
                                 ? $book->imagen 
@@ -38,7 +38,7 @@
                     </figure>
                     <section class="book-card__footer">
                         <h3>
-                            <a href="./book.php?id=<?= htmlspecialchars($book->id) ?>">
+                            <a href="./book?id=<?= htmlspecialchars($book->id) ?>">
                                 <?= htmlspecialchars($book->titulo) ?>
                             </a>
                         </h3>
@@ -66,7 +66,7 @@
                 <?php foreach ($books as $book): ?>
                     <article class="book-card">
                     <figure>
-                        <a href="./book.php?id=<?= htmlspecialchars($book->id) ?>">
+                        <a href="./book?id=<?= htmlspecialchars($book->id) ?>">
                         <?php 
                             $imagen = (strlen($book->imagen ?? '') > 10) 
                                 ? $book->imagen 
@@ -77,7 +77,7 @@
                     </figure>
                     <section class="book-card__footer">
                         <h3>
-                            <a href="./book.php?id=<?= htmlspecialchars($book->id) ?>">
+                            <a href="./book?id=<?= htmlspecialchars($book->id) ?>">
                                 <?= htmlspecialchars($book->titulo) ?>
                             </a>
                         </h3>
