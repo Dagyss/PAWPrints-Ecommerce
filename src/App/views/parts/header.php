@@ -1,5 +1,6 @@
 <?php
-    $loggedUser = $_SESSION['user'] ?? null;
+    require_once __DIR__ . '/../../../Core/helpers.php';
+    $loggedUser = getLoggedUser();
 ?>
 <header id="header">
     <input type="checkbox" id="hamburger-checkbox" class="hamburger-checkbox">
@@ -31,7 +32,7 @@
                 }
             ?>
             <img src="<?= $avatarSrc ?>" class="icon" alt="Avatar">
-            <?= $loggedUser ? htmlspecialchars($loggedUser['username']) : 'Mi cuenta' ?>
+            <?= htmlspecialchars(getLoggedUsername()) ?>
         </button>
          <ul id="account-menu">
             <?php if ($loggedUser): ?>

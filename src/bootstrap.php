@@ -1,6 +1,17 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
+// Evitamos acceso por JS
+ini_set('session.cookie_httponly', 1); 
+ini_set('session.cookie_secure', isset($_SERVER['HTTPS']) ? 1 : 0); // Solo por HTTPS si aplica
+ini_set('session.cookie_samesite', 'Lax');
 
+session_set_cookie_params([
+    'lifetime' => 3600,
+    'path' => '/',
+    'secure' => false,
+    'httponly' => true,
+    'samesite' => 'Strict'
+]);
 session_start();
 
 use Monolog\Logger;
