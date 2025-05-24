@@ -90,6 +90,17 @@ class Order extends AbstractModel
         }
         $this->fields["created_at"] = $createdAt->format('Y-m-d H:i:s');
     }
+    
+    public function getCreatedAt(string $created_at): string {
+        $rawDate = $created_at;
+
+        $dateTime = DateTime::createFromFormat('Y-m-d H:i:s', $rawDate);
+        if (!$dateTime) {
+            return $rawDate;
+        }
+
+        return $dateTime->format('d/m/Y H:i') . 'hs';
+    }
 
     public function set(array $values): void
     {

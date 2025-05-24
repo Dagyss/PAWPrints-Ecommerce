@@ -8,8 +8,7 @@ class OrderCollection extends AbstractModel
 {
     public $table = "Orders";
 
-    public function getAll(): array
-    {
+    public function getAll(): array{
         $ordersData = $this->getQueryBuilder()->select($this->table);
         $ordersCollection = [];
 
@@ -22,16 +21,14 @@ class OrderCollection extends AbstractModel
         return $ordersCollection;
     }
 
-    public function getById(int $id): ?Order
-    {
+    public function getById(int $id): ?Order{
         $orderData = $this->getQueryBuilder()->select($this->table, ["order_id" => $id]);
         $order = new Order();
         $order->set($orderData[0]);
         return $order;
     }
 
-    public function createOrder(Order $order)
-    {
+    public function createOrder(Order $order){
         return $this->getQueryBuilder()->insert($this->table, $order->fields);
     }
 

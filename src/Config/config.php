@@ -23,6 +23,7 @@ return [
         ['path' => '/shopping-cart', 'action' => 'CartController@show', 'method' => 'GET'],
         ['path' => '/checkout-form', 'action' => 'CheckoutController@showForm', 'method' => 'GET'],
         ['path' => '/logout', 'action' => 'AuthController@logout', 'method' => 'GET'],
+        ['path' => '/order-list', 'action' => 'OrderCollectionController@orderList', 'method' => 'GET'],
         
         ['path' => '/login', 'action' => 'AuthController@login', 'method' => 'POST'],
         ['path' => '/checkout-form', 'action' => 'CheckoutController@submit', 'method' => 'POST']

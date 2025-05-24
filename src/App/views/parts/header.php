@@ -36,6 +36,7 @@
         </button>
          <ul id="account-menu">
             <?php if ($loggedUser): ?>
+                <li><a href="/order-list">Listado de pedidos</a></li>
                 <li><a href="/purchase-history">Historial de compras</a></li>
                 <li><a href="/logout">Cerrar sesión</a></li>
             <?php else: ?>
