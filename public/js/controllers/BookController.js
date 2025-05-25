@@ -33,18 +33,32 @@ export default class BookController {
     }
 
     async init() {
-        const search = new SearchComponent({
+        const params = new URLSearchParams(window.location.search);
+        const initialQ = params.get('q')?.trim().toLowerCase() || '';
+
+        this.currentFilters = {
+            orden: 'novedades',
+            categorias: new Set(),
+            precioMin: null,
+            precioMax: null,
+            autor: initialQ,
+            idiomas: new Set(),
+            formatos: new Set()
+        };
+
+        new SearchComponent({
             formSelector: '#search-form',
             inputSelector: '#search-input',
             historyContainerSelector: '#search-history',
             storageKey: 'paw-search-history',
             max: 5,
             onSearch: q => {
-              this.currentPage = 1;
-              this.filteredBooks = this.applyFilters(this.originalBooks, { ...this.currentFilters, autor: q.toLowerCase() });
-              this.handleViewportChange(this.mql);
+            this.currentPage = 1;
+            this.currentFilters.autor = q.toLowerCase();
+            this.filteredBooks = this.applyFilters(this.originalBooks, this.currentFilters);
+            this.handleViewportChange(this.mql);
             }
-          });
+        });
 
         // Carga datos
         this.originalBooks = await BookService.getBooks();
@@ -55,7 +69,11 @@ export default class BookController {
         // Instancia de FilterComponent para filtrar libros
         new FilterComponent(this.filterForm, filtros => {
             this.currentPage = 1;
-            this.filteredBooks = this.applyFilters(this.originalBooks, filtros);
+            this.currentFilters = {
+                ...filtros,
+                autor: this.currentFilters.autor
+            };
+            this.filteredBooks = this.applyFilters(this.originalBooks, this.currentFilters);
             this.handleViewportChange(this.mql);
         });
 
@@ -143,7 +161,6 @@ export default class BookController {
                 return (f.precioMin == null || p >= f.precioMin)
                     && (f.precioMax == null || p <= f.precioMax);
             })
-            .filter(b => !f.autor || b.autor.toLowerCase().includes(f.autor))
             .filter(b =>
                 !f.autor ||
                 b.autor.toLowerCase().includes(f.autor) ||

@@ -33,7 +33,6 @@ export default class SearchComponent {
       history.unshift(q);
       if (history.length > this.max) history = history.slice(0, this.max);
       this.saveHistory(history);
-      this.form.submit();
       this.onSearch?.(q);
     }
   
