@@ -5,8 +5,7 @@ namespace Paw\Core\Database;
 use Paw\Core\Traits\Loggeable;
 use PDO;
 
-class QueryBuilder
-{
+class QueryBuilder{
     use Loggeable;
     private static ?self $instance = null;
     private PDO $pdo;

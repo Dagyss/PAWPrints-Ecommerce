@@ -1,3 +1,7 @@
+<?php
+    $queryParams = $_GET;
+    unset($queryParams['page']);
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -8,6 +12,7 @@
     <meta name="keywords" content="PAWPrints, orden, pedidos, ebooks" />
     <meta name="author" content="PAWPrints" />
     <link rel="stylesheet" href="./css/order-list.css" />
+    <link rel="stylesheet" href="./css/parts/pagination.css" />
     <script src="./js/pages/accountMenu.js"></script>
     <title>Lista de Pedidos - PAWPrints</title>
 </head>
@@ -36,6 +41,7 @@
                 </article>
             <?php endforeach; ?>
         </section>
+        <?php require "parts/pagination.php"; ?>
     </main>
 
     <?php require "parts/footer.php"; ?>
