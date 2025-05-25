@@ -11,12 +11,13 @@
         </h1>
     
         <search class="header-search">
-            <form class="header-search__form">
-                <input type="search" placeholder="¿Qué estás buscando?" />
-                <button type="submit" aria-label="Buscar">
-                    <img src="../icons/magnifying-glass.png" alt="Buscar"/>
-                </button>
+            <form id="search-form" class="header-search__form" action="/books"  method="get">
+            <input id="search-input" name="q" type="search" placeholder="¿Qué estás buscando?" autocomplete="off" />
+            <button type="submit" aria-label="Buscar">
+                <img src="../icons/magnifying-glass.png" alt="Buscar"/>
+            </button>
             </form>
+            <ul id="search-history" class="header-search__history"></ul>
         </search>
     
         <section class="header-my-account">

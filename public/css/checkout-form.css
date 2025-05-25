@@ -170,6 +170,16 @@ fieldset.form-section label {
         flex-direction: column;
     }
 
+    .order-summary-item{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .order-summary-item img {
+        height: auto;
+        margin-bottom: 1rem;
+    }
+    
 }
 @media screen and (max-width: 1024px) and (orientation:landscape){
     .checkout-container {

@@ -3,6 +3,7 @@ import BookComponent from '../components/BookComponent.js';
 import FilterComponent from '../components/FilterComponent.js';
 import PaginationComponent from '../components/PaginationComponent.js';
 import InfiniteScrollComponent from '../components/InfiniteScrollComponent.js';
+import SearchComponent from '../components/SearchComponent.js'; 
 
 const MOBILE_QUERY = '(max-width: 899px)';
 
@@ -32,6 +33,19 @@ export default class BookController {
     }
 
     async init() {
+        const search = new SearchComponent({
+            formSelector: '#search-form',
+            inputSelector: '#search-input',
+            historyContainerSelector: '#search-history',
+            storageKey: 'paw-search-history',
+            max: 5,
+            onSearch: q => {
+              this.currentPage = 1;
+              this.filteredBooks = this.applyFilters(this.originalBooks, { ...this.currentFilters, autor: q.toLowerCase() });
+              this.handleViewportChange(this.mql);
+            }
+          });
+
         // Carga datos
         this.originalBooks = await BookService.getBooks();
 
@@ -130,6 +144,11 @@ export default class BookController {
                     && (f.precioMax == null || p <= f.precioMax);
             })
             .filter(b => !f.autor || b.autor.toLowerCase().includes(f.autor))
+            .filter(b =>
+                !f.autor ||
+                b.autor.toLowerCase().includes(f.autor) ||
+                b.titulo.toLowerCase().includes(f.autor)
+              )              
             .sort((a, b) => this.compare(a, b, f.orden));
     }
 

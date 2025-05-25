@@ -177,6 +177,32 @@ h1 a{
     display: none;
 }
 
+.header-search {
+    position: relative;
+  }
+  
+  .header-search__history {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--background-color);
+    border: 1px solid #ccc;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    z-index: 10;
+  }
+  
+  .header-search__history .history-item {
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .header-search__history .history-item:hover {
+    background-color: var(--background-contents);
+  }  
+
 @media (min-width: 814px) {
     .hamburger-checkbox{
         display: none;
