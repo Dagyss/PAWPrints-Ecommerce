@@ -37,12 +37,12 @@ class ErrorController{
 
     public function notFound(){
         http_response_code(404);
-        require $this->viewsDir . 'not-found.php';
+        require $this->viewsDir . 'errors/not-found.php';
     }
 
     public function internalError(){
         http_response_code(500);
-        require $this->viewsDir . 'internal-error.php';
+        require $this->viewsDir . 'errors/internal-error.php';
     }
 }
 ?>

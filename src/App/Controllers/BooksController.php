@@ -25,7 +25,7 @@ class BooksController extends AbstractController{
         $id = $_GET['id'];
         $book = $this->model->getById($id);
         if(is_null($book)){
-            require $this->viewsDir . 'not-found.php';
+            require $this->viewsDir . 'errors/not-found.php';
             exit;
         }
         require $this->viewsDir . 'book.php';
