@@ -1,351 +1,358 @@
-@import url('./reset.css');
-@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@300;400;500;700&display=swap');
+@import url("./reset.css");
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@300;400;500;700&display=swap");
 
 :root {
-    /* Colores principales*/
-    --primary-color: #843DA1;
-    --secondary-color: #5C068C; /*Color violeta del logo*/
-    /* Colores de fondo */
-    --background-color: #EBDCF9;
-    --background-contents: #AE7BCA;/* Para contenido como forms, sections*/
+  /* Colores principales*/
+  --primary-color: #843da1;
+  --secondary-color: #5c068c; /*Color violeta del logo*/
+  /* Colores de fondo */
+  --background-color: #ebdcf9;
+  --background-contents: #ae7bca; /* Para contenido como forms, sections*/
 
-    /* Colores de texto */
-    --text-color: #000000;
-    --muted-text-color: #000000;
-    --contrast-text-color: #ffffff;
-    --link-color: #000000;
-    
-    /* Colores de botones */
-    --buttons-color: #6C5C7A; /* Para el color de botones */
-    --footer-background-color: #6C5C7A;
+  /* Colores de texto */
+  --text-color: #000000;
+  --muted-text-color: #000000;
+  --contrast-text-color: #ffffff;
+  --link-color: #000000;
+
+  /* Colores de botones */
+  --buttons-color: #6c5c7a; /* Para el color de botones */
+  --footer-background-color: #6c5c7a;
 }
 
 /* Estilos básicos generales */
 html {
-    font-size: 16px;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
+  font-size: 16px;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
-*, *::before, *::after {
-    box-sizing: inherit;
-    margin: 0;
-    padding: 0;
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
-    color: var(--text-color);
-    background-color: var(--background-color);
-    line-height: 1.6;
+  font-family: "Montserrat", sans-serif;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  line-height: 1.6;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Montserrat', sans-serif;
-    color: var(--text-color);
-    margin-bottom: 0.5rem;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat", sans-serif;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
 }
 
 p {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 a {
-    color: var(--text-color);
-    text-decoration: none;
-    transition: color 0.3s ease;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 a:hover {
-    color: var(--secondary-color);
+  color: var(--secondary-color);
 }
 
 button {
-    font-family: inherit;
-    background-color: var(--primary-color);
-    color: var(--contrast-text-color);
-    padding: 0.75rem 1.5rem;
-    border: 1px solid var(--contrast-text-color);
-    border-radius: 2rem;
-    cursor: pointer;
+  font-family: inherit;
+  background-color: var(--primary-color);
+  color: var(--contrast-text-color);
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--contrast-text-color);
+  border-radius: 2rem;
+  cursor: pointer;
 }
 
 button:hover {
-    background-color: var(--secondary-color);
+  background-color: var(--secondary-color);
 }
 
-input{
-    border-radius: .5rem;
+input {
+  border-radius: 0.5rem;
 }
-
 
 main {
-    margin-top: 3rem;
+  margin-top: 3rem;
 }
 
 main nav {
-    display: none;
+  display: none;
 }
 
 footer {
-    margin-top: 3rem;
-    background-color: var(--footer-background-color);
+  margin-top: 3rem;
+  background-color: var(--footer-background-color);
 }
 
 .container {
-    background-color: var(--background-contents);
-    width: 20rem;
-    margin: 3rem auto 0;
-    text-align: center;
-    border-radius: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  background-color: var(--background-contents);
+  width: 20rem;
+  margin: 3rem auto 0;
+  text-align: center;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .container h1 {
-    display: inline-block;
-    color: var(--text-color);
-    text-align: center;
+  display: inline-block;
+  color: var(--text-color);
+  text-align: center;
 }
 
 .container form {
-    width: inherit;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 }
 
 .container form label {
-    font-weight: bold;
-    align-self: flex-start;
-    margin-left: 1.5rem;
+  font-weight: bold;
+  align-self: flex-start;
+  margin-left: 1.5rem;
 }
 
 .container form input {
-    width: 18rem;
-    height: 3rem;
-    margin-bottom: 1rem;
-    padding-right: 3rem;
-    border-radius: 2rem;
+  width: 18rem;
+  height: 3rem;
+  margin-bottom: 1rem;
+  padding-right: 3rem;
+  border-radius: 2rem;
+  padding-left: 1rem;
 }
 
 .container form button {
-    width: 10rem;
+  width: 10rem;
 }
 
 .container form input::placeholder {
-    padding: 0 1rem;
+  padding: 0 1rem;
 }
 
 .container p {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 .container p a {
-    display: block;
-    text-decoration: underline;
-    font-weight: bold;
-    margin-top: 0.3rem;
-    color: var(--link-color);
+  display: block;
+  text-decoration: underline;
+  font-weight: bold;
+  margin-top: 0.3rem;
+  color: var(--link-color);
 }
 
 .icon {
-    width: 2rem;
+  width: 2rem;
 }
 .icon-forms {
-    position: absolute;
-    right: 1.5rem;
-    top: 50%;
-    transform: translateY(-50%);
-    height: auto;
-    cursor: pointer;
-    width: 2rem;
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: auto;
+  cursor: pointer;
+  width: 2rem;
 }
 
 .breadcrumb {
-    padding: 0.5rem 1rem;
-    font-size: 0.95rem;
-    color: --muted-text-color;
-    margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  color: --muted-text-color;
+  margin-top: 1rem;
 }
 
 .breadcrumb ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.breadcrumb li::after {
+  content: ">";
+  margin: 0 0.5rem;
+  color: --muted-text-color;
+}
+
+.breadcrumb li:last-child::after {
+  content: "";
+  margin: 0;
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  color: --muted-text-color;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 842px) and (max-width: 1139px) {
+  html {
+    font-size: 1.2rem;
+  }
+
+  main nav {
+    display: block;
+    margin-left: 1rem;
+  }
+
+  nav[aria-label="breadcrumb"] {
+    width: 70%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+  main nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     gap: 0.5rem;
     flex-wrap: wrap;
-}
+    color: var(--primary-color);
+  }
 
-.breadcrumb li::after {
+  main nav li {
+    display: flex;
+    align-items: center;
+  }
+
+  main nav li::after {
     content: ">";
     margin: 0 0.5rem;
-    color: --muted-text-color;
-}
+  }
 
-.breadcrumb li:last-child::after {
+  main nav li:last-child::after {
     content: "";
-    margin: 0;
-}
+  }
 
-.breadcrumb a {
+  main nav li:last-child {
+    font-weight: bold;
+  }
+
+  main nav a {
     text-decoration: none;
-    color: --muted-text-color;
-}
+    color: var(--background-contents);
+  }
 
-.breadcrumb a:hover {
+  main nav a:hover {
     text-decoration: underline;
-}
+  }
+  main nav {
+    display: block;
+    margin-left: 1rem;
+  }
 
-@media (min-width: 842px) and (max-width: 1139px) {
-    html{
-        font-size: 1.2rem;
-    }
-    
-    main nav {
-        display: block;
-        margin-left: 1rem;
-    }
+  .container {
+    width: 30rem;
+  }
 
-    nav[aria-label="breadcrumb"] {
-        width: 70%;
-        margin: 0 auto;
-        margin-bottom: 20px;
-    }
-    main nav ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-        color: var(--primary-color);
-    }
-    
-    main nav li {
-        display: flex;
-        align-items: center;
-    }
-    
-    main nav li::after {
-        content: ">";
-        margin: 0 0.5rem;
-    }
-    
-    main nav li:last-child::after {
-        content: "";
-    }
+  .container form {
+    width: 20rem;
+  }
 
-    main nav li:last-child{
-        font-weight: bold;
-    }
-    
-    main nav a {
-        text-decoration: none;
-        color: var(--background-contents);
-    }
-    
-    main nav a:hover {
-        text-decoration: underline;
-    }
-    main nav {
-        display: block;
-        margin-left: 1rem;
-    }
-    
-    .container{
-        width: 30rem;
-    }
+  .container form label {
+    margin: 0 0.5rem;
+  }
 
-    .container form{
-        width: 20rem;
-    }
+  .container form input {
+    width: 20rem;
+  }
 
-    .container form label {
-        margin: 0 .5rem;
-    }
-
-    .container form input {
-        width: 20rem;
-    }
-
-    .container form button {
-        width: 13rem;
-    }
+  .container form button {
+    width: 13rem;
+  }
 }
 
 @media (min-width: 1140px) {
-    html{
-        font-size: 1.5rem;
-    }
-    nav[aria-label="breadcrumb"] {
-        width: 70%;
-        margin: 0 auto;
-        margin-bottom: 20px;
-    }
-    main nav {
-        display: block;
-        margin-left: 1rem;
-    }
-    
-    main nav ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-        color: var(--primary-color);
-    }
-    
-    main nav li {
-        display: flex;
-        align-items: center;
-    }
-    
-    main nav li::after {
-        content: ">";
-        margin: 0 0.5rem;
-    }
-    
-    main nav li:last-child::after {
-        content: "";
-    }
+  html {
+    font-size: 1.5rem;
+  }
+  nav[aria-label="breadcrumb"] {
+    width: 70%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+  main nav {
+    display: block;
+    margin-left: 1rem;
+  }
 
-    main nav li:last-child{
-        font-weight: bold;
-    }
-    
-    main nav a {
-        text-decoration: none;
-        color: var(--background-contents);
-    }
-    
-    main nav a:hover {
-        text-decoration: underline;
-        color: var(--secondary-color);
-    }
+  main nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    color: var(--primary-color);
+  }
 
-    .container{
-        width: 45rem;
-    }
+  main nav li {
+    display: flex;
+    align-items: center;
+  }
 
-    .container form{
-        width: 30rem;
-    }
+  main nav li::after {
+    content: ">";
+    margin: 0 0.5rem;
+  }
 
-    .container form label {
-        margin: 0 .5rem;
-    }
+  main nav li:last-child::after {
+    content: "";
+  }
 
-    .container form input {
-        width: 30rem;
-    }
+  main nav li:last-child {
+    font-weight: bold;
+  }
 
-    .container form button {
-        width: 15rem;
-    }
+  main nav a {
+    text-decoration: none;
+    color: var(--background-contents);
+  }
+
+  main nav a:hover {
+    text-decoration: underline;
+    color: var(--secondary-color);
+  }
+
+  .container {
+    width: 45rem;
+  }
+
+  .container form {
+    width: 30rem;
+  }
+
+  .container form label {
+    margin: 0 0.5rem;
+  }
+
+  .container form input {
+    width: 30rem;
+  }
+
+  .container form button {
+    width: 15rem;
+  }
 }
