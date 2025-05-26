@@ -13,7 +13,7 @@ class AuthController extends AbstractController {
         $password = $_POST['password'] ?? null;
         $confirmPassword = $_POST['confirm_password'] ?? null;
         $full_name = $_POST['full_name'] ?? null;
-        $role = $_POST['role'] ?? null;
+        $role = $_POST['role'] ?? 'cliente';
 
         $userModel = $this->getModel(Users::class);
 
@@ -21,10 +21,6 @@ class AuthController extends AbstractController {
 
         if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errors[] = "El correo electrónico no es válido.";
-        }
-
-        if (empty($role)) {
-            $errors[] = "Debe seleccionar un rol.";
         }
 
         if ($password !== $confirmPassword) {
@@ -64,8 +60,6 @@ class AuthController extends AbstractController {
         $_SESSION['success'] = "Se creo correctamente el usuario " . $email;
         header('Location: /create-account');
         exit;
-
-       
     }
 
 

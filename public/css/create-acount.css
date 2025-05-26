@@ -2,13 +2,19 @@
 @import url("./header.css");
 @import url("./footer.css");
 
-form span {
+form fieldset {
   display: flex;
   gap: 5rem;
+  border: none;
+}
+
+form fieldset legend {
+  font-weight: bold;
 }
 
 form .role-label {
   width: 5rem;
+  font-weight: 400;
 }
 
 form .role-label input {
@@ -37,14 +43,23 @@ form .role-label input {
   background-color: var(--secondary-color);
 }
 
-.register-container form .icon-password {
-  display: block;
-  top: 64%;
+.input-wrapper {
+  position: relative;
 }
 
-.register-container form .icon-confirm-password {
-  display: block;
-  top: 82.5%;
+.input-wrapper input {
+  width: 100%;
+  padding-right: 2.5rem;
+}
+
+.icon-forms {
+  position: absolute;
+  top: 54%;
+  right: 1.8rem;
+  transform: translateY(-50%);
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: pointer;
 }
 
 .error-messages .error-text {
@@ -52,7 +67,14 @@ form .role-label input {
   margin-bottom: 0.5rem;
 }
 
-.success-messages .error-text {
-  color: green;
-  margin-bottom: 0.5rem;
+@media (min-width: 842px) and (max-width: 1139px) {
+  .icon-forms {
+    right: 0.8rem;
+  }
+}
+
+@media (min-width: 1140px) {
+  .icon-forms {
+    right: 0.8rem;
+  }
 }

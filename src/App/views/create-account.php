@@ -55,29 +55,33 @@
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="ej: email@gmail.com" required>
                 
-                <label for="role">Roles</label>
-                <?php if ($loggedUser['role'] === 'admin'): ?>
-                    <span>
+                <?php if ($loggedUser && $loggedUser['role'] === 'admin'): ?>
+                    <fieldset>
+                        <legend>Roles</legend>
                         <label class="role-label">
-                        Empleado
-                        <input type="radio" name="role" value="empleado" required>
-                        <span class="custom-radio"></span>
-                    </label>
-                    <label class="role-label">
-                        Cliente
-                        <input type="radio" name="role" value="cliente" required>
-                        <span class="custom-radio"></span>
-                    </label>
-                    </span>
+                            Empleado
+                            <input type="radio" name="role" value="empleado" required>
+                            <span class="custom-radio"></span>
+                        </label>
+                        <label class="role-label">
+                            Cliente
+                            <input type="radio" name="role" value="cliente" required>
+                            <span class="custom-radio"></span>
+                        </label>
+                    </fieldset>
                 <?php endif; ?>
 
-                <label for="password">Contraseña</label>
-                <input type="password" id="password" name="password" placeholder="ej: contraseña123" required>
-                <img src="../icons/close-eye.png" alt="" class="icon-forms icon-password">
-                
-                <label for="confirm_password">Confirmar contraseña</label>
-                <input type="password" id="confirm_password" name="confirm_password" placeholder="ej: contraseña123" required>
-                <img src="../icons/close-eye.png" alt="" class="icon-forms icon-confirm-password">
+                <div class="input-wrapper">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" placeholder="ej: contraseña123" required>
+                    <img src="../icons/close-eye.png"  alt="Ocultar contraseña" class="icon-forms icon-password">
+                </div>
+
+                <div class="input-wrapper">
+                    <label for="confirm_password">Confirmar contraseña</label>
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="ej: contraseña123" required>
+                    <img src="../icons/close-eye.png" alt="Ocultar contraseña" class="icon-forms icon-confirm-password">
+                </div>
                 
                 <button type="submit">Crear cuenta</button>
             </form>
