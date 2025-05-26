@@ -26,6 +26,7 @@ return [
         ['path' => '/order-list', 'action' => 'OrderCollectionController@orderList', 'method' => 'GET'],
         
         ['path' => '/login', 'action' => 'AuthController@login', 'method' => 'POST'],
+        ['path' => '/register', 'action' => 'AuthController@register', 'method' => 'POST'],
         ['path' => '/checkout-form', 'action' => 'CheckoutController@submit', 'method' => 'POST']
     ],
 

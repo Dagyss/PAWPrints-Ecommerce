@@ -9,6 +9,7 @@
     <meta name="author" content="PAWPrints" />
     <link rel="stylesheet" href="./css/books.css" />
     <script type="module" src="./js/pages/Books.js"></script>
+    <script src="./js/pages/accountMenu.js"></script>
     <title>Libros - PAWPrints</title>
 </head>
 

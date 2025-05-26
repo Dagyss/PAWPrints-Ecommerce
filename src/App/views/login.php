@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar sesión - PAWPrints</title>
     <link rel="stylesheet" href="./css/login.css">
+    <script src="./js/pages/accountMenu.js"></script>
 </head>
 <body>
     <?php
@@ -51,6 +52,5 @@
     <?php
         require "parts/footer.php";
     ?>
-    <script src="./js/pages/accountMenu.js"></script>
 </body>
 </html>

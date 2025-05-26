@@ -127,4 +127,14 @@ class Users extends AbstractModel {
 
         return $objects;
     }
+
+    public function insert(){
+        $qb = $this->getQueryBuilder();
+        $values = [
+            'username' => $this->getUsername(),
+            'password' => $this->getPassword(),
+            'role'     => $this->getRole()
+        ];
+        return $qb->insert($this->table, $values);
+    }
 }

@@ -148,8 +148,7 @@ class QueryBuilder{
         return $statement->fetchAll();
     }
 
-    public function insert(string $table, array $values): ?string
-    {
+    public function insert(string $table, array $values): ?string{
         if (empty($values)) {
             throw new \InvalidArgumentException('No se proporcionaron valores para insertar.');
         }
@@ -168,7 +167,6 @@ class QueryBuilder{
 
         $setClause = implode(', ', $sets);
         $query = "INSERT INTO `$table` SET $setClause";
-
         try {
             $stmt = $this->pdo->prepare($query);
             foreach ($params as $placeholder => $val) {

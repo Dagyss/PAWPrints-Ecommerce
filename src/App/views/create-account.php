@@ -1,3 +1,14 @@
+<?php
+    $errors = $_SESSION['errors'] ?? [];
+    unset($_SESSION['errors']);
+
+    $createdUser = $_SESSION['success'] ?? [];
+    unset($_SESSION['success']);
+?>
+<?php
+    require_once __DIR__ . '/../../Core/helpers.php';
+    $loggedUser = getLoggedUser();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -25,13 +36,41 @@
         
         <section class="container register-container">
             <h1>Crear cuenta</h1>
+            <?php if (!empty($errors)): ?>
+                <section class="error-messages">
+                    <?php foreach ($errors as $error): ?>
+                        <p class="error-text"><?php echo htmlspecialchars($error); ?></p>
+                    <?php endforeach; ?>
+                </section>
+            <?php endif; ?>
+            <?php if (!empty($createdUser)): ?>
+                <section class="success-messages">
+                    <p class="success-text"><?php echo htmlspecialchars($createdUser); ?></p>
+                </section>
+            <?php endif; ?>
             <form action="/register" method="post">
                 <label for="full_name">Nombre y apellido</label>
-                <input type="text" id="name" name="name" placeholder="ej: Cosme Fulanito" required>
+                <input type="text" id="full_name" name="full_name" placeholder="ej: Cosme Fulanito" required>
                 
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="ej: email@gmail.com" required>
                 
+                <label for="role">Roles</label>
+                <?php if ($loggedUser['role'] === 'admin'): ?>
+                    <span>
+                        <label class="role-label">
+                        Empleado
+                        <input type="radio" name="role" value="empleado" required>
+                        <span class="custom-radio"></span>
+                    </label>
+                    <label class="role-label">
+                        Cliente
+                        <input type="radio" name="role" value="cliente" required>
+                        <span class="custom-radio"></span>
+                    </label>
+                    </span>
+                <?php endif; ?>
+
                 <label for="password">Contraseña</label>
                 <input type="password" id="password" name="password" placeholder="ej: contraseña123" required>
                 <img src="../icons/close-eye.png" alt="" class="icon-forms icon-password">
