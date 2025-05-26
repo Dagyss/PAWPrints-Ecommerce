@@ -41,9 +41,10 @@ export default class BookController {
             categorias: new Set(),
             precioMin: null,
             precioMax: null,
-            autor: initialQ,
+            autor: '',             
             idiomas: new Set(),
-            formatos: new Set()
+            formatos: new Set(),
+            searchTerm: initialQ    
         };
 
         new SearchComponent({
@@ -54,7 +55,7 @@ export default class BookController {
             max: 5,
             onSearch: q => {
             this.currentPage = 1;
-            this.currentFilters.autor = q.toLowerCase();
+            this.currentFilters.searchTerm = q.toLowerCase();
             this.filteredBooks = this.applyFilters(this.originalBooks, this.currentFilters);
             this.handleViewportChange(this.mql);
             }
@@ -71,7 +72,7 @@ export default class BookController {
             this.currentPage = 1;
             this.currentFilters = {
                 ...filtros,
-                autor: this.currentFilters.autor
+                searchTerm: this.currentFilters.searchTerm
             };
             this.filteredBooks = this.applyFilters(this.originalBooks, this.currentFilters);
             this.handleViewportChange(this.mql);
@@ -161,11 +162,11 @@ export default class BookController {
                 return (f.precioMin == null || p >= f.precioMin)
                     && (f.precioMax == null || p <= f.precioMax);
             })
-            .filter(b =>
-                !f.autor ||
-                b.autor.toLowerCase().includes(f.autor) ||
-                b.titulo.toLowerCase().includes(f.autor)
-              )              
+            .filter(b => f.autor === '' 
+                || b.autor.toLowerCase().includes(f.autor))
+            .filter(b => f.searchTerm === '' 
+                || b.titulo.toLowerCase().includes(f.searchTerm)
+                || b.autor.toLowerCase().includes(f.searchTerm))  
             .sort((a, b) => this.compare(a, b, f.orden));
     }
 
