@@ -22,7 +22,8 @@ return [
         ['path' => '/book', 'action' => 'BooksController@show', 'method' => 'GET'],
         ['path' => '/shopping-cart', 'action' => 'CartController@show', 'method' => 'GET'],
         ['path' => '/checkout-form', 'action' => 'CheckoutController@showForm', 'method' => 'GET'],
-        ['path' => '/checkout-form', 'action' => 'CheckoutController@submit', 'method' => 'POST']
+        ['path' => '/checkout-form', 'action' => 'CheckoutController@submit', 'method' => 'POST'],
+        ['path' => '/create-book', 'action' => 'BooksController@createBook', 'method' => 'GET']
     ],
 
 
