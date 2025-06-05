@@ -1,48 +1,29 @@
 <?php
+
 namespace Paw\App\Controllers;
 
-class ErrorController{
-    public string $viewsDir = "";
-    public array $menu_nav = [];
+use Paw\Core\AbstractController;
 
-    public function __construct(){
-        $this->viewsDir = __DIR__ . "/../views/";
-        $this->menu_nav = [
-            [
-                "href" => "/books",
-                "route_name" => "Libros"
-            ],
-            [
-                "href" => "/News",
-                "route_name" => "Novedades"
-            ],
-            [
-                "href" => "/offer",
-                "route_name" => "Ofertas"
-            ],
-            [
-                "href" => "/best-seller",
-                "route_name" => "Más vendidos"
-            ],
-            [
-                "href" => "/branches",
-                "route_name" => "Sucursales"
-            ],
-            [
-                "href" => "/about-us",
-                "route_name" => "Nosotros"
-            ],
-        ];
-    }
-
-    public function notFound(){
+class ErrorController extends AbstractController
+{
+    public function notFound()
+    {
         http_response_code(404);
-        require $this->viewsDir . 'errors/not-found.php';
+
+        $this->render('errors/not-found.twig', [
+            'loggedUser' => getLoggedUser() ?? null,
+            'username'   => getLoggedUsername() ?? null,
+            // Podrías incluir datos específicos del error si quieres
+        ]);
     }
 
-    public function internalError(){
+    public function internalError()
+    {
         http_response_code(500);
-        require $this->viewsDir . 'errors/internal-error.php';
+
+        $this->render('errors/internal-error.twig', [
+            'loggedUser' => getLoggedUser() ?? null,
+            'username'   => getLoggedUsername() ?? null,
+        ]);
     }
 }
-?>

@@ -1,0 +1,95 @@
+{# templates/shopping-cart.twig #}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Carrito de compras en PAWPrints. Revisa y administra los productos agregados a tu carrito.">
+    <meta name="keywords" content="PAWPrints, carrito de compras, libros, ebooks, productos">
+    <meta name="author" content="PAWPrints">
+    <title>Carrito de Compras - PAWPrints</title>
+    <link rel="stylesheet" href="./css/shopping-cart.css">
+</head>
+<body>
+    {% include 'parts/header.twig' with {
+        'loggedUser': loggedUser,
+        'username': username,
+        'menu_nav': menu_nav
+    } %}
+
+    <main>
+        <div class="cart-container">
+            <section class="cart">
+                <h2>Carrito de compra</h2>
+    
+                {% if cart is empty %}
+                    <p>No hay productos en el carrito.</p>
+                {% else %}
+                    {% set total = 0 %}
+                    {% for item in cart %}
+                        {# Extraemos datos del ítem; asumimos que item.precio e item.cantidad ya son numéricos #}
+                        {% set id       = item.id %}
+                        {% set titulo   = item.titulo %}
+                        {% set imagen   = (item.imagen is defined and item.imagen) ? item.imagen : '../icons/book.png' %}
+                        {% set cantidad = item.cantidad %}
+                        {# Usamos el filtro number_format para formatear el precio #}
+                        {% set precio   = item.precio|number_format(2, ',', '.') %}
+                        {% set subtotal = (item.precio * cantidad) %}
+                        {% set total    = total + subtotal %}
+                        <article class="cart-item">
+                            <figure>
+                                <a href="./book?id={{ id | e }}">
+                                    <img src="{{ imagen | e }}" alt="Portada de {{ titulo | e }}">
+                                </a>
+                            </figure>
+    
+                            <div class="cart-item-content">
+                                <div class="cart-item-header">
+                                    <h3>
+                                        <a href="./book?id={{ id | e }}">{{ titulo | e }}</a>
+                                    </h3>
+                                    <button 
+                                        class="cart-remove-btn" 
+                                        aria-label="Eliminar producto"
+                                        onclick="location.href='?remove={{ id | e }}'"
+                                    >
+                                        <img src="../icons/trash.png" alt="Eliminar">
+                                    </button>
+                                </div>
+    
+                                <div class="cart-controls">
+                                    <label for="quantity{{ loop.index0 }}" class="visually-hidden">Cantidad</label>
+                                    <input 
+                                        type="number" 
+                                        id="quantity{{ loop.index0 }}" 
+                                        min="1" 
+                                        value="{{ cantidad }}" 
+                                        class="cart-quantity"
+                                        disabled
+                                    >
+                                    <p class="cart-price">$ {{ precio }} c/u</p>
+                                    <p class="subtotal">
+                                        Subtotal: $ {{ subtotal|number_format(2, ',', '.') }}
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    {% endfor %}
+    
+                    <p class="total">
+                        Total: $ {{ total|number_format(2, ',', '.') }}
+                    </p>
+    
+                    <form action="/checkout-form" method="GET">
+                        <button type="submit" class="checkout-button">
+                            Finalizar compra
+                        </button>
+                    </form>
+                {% endif %}
+            </section>
+        </div>
+    </main>
+
+    {% include 'parts/footer.twig' %}
+</body>
+</html>

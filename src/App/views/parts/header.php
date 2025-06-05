@@ -24,12 +24,6 @@
             <ul id="search-history" class="header-search__history"></ul>
         </search>
     
-        <section class="header-my-account">
-            <button type="button" aria-label="Abrir menú de cuenta">
-                <img src="../icons/UserIcon.png" class="icon">
-                Mi cuenta
-            </button>
-        </form>
     </search>
 
     <section class="header-my-account">

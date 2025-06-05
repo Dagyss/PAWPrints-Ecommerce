@@ -1,0 +1,71 @@
+{# templates/book.twig #}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Libros en venta en PAWPrints. Consulta los libros disponibles en PAWPrints." />
+    <meta name="keywords" content="PAWPrints, compra, libros, ebooks, productos" />
+    <meta name="author" content="PAWPrints" />
+    <link rel="stylesheet" href="./css/book-information.css" />
+    <title>Información del Libro - PAWPrints</title>
+</head>
+<body>
+    {% include 'parts/header.twig' with {
+        'loggedUser': loggedUser,
+        'username': username,
+        'menu_nav': menu_nav
+    } %}
+
+    <main>
+        <nav aria-label="breadcrumb">
+            <ul>
+                <li><a href="./">Home</a></li>
+                <li><a href="./books">Libros</a></li>
+                <li><span>Libro</span></li>
+            </ul>
+        </nav>
+
+        <h2>Información</h2>
+        <section class="flex-container">
+            <img src="{{ book.fields.imagen | e }}" alt="Portada del Libro" />
+            <section>
+                <h2>{{ book.fields.titulo | e }}</h2>
+                <p>{{ book.fields.autor | e }}</p>
+                <p>${{ book.fields.precio|number_format(2, ',', '.') }}</p>
+                <p>{{ book.fields.id | e }}</p>
+
+                <fieldset>
+                    <legend>Elige el formato:</legend>
+
+                    <input type="radio" id="fisico" name="formato-libro" value="f" checked="checked" />
+                    <label for="fisico">Físico</label>
+
+                    <input type="radio" id="electronico" name="formato-libro" value="e" />
+                    <label for="electronico">Electrónico</label>
+                </fieldset>
+
+                <input type="number" id="cantidad" name="cantidad" placeholder="1" min="1" />
+                <input type="button" value="Al carrito" />
+            </section>
+
+            <section>
+                <h2>Descripción</h2>
+                <p>Formato: LIBROS</p>
+                <p>Editorial: {{ book.fields.editorial | e }}</p>
+                <p>Idioma: Español</p>
+                <p>ISBN: 9789878121383</p>
+                <p>N° Páginas: 496</p>
+                <p>Fecha Publicación: xx/xxxx</p>
+            </section>
+
+            <section>
+                <h2>Sinopsis</h2>
+                <p>{{ book.fields.descripcion | e }}</p>
+            </section>
+        </section>
+    </main>
+
+    {% include 'parts/footer.twig' %}
+</body>
+</html>

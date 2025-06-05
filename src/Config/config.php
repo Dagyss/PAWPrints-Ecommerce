@@ -11,6 +11,8 @@ return [
         'level' => Monolog\Logger::DEBUG
     ],
 
+    'base_url' => '',
+    
     // Configuración de rutas iniciales
     'routes' => [
         ['path' => '/', 'action' => 'HomeController@index', 'method' => 'GET'],

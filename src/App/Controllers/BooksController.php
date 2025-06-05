@@ -1,38 +1,49 @@
 <?php
-
 namespace Paw\App\Controllers;
 
 use Paw\Core\AbstractController;
 use Paw\App\Models\BooksCollection;
 
-class BooksController extends AbstractController{
-
+class BooksController extends AbstractController
+{
     public ?string $modelName = BooksCollection::class;
     private int $sizePage = 6;
 
-    public function index() {
-        
-        require $this->viewsDir . 'books.php';
+    public function index()
+    {
+
+
+        $this->render('books.twig', [
+            
+        ]);
     }
 
-    public function indexJson() {
+    public function indexJson()
+    {
         $books = $this->model->getAll();
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode($books, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
     }
 
-    public function show() {
+    public function show()
+    {
         $id = $_GET['id'];
         $book = $this->model->getById($id);
-        if(is_null($book)){
-            require $this->viewsDir . 'errors/not-found.php';
-            exit;
+
+        if (is_null($book)) {
+            // Renderizamos plantilla de error en lugar de incluir PHP crudo
+            $this->render('errors/not-found.twig', []);
+            return;
         }
-        require $this->viewsDir . 'book.php';
+
+        $this->render('book.twig', [
+            'book' => $book,
+        ]);
     }
 
-    public function createBook(){
-        require $this->viewsDir . 'create-book.php';
+    public function createBook()
+    {
+        $this->render('create-book.twig', []);
     }
 
     private function getFilters(): array {
