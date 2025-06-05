@@ -27,7 +27,9 @@ return [
         
         ['path' => '/login', 'action' => 'AuthController@login', 'method' => 'POST'],
         ['path' => '/register', 'action' => 'AuthController@register', 'method' => 'POST'],
-        ['path' => '/checkout-form', 'action' => 'CheckoutController@submit', 'method' => 'POST']
+        ['path' => '/checkout-form', 'action' => 'CheckoutController@submit', 'method' => 'POST'],
+        ['path' => '/checkout-form', 'action' => 'CheckoutController@submit', 'method' => 'POST'],
+        ['path' => '/create-book', 'action' => 'BooksController@createBook', 'method' => 'GET']
     ],
 
 

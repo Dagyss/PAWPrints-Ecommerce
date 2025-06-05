@@ -31,6 +31,10 @@ class BooksController extends AbstractController{
         require $this->viewsDir . 'book.php';
     }
 
+    public function createBook(){
+        require $this->viewsDir . 'create-book.php';
+    }
+
     private function getFilters(): array {
         return[
             'categorias' => $_GET['categorias'] ?? [],

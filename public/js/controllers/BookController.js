@@ -3,6 +3,7 @@ import BookComponent from '../components/BookComponent.js';
 import FilterComponent from '../components/FilterComponent.js';
 import PaginationComponent from '../components/PaginationComponent.js';
 import InfiniteScrollComponent from '../components/InfiniteScrollComponent.js';
+import SearchComponent from '../components/SearchComponent.js'; 
 
 const MOBILE_QUERY = '(max-width: 899px)';
 
@@ -32,6 +33,34 @@ export default class BookController {
     }
 
     async init() {
+        const params = new URLSearchParams(window.location.search);
+        const initialQ = params.get('q')?.trim().toLowerCase() || '';
+
+        this.currentFilters = {
+            orden: 'novedades',
+            categorias: new Set(),
+            precioMin: null,
+            precioMax: null,
+            autor: '',             
+            idiomas: new Set(),
+            formatos: new Set(),
+            searchTerm: initialQ    
+        };
+
+        new SearchComponent({
+            formSelector: '#search-form',
+            inputSelector: '#search-input',
+            historyContainerSelector: '#search-history',
+            storageKey: 'paw-search-history',
+            max: 5,
+            onSearch: q => {
+            this.currentPage = 1;
+            this.currentFilters.searchTerm = q.toLowerCase();
+            this.filteredBooks = this.applyFilters(this.originalBooks, this.currentFilters);
+            this.handleViewportChange(this.mql);
+            }
+        });
+
         // Carga datos
         this.originalBooks = await BookService.getBooks();
 
@@ -41,7 +70,11 @@ export default class BookController {
         // Instancia de FilterComponent para filtrar libros
         new FilterComponent(this.filterForm, filtros => {
             this.currentPage = 1;
-            this.filteredBooks = this.applyFilters(this.originalBooks, filtros);
+            this.currentFilters = {
+                ...filtros,
+                searchTerm: this.currentFilters.searchTerm
+            };
+            this.filteredBooks = this.applyFilters(this.originalBooks, this.currentFilters);
             this.handleViewportChange(this.mql);
         });
 
@@ -129,7 +162,11 @@ export default class BookController {
                 return (f.precioMin == null || p >= f.precioMin)
                     && (f.precioMax == null || p <= f.precioMax);
             })
-            .filter(b => !f.autor || b.autor.toLowerCase().includes(f.autor))
+            .filter(b => f.autor === '' 
+                || b.autor.toLowerCase().includes(f.autor))
+            .filter(b => f.searchTerm === '' 
+                || b.titulo.toLowerCase().includes(f.searchTerm)
+                || b.autor.toLowerCase().includes(f.searchTerm))  
             .sort((a, b) => this.compare(a, b, f.orden));
     }
 
