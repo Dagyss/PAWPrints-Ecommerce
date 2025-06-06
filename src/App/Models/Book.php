@@ -8,7 +8,7 @@ use Paw\Core\Exceptions\InvalidValueFormatException;
 
 class Book extends AbstractModel {
 
-    public $table = "libros";
+    public $table = "Books";
     public $fields = [
         "id"               => null,
         "titulo"           => null,
