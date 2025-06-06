@@ -5,7 +5,7 @@ use DateTime;
 use Paw\Core\AbstractController;
 use Paw\App\Models\BooksCollection;
 use Paw\App\Models\Book;
-
+use Paw\Core\Request;
 class BooksController extends AbstractController
 {
     public ?string $modelName = BooksCollection::class;
@@ -172,6 +172,54 @@ class BooksController extends AbstractController
             exit;
         }
     }
+
+    public function fetchIsbn(Request $request)
+    {
+        $isbn = $_GET['isbn'] ?? null;
+
+        if (!$isbn) {
+            http_response_code(400);
+            echo json_encode(['error' => 'ISBN faltante']);
+            return;
+        }
+
+        $url = "https://openlibrary.org/isbn/{$isbn}.json";
+        $opts = [
+            "http" => [
+                "method" => "GET",
+                "header" => "Accept: application/json\r\n"
+            ]
+        ];
+        $context = stream_context_create($opts);
+        $response = @file_get_contents($url, false, $context);
+
+        if ($response === false) {
+            http_response_code(502);
+            echo json_encode(['error' => 'No se pudo obtener datos de Open Library']);
+            return;
+        }
+
+        $data = json_decode($response, true);
+
+        // Obtener nombres de autores
+        if (isset($data['authors']) && is_array($data['authors'])) {
+            foreach ($data['authors'] as &$author) {
+                $authorKey = $author['key'];
+                $authorUrl = "https://openlibrary.org{$authorKey}.json";
+                $authorResponse = @file_get_contents($authorUrl, false, $context);
+                if ($authorResponse !== false) {
+                    $authorData = json_decode($authorResponse, true);
+                    $author['name'] = $authorData['name'] ?? 'Desconocido';
+                } else {
+                    $author['name'] = 'Desconocido';
+                }
+            }
+        }
+
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($data);
+    }
+
 }
 
 ?>
