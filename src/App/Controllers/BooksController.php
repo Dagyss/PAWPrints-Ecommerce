@@ -135,36 +135,46 @@ class BooksController extends AbstractController
         }
 
         // 3) Manejo de archivo “portada” (imagen)
-        if (
-            isset($_FILES['portada']) &&
-            $_FILES['portada']['error'] === UPLOAD_ERR_OK
-        ) {
+        $uploadDir = __DIR__ . '/../../public/uploads/books/';
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0755, true);
+        }
+
+        if (isset($_FILES['portada']) && $_FILES['portada']['error'] === UPLOAD_ERR_OK) {
+            // El usuario subió manualmente la portada
             $tmpPath  = $_FILES['portada']['tmp_name'];
             $origName = basename($_FILES['portada']['name']);
-            // Generar un nombre unico, por ejemplo:
             $ext      = pathinfo($origName, PATHINFO_EXTENSION);
             $newName  = uniqid('book_') . '.' . $ext;
-            // Directorio donde se guardan las portadas:
-            $uploadDir = __DIR__ . '/../../public/uploads/books/';
-            if (!is_dir($uploadDir)) {
-                mkdir($uploadDir, 0755, true);
-            }
             $destPath = $uploadDir . $newName;
 
             if (move_uploaded_file($tmpPath, $destPath)) {
                 $book->setImagen('uploads/books/' . $newName);
-            } else {
-                $book->setImagen('uploads/books/default_cover.png'); //api
             }
-        } else {
-            $book->setImagen('uploads/books/default_cover.png'); //api
+        } else if (!empty($isbn)) {
+            // No subió imagen: tratamos de descargarla de Open Library
+            // Usamos ISBN y tamaño "L"; agregamos default=false para 404 si no hay cover
+            $coverUrl = "https://covers.openlibrary.org/b/isbn/{$isbn}-L.jpg?default=false";
+            $coverData = @file_get_contents($coverUrl);
+            if ($coverData !== false) {
+                // Creamos un archivo con extensión jpg
+                $newName  = "cover_{$isbn}_" . time() . ".jpg";
+                $destPath = $uploadDir . $newName;
+                file_put_contents($destPath, $coverData);
+                $book->setImagen('uploads/books/' . $newName);
+            }
+        }
+
+        // Si por alguna razón no quedo imagen, podemos asignar una por defecto
+        if (!$book->__get('imagen')) {
+            $book->setImagen('uploads/books/default_cover.png');
         }
 
         $newId = $this->model->insertBook($book);
 
         if ($newId) {
             $_SESSION['success'] = "Libro creado correctamente (ID: $newId).";
-            header('Location: /create-books');
+            header('Location: /create-book');
             exit;
         } else {
             $_SESSION['error'] = "Error al guardar el libro en la base de datos.";
