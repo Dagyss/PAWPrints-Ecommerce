@@ -63,6 +63,10 @@ class AbstractController {
                 "href" => "/about-us",
                 "route_name" => "Nosotros"
             ],
+            [
+                "href" => "/create-book",
+                "route_name" => "Crear Libro"
+            ],
         ];
 
         if (!is_null($this->modelName)) {

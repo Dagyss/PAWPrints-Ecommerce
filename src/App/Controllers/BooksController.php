@@ -135,7 +135,7 @@ class BooksController extends AbstractController
         }
 
         // 3) Manejo de archivo “portada” (imagen)
-        $uploadDir = __DIR__ . '/../../public/uploads/books/';
+        $uploadDir = __DIR__ . '/../../../public/uploads/books/';
         if (!is_dir($uploadDir)) {
             mkdir($uploadDir, 0755, true);
         }
@@ -174,11 +174,17 @@ class BooksController extends AbstractController
 
         if ($newId) {
             $_SESSION['success'] = "Libro creado correctamente (ID: $newId).";
-            header('Location: /create-book');
+            $this->render('new-book.twig', [
+                'loggedUser' => getLoggedUser() ?? null,
+                'username'   => getLoggedUsername() ?? null,
+            ]);
             exit;
         } else {
             $_SESSION['error'] = "Error al guardar el libro en la base de datos.";
-            header('Location: /books');
+            $this->render('errors/internal-error.twig', [
+                'loggedUser' => getLoggedUser() ?? null,
+                'username'   => getLoggedUsername() ?? null,
+            ]);
             exit;
         }
     }
