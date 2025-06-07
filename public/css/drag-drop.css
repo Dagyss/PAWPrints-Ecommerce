@@ -1,0 +1,33 @@
+.container-portada{
+    text-align: center;
+    width: 100%;
+}
+
+.drop-area {
+    border: 0.1rem dashed grey;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 5rem;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.drop-area p {
+    text-align: center;
+    align-self: center;
+}
+
+.drag-over {
+    color: white;
+    background-color: rgb(104, 100, 100);
+}
+
+.output-area {
+    max-width: 500px;   
+    margin: auto;
+}
+
+.image-uploaded img {
+    max-width: 100%;
+}

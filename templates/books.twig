@@ -1,0 +1,111 @@
+{# templates/books.twig #}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Libros en venta en PAWPrints. Consulta los libros disponibles en PAWPrints." />
+    <meta name="keywords" content="PAWPrints, compra, libros, ebooks, productos" />
+    <meta name="author" content="PAWPrints" />
+    <link rel="stylesheet" href="./css/books.css" />
+    <script type="module" src="./js/pages/Books.js"></script>
+    <script src="./js/pages/accountMenu.js"></script>
+    <title>Libros - PAWPrints</title>
+</head>
+<body>
+    {% include 'parts/header.twig' with {
+        'loggedUser': loggedUser,
+        'username': username,
+        'menu_nav': menu_nav
+    } %}
+
+    <main>
+        <nav aria-label="breadcrumb">
+            <ul>
+                <li><a href="./">Home</a></li>
+                <li><span>Libros</span></li>
+            </ul>
+        </nav>
+
+        <h2>Libros</h2>
+
+        <section class="content">
+
+            <section class="filtros">
+                <button class="buttom-filtros" type="button" aria-label="Abrir menú de filtros">Filtrar</button>
+                <button class="button-ordenar" type="button" aria-label="Abrir menú de Ordenar Por">Ordenar Por</button>
+            </section>
+
+            <search>
+                <form id="form-filtros">
+                    <fieldset class="filtro">
+                        <legend>Ordenar</legend>
+                        <label>Ordenar por:</label>
+                        <select id="orden" name="orden">
+                            <option value="novedades" selected>Novedades</option>
+                            <option value="ofertas">Ofertas</option>
+                            <option value="mas_vendidos">Más vendidos</option>
+                            <option value="precio_asc">Precio: Menor a mayor</option>
+                            <option value="precio_desc">Precio: Mayor a menor</option>
+                        </select>
+                    </fieldset>
+
+                    <fieldset class="filtro">
+                        <legend>Categorías</legend>
+                        <ul>
+                            <li><label><input type="checkbox" name="categorias[]" value="terror"> Terror</label></li>
+                            <li><label><input type="checkbox" name="categorias[]" value="ciencia ficción"> Ciencia Ficción</label></li>
+                            <li><label><input type="checkbox" name="categorias[]" value="misterio"> Misterio</label></li>
+                            <li><label><input type="checkbox" name="categorias[]" value="romance"> Romance</label></li>
+                        </ul>
+                    </fieldset>
+
+                    <fieldset class="filtro">
+                        <legend>Precio</legend>
+                        <label>Desde</label>
+                        <input id="precioMin" type="number" name="precio_min" placeholder="$ Precio mínimo">
+                        <label>Hasta</label>
+                        <input id="precioMax" type="number" name="precio_max" placeholder="$ Precio máximo">
+                    </fieldset>
+
+                    <fieldset class="filtro">
+                        <legend>Autor</legend>
+                        <label>Buscar autor:</label>
+                        <input id="autor" type="text" name="autor" placeholder="Buscar autor">
+                    </fieldset>
+
+                    <fieldset class="filtro" id="filtro-idioma">
+                        <legend>Idioma</legend>
+                        <ul>
+                            <li><label><input type="checkbox" name="idiomas[]" value="ingles"> Inglés</label></li>
+                            <li><label><input type="checkbox" name="idiomas[]" value="español"> Español</label></li>
+                            <li><label><input type="checkbox" name="idiomas[]" value="frances"> Francés</label></li>
+                            <li><label><input type="checkbox" name="idiomas[]" value="portugues"> Portugués</label></li>
+                        </ul>
+                    </fieldset>
+
+                    <fieldset class="filtro">
+                        <legend>Formato</legend>
+                        <label><input type="checkbox" name="formatos[]" value="digital"> E-book</label>
+                        <label><input type="checkbox" name="formatos[]" value="físico"> Físico</label>
+                    </fieldset>
+
+                    {# No hay submit porque la lista se carga con JS #}
+                </form>
+            </search>
+
+            <section class="books-wrapper">
+                <section class="books" id="listaLibros">
+                    {# Se cargan los libros a través de JS, así que aquí no hacemos bucle PHP/Twig #}
+                </section>
+                <nav class="pagination" id="paginador">
+                    {# El paginador lo carga JS igual que antes #}
+                </nav>
+            </section>
+
+        </section>
+    </main>
+
+    {% include 'parts/footer.twig' %}
+</body>
+</html>

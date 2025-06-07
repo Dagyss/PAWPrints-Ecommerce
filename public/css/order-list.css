@@ -1,0 +1,35 @@
+@import url('./base.css');
+@import url('./header.css');
+@import url('./footer.css');
+
+.content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.content article {
+    justify-items: center;
+    background-color: #fff;
+    border-radius: .5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.content article:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    border: .2rem solid var(--primary-color);
+}
+
+.content article p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+h2 {
+    margin-left: 2rem;
+}

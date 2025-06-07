@@ -1,0 +1,27 @@
+{# templates/checkout-success.twig #}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página de éxito tras finalizar compra en PAWPrints.">
+    <meta name="author" content="PAWPrints">
+    <title>¡Compra realizada! - PAWPrints</title>
+    <link rel="stylesheet" href="./css/checkout-success.css">
+</head>
+<body>
+    {% include 'parts/header.twig' with {
+        'loggedUser': loggedUser,
+        'username': username,
+        'menu_nav': menu_nav
+    } %}
+
+    <main class="success-container">
+        <h2>¡Compra realizada!</h2>
+        <p>Gracias, {{ data.nombre | e }}. Tu pedido fue recibido exitosamente.</p>
+        <a href="/" class="button">Volver al inicio</a>
+    </main>
+
+    {% include 'parts/footer.twig' %}
+</body>
+</html>

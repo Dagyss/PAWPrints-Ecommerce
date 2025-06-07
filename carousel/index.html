@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Carrusel de Imágenes F1 | Slider Interactivo y Responsivo</title>
+  <meta name="description" content="Carrusel de imágenes de escuderías de Fórmula 1. Navegación por botones, teclado, swipe y thumbnails. Transiciones animadas y diseño responsivo." />
+  <meta name="keywords" content="F1, carrusel, slider, imágenes, galería, JavaScript, frontend, programación web" />
+  <meta name="author" content="Tu Nombre" />
+
+  <meta property="og:title" content="Carrusel de Imágenes F1" />
+  <meta property="og:description" content="Explorá un carrusel interactivo de escuderías F1 con transiciones, navegación y diseño adaptativo." />
+  <meta property="og:type" content="website" />
+
+  <link rel="stylesheet" href="css/index.css" />
+
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+  <header>
+    <h1>Carrusel Interactivo de Escuderías F1</h1>
+  </header>
+
+  <main>
+    <section id="carousel" class="carousel" aria-label="Carrusel de imágenes de autos F1">
+      <div id="progress-bar-container" aria-hidden="true">
+        <div id="progress-bar"></div>
+      </div>
+    </section>
+
+    <section id="info">
+      <p>Este carrusel muestra imágenes de las principales escuderías de Fórmula 1. Se carga dinámicamente desde un archivo JSON y es completamente responsivo e interactivo.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 - PAW.</p>
+  </footer>
+
+  <script type="module">
+    import { Carousel } from "./js/carousel.js";
+  
+    new Carousel("#carousel", {
+      images: "images.json",
+      transition: "zoom",
+      autoplay: true,
+      interval: 4000,
+      imagePath: "images/"
+    });
+  </script>
+</body>
+</html>

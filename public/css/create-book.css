@@ -1,0 +1,73 @@
+@import url('./base.css');
+@import url('./header.css');
+@import url('./footer.css');
+
+main :not(h2) {
+    display: grid;
+}
+
+nav[aria-label="breadcrumb"] {
+    width: 70%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+main h2 {
+    width: 70%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+
+.form-content{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--primary-color);
+  border-style: solid;
+  border-radius: 0.5rem;
+  padding-right: 25px;
+  padding-left: 25px;
+  width: 70%;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+.form-content label {
+  font-weight: bold;
+}
+
+.form-content input, select {
+  height: 2rem;
+  margin-bottom: 1rem;
+  padding-right: 1rem;
+  border-radius: 0.5rem;
+}
+
+.form-content textarea {
+  margin-bottom: 1rem;
+  padding-right: 1rem;
+  border-radius: 0.5rem;
+}
+
+  
+.accept-button {
+  align-items: center;
+  gap:1rem;
+  margin-top: 2rem;
+  background-color: var(--primary-color);
+  color: #fff;
+  border:1px solid #fff;
+  padding:1rem 2rem;
+  border-radius:28px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin:2rem auto 1rem auto;
+  max-width: 60%;
+
+}
+
+  /*@media (max-width: 1150px) {
+    .content{
+       grid-template-columns: repeat(1, 1fr);
+    }
+ }*/

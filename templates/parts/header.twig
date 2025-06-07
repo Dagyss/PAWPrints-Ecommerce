@@ -1,0 +1,62 @@
+{# templates/parts/header.twig #}
+
+{# Si en helpers.php había funciones como getLoggedUser() o getLoggedUsername(),
+   lo ideal sería ejecutar esas funciones en el controlador y pasar
+   el resultado a Twig en la variable loggedUser o username.
+   De lo contrario, podrías registrar esas funciones como “Twig functions”.
+   Aquí asumiremos que el controlador ya asigna ‘loggedUser’ y ‘username’. #}
+
+<header id="header">
+    <input type="checkbox" id="hamburger-checkbox" class="hamburger-checkbox">
+    <label for="hamburger-checkbox" class="hamburger-menu">
+        <img src="{{ asset_path }}/icons/hamburguer-menu.png" alt="Menú" class="icon">
+    </label>
+    <h1>
+        <a href="{{ path('/') }}">
+            PAWPrints
+            <img src="{{ asset_path }}/icons/PAWPrintsWhite.svg" id="enterprise-icon"/>
+        </a>
+    </h1>
+
+    <search class="header-search">
+        <form id="search-form" class="header-search__form" action="{{ path('/books') }}" method="get">
+            <input id="search-input" name="q" type="search" placeholder="¿Qué estás buscando?" autocomplete="off" />
+            <button type="submit" aria-label="Buscar">
+                <img src="{{ asset_path }}/icons/magnifying-glass.png" alt="Buscar"/>
+            </button>
+        </form>
+        <ul id="search-history" class="header-search__history"></ul>
+    </search>
+
+    <section class="header-my-account">
+        <button type="button" aria-label="Abrir menú de cuenta" id="account-button">
+            {% set avatarSrc = asset_path ~ '/icons/UserIcon.png' %}
+            {% if loggedUser is defined and loggedUser.avatar is not empty %}
+                {% set avatarSrc = loggedUser.avatar %}
+            {% endif %}
+            <img src="{{ avatarSrc }}" class="icon" alt="Avatar">
+            {{ username|e }}
+        </button>
+        <ul id="account-menu">
+            {% if loggedUser %}
+                {% if loggedUser.role != 'cliente' %}
+                    <li><a href="{{ path('/order-list') }}">Listado de pedidos</a></li>
+                {% endif %}
+                {% if loggedUser.role == 'admin' %}
+                    <li><a href="{{ path('/create-account') }}">Crear cuenta</a></li>
+                {% endif %}
+                <li><a href="{{ path('/purchase-history') }}">Historial de compras</a></li>
+                <li><a href="{{ path('/logout') }}">Cerrar sesión</a></li>
+            {% else %}
+                <li><a href="{{ path('/login') }}">Iniciar sesión</a></li>
+                <li><a href="{{ path('/create-account') }}">Crear cuenta</a></li>
+            {% endif %}
+        </ul>
+        <a href="{{ path('/shopping-cart') }}" class="header-shopping-cart-link">
+            <img src="{{ asset_path }}/icons/shopping-cart.png" alt="Carrito de compras" class="icon"/>
+        </a>
+    </section>
+
+    {# Incluir el menú de navegación (nav.twig) #}
+    {% include 'parts/nav.twig' %}
+</header>

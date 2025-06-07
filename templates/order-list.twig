@@ -1,0 +1,58 @@
+{# templates/order-list.twig #}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Lista de pedidos realizados en PAWPrints. Consulta la lista de pedidos realizados en PAWPrints." />
+    <meta name="keywords" content="PAWPrints, orden, pedidos, ebooks" />
+    <meta name="author" content="PAWPrints" />
+    <link rel="stylesheet" href="./css/order-list.css" />
+    <link rel="stylesheet" href="./css/parts/pagination.css" />
+    <script src="./js/pages/accountMenu.js"></script>
+    <title>Lista de Pedidos - PAWPrints</title>
+</head>
+<body>
+    {% include 'parts/header.twig' with {
+        'loggedUser': loggedUser,
+        'username': username,
+        'menu_nav': menu_nav
+    } %}
+
+    <main>
+        <nav aria-label="breadcrumb">
+            <ul>
+                <li><a href="./">Home</a></li>
+                <li><span>Pedidos</span></li>
+            </ul>
+        </nav>
+
+        <h2>Listado de pedidos</h2>
+        <section class="content">
+            {% for order in ordersLists %}
+                <article>
+                    <p><strong>Nº de orden:</strong> {{ order.order_id | e }}</p>
+                    <p><strong>Solicitado por:</strong> {{ order.nombre | e }}</p>
+                    <p>
+                        <strong>Solicitado el día:</strong>
+                        {# Sólo llamamos a getCreatedAt() si created_at no es null #}
+                        {% if order.created_at is not null %}
+                            {{ order.getCreatedAt(order.created_at) | e }}
+                        {% else %}
+                            —
+                        {% endif %}
+                    </p>
+                    <p><strong>Tipo de entrega:</strong> {{ order.entrega | e }}</p>
+                    <p><strong>Email:</strong> {{ order.email | e }}</p>
+                    <p><strong>Teléfono:</strong> {{ order.telefono | e }}</p>
+                </article>
+            {% endfor %}
+        </section>
+
+        {# Incluir paginación (asumiendo que creaste templates/parts/pagination.twig) #}
+        {% include 'parts/pagination.twig' %}
+    </main>
+
+    {% include 'parts/footer.twig' %}
+</body>
+</html>
