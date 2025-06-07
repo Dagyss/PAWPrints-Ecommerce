@@ -31,16 +31,25 @@
         <h2>Listado de pedidos</h2>
         <section class="content">
             <?php foreach ($ordersLists as $order): ?>
-                <article>
-                    <p><strong>Nº de orden:</strong> <?= htmlspecialchars($order->order_id) ?></p>    
-                    <p><strong>Solicitado por:</strong> <?= htmlspecialchars($order->nombre) ?></p>
-                    <p><strong>Solicitado el día:</strong> <?= htmlspecialchars($order->getCreatedAt($order->created_at)) ?></p>
-                    <p><strong>Tipo de entrega:</strong> <?= htmlspecialchars($order->entrega) ?></p>
-                    <p><strong>Email:</strong> <?= htmlspecialchars($order->email) ?></p>
-                    <p><strong>Teléfono:</strong> <?= htmlspecialchars($order->telefono) ?></p>
+                <article itemscope itemtype="https://schema.org/Order">
+                    <p><strong>Nº de orden:</strong> <span itemprop="orderNumber"><?= htmlspecialchars($order->order_id) ?></span></p>
+                    <p><strong>Solicitado por:</strong> <span itemprop="customer" itemscope itemtype="https://schema.org/Person">
+                        <span itemprop="name"><?= htmlspecialchars($order->nombre) ?></span>
+                    </span></p>
+                    <p><strong>Solicitado el día:</strong> <time itemprop="orderDate" datetime="<?= htmlspecialchars($order->created_at) ?>">
+                        <?= htmlspecialchars($order->getCreatedAt($order->created_at)) ?>
+                    </time></p>
+                    <p><strong>Tipo de entrega:</strong> <span itemprop="deliveryMethod"><?= htmlspecialchars($order->entrega) ?></span></p>
+                    <p><strong>Email:</strong> <span itemprop="customer" itemscope itemtype="https://schema.org/Person">
+                        <meta itemprop="email" content="<?= htmlspecialchars($order->email) ?>"><?= htmlspecialchars($order->email) ?>
+                    </span></p>
+                    <p><strong>Teléfono:</strong> <span itemprop="customer" itemscope itemtype="https://schema.org/Person">
+                        <meta itemprop="telephone" content="<?= htmlspecialchars($order->telefono) ?>"><?= htmlspecialchars($order->telefono) ?>
+                    </span></p>
                 </article>
             <?php endforeach; ?>
         </section>
+
         <?php require "parts/pagination.php"; ?>
     </main>
 

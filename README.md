@@ -175,3 +175,24 @@ De esta manera, nos aseguro de que cualquier dato que llegue desde el usuario no
     }
 ```
 
+## 9- Implementar las funcionalidades necesarias para que cada página tenga la microdata que corresponda. 
+## a- ¿Toda la microdata es estática?
+## b- ¿Cómo decidimos en qué página es importante la microdata de ciertos objetos? Por ejemplo, ¿En todos los sitios pondremos la microdata de la/s sucursal/es? En los listados de libros, ¿Que tipo de objetos son? ¿Son libros, son publicidades, que son?
+
+Para mejorar el SEO y la comprensión de nuestro sitio por parte de los motores de búsqueda, implementamos microdata en distintas páginas del sistema, utilizando las especificaciones de Schema.org. Esta microdata permite etiquetar ciertos elementos del contenido (como productos, autores, direcciones, etc.) para que puedan ser interpretados de forma semántica.
+Por otra parte, no, la microdata no necesariamente es estática. Puede ser dinámica, dependiendo del contenido que se renderice en cada página. Por ejemplo, si tenemos un sistema que lista libros como en nuesto caso, desde una base de datos, la microdata se genera dinámicamente con cada libro que aparece en el listado. En cambio, si tenemos una sección con información fija de una sucursal, como dirección y horario, esa microdata podría ser estática, ya que no cambia frecuentemente.
+
+La microdata se coloca en función del tipo de contenido que tiene valor semántico y que queremos destacar para buscadores o asistentes inteligentes. Por ejemplo:
+En una página de detalle de producto, usamos itemtype="https://schema.org/Book" si se trata de un libro, y marcamos título, autor, editorial, ISBN, etc.
+En un listado de libros, cada ítem puede tener también la microdata del tipo Book, si es relevante para SEO.
+No tiene sentido poner la microdata de una sucursal en cada página del sitio, solo la incluiría en la página de contacto, en el footer o en una sección específica de ubicación, donde tiene más sentido semántico usar itemtype="https://schema.org/LocalBusiness" o PostalAddress.
+
+- Aplicamos microodata usando el vocabulario de Schema.org en el archivo order-list.php, home.php y book.php
+
+- Cada tag <article> ahora declara itemscope itemtype="https://schema.org/Order" para representar un pedido.
+
+- Usamos propiedades coom orderNumber, orderDate, deliveryMethod y customer.
+
+- Encapsulamos la información del cliente dentro de un objeto Person, usando itemprop="customer" junto con name, email, y telephone.
+
+- Mejoramos la semántica del HTML sin afectar la visualización ni la funcionalidda.

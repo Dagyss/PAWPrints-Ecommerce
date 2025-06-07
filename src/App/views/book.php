@@ -27,13 +27,18 @@
         </nav>
 
         <h2>Información</h2>
-        <section class="flex-container">
-            <img src="<?= htmlspecialchars($book->fields['imagen']) ?>" alt="Portada del Libro" />
+        <section itemscope itemtype="https://schema.org/Book" class="flex-container">
+            <img src="<?= htmlspecialchars($book->fields['imagen']) ?>" alt="Portada del Libro" itemprop="image" />
             <section>
-                <h2><?= htmlspecialchars($book->fields['titulo']) ?></h2>
-                <p><?= htmlspecialchars($book->fields['autor']) ?></p>
-                <p>$<?= number_format($book->fields['precio'], 2, ',', '.') ?></p>
-                <p><?= htmlspecialchars($book->fields['id']) ?></p>
+                <h2 itemprop="name" ><?= htmlspecialchars($book->fields['titulo']) ?></h2>
+                <p itemprop="author"><?= htmlspecialchars($book->fields['autor']) ?></p>
+                <p>
+                    <span itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                        <meta itemprop="priceCurrency" content="ARS" />
+                        <span itemprop="price"><?= number_format($book->fields['precio'], 2, ',', '.') ?></span>
+                    </span>
+                </p>
+                <meta itemprop="productID" content="<?= htmlspecialchars($book->fields['id']) ?>" />
 
                 <fieldset>
                     <legend>Elige el formato:</legend>

@@ -24,28 +24,32 @@
 
                 <div class="books-carousel" id="books-carousel">
                 <?php foreach ($books as $book): ?>
-                    <article class="book-card">
-                    <figure>
-                        <!-- TODO detalle del libro -->
-                        <a href="./book?id=<?= htmlspecialchars($book->id) ?>">
-                        <?php 
-                            $imagen = (strlen($book->imagen ?? '') > 10) 
-                                ? $book->imagen 
-                                : './icons/book.png';
-                        ?>
-                        <img src="<?= htmlspecialchars($imagen) ?>" alt="Portada del libro">                            
-                        </a>
-                    </figure>
-                    <section class="book-card__footer">
-                        <h3>
+                    <article class="book-card" itemscope itemtype="https://schema.org/Book">
+                        <figure>
                             <a href="./book?id=<?= htmlspecialchars($book->id) ?>">
-                                <?= htmlspecialchars($book->titulo) ?>
+                                <?php 
+                                    $imagen = (strlen($book->imagen ?? '') > 10) 
+                                        ? $book->imagen 
+                                        : './icons/book.png';
+                                ?>
+                                <img src="<?= htmlspecialchars($imagen) ?>" alt="Portada del libro" itemprop="image">                            
                             </a>
-                        </h3>
-                        <p><?= htmlspecialchars($book->autor) ?></p>
-                        <p>$<?= htmlspecialchars($book->precio) ?></p>
-                        <button type="button">Comprar</button>
-                    </section>
+                        </figure>
+                        <section class="book-card__footer">
+                            <h3 itemprop="name">
+                                <a href="./book?id=<?= htmlspecialchars($book->id) ?>" itemprop="url">
+                                    <?= htmlspecialchars($book->titulo) ?>
+                                </a>
+                            </h3>
+                            <p itemprop="author"><?= htmlspecialchars($book->autor) ?></p>
+                            <p>
+                                <span itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                                    <meta itemprop="priceCurrency" content="ARS">
+                                    <span itemprop="price"><?= htmlspecialchars($book->precio) ?></span>
+                                </span>
+                            </p>
+                            <button type="button">Comprar</button>
+                        </section>
                     </article>
                 <?php endforeach; ?>
                 </div>
