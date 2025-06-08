@@ -44,6 +44,10 @@ class BooksCollection extends AbstractModel{
     public function updateBook(Book $book){
         $this->getQueryBuilder()->update($this->table, $book->fields, ["id" => $book->id]);
     }
+    public function insertBook(Book $book): ?string
+    {
+        return $this->getQueryBuilder()->insert($this->table, $book->fields);
+    }
 }
 
 

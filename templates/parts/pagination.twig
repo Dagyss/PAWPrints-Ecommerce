@@ -1,0 +1,23 @@
+{# templates/parts/pagination.twig #}
+<nav class="pagination" itemscope itemtype="https://schema.org/Pagination">
+    {# Si queryParams no está definido o es null, lo sustituimos por un array vacío {} #}
+    {% set params = queryParams is defined and queryParams is not null ? queryParams : {} %}
+
+    {% if paginaActual > 1 %}
+        {% set prevParams = params|merge({'page': paginaActual - 1}) %}
+        <a href="?{{ prevParams | url_encode }}" class="page-link prev" itemprop="previousPage">
+            « Anterior
+        </a>
+    {% endif %}
+
+    <span class="page-info" itemprop="pageNumber">
+        Página {{ paginaActual }} de {{ totalPaginas }}
+    </span>
+
+    {% if paginaActual < totalPaginas %}
+        {% set nextParams = params|merge({'page': paginaActual + 1}) %}
+        <a href="?{{ nextParams | url_encode }}" class="page-link next" itemprop="nextPage">
+            Siguiente »
+        </a>
+    {% endif %}
+</nav>

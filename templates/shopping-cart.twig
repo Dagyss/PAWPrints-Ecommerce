@@ -1,0 +1,96 @@
+{# templates/shopping-cart.twig #}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Carrito de compras en PAWPrints. Revisa y administra los productos agregados a tu carrito.">
+    <meta name="keywords" content="PAWPrints, carrito de compras, libros, ebooks, productos">
+    <meta name="author" content="PAWPrints">
+    <title>Carrito de Compras - PAWPrints</title>
+    <link rel="stylesheet" href="./css/shopping-cart.css">
+</head>
+<body itemscope itemtype="https://schema.org/WebPage">
+    {% include 'parts/header.twig' with {
+        'loggedUser': loggedUser,
+        'username': username,
+        'menu_nav': menu_nav
+    } %}
+
+    <main>
+        <div class="cart-container" itemscope itemtype="https://schema.org/ShoppingCart">
+            <section class="cart">
+                <h2 itemprop="name">Carrito de compra</h2>
+    
+                {% if cart is empty %}
+                    <p>No hay productos en el carrito.</p>
+                {% else %}
+                    {% set total = 0 %}
+                    {% for item in cart %}
+                        {% set subtotal = item.precio * item.cantidad %}
+                        <article class="cart-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/OrderItem">
+                            <figure>
+                                <a href="/book?id={{ item.id | e }}" itemprop="url">
+                                    <img src="{{ item.imagen | default('/icons/book.png') | e }}" alt="Portada de {{ item.titulo | e }}" itemprop="image">
+                                </a>
+                            </figure>
+    
+                            <div class="cart-item-content">
+                                <div class="cart-item-header">
+                                    <h3 itemprop="name">
+                                        <a href="/book?id={{ item.id | e }}">{{ item.titulo | e }}</a>
+                                    </h3>
+                                    <button 
+                                        class="cart-remove-btn" 
+                                        aria-label="Eliminar producto"
+                                        onclick="location.href='?remove={{ item.id | e }}'"
+                                    >
+                                        <img src="../icons/trash.png" alt="Eliminar">
+                                    </button>
+                                </div>
+    
+                                <div class="cart-controls">
+                                    <label for="quantity{{ loop.index0 }}" class="visually-hidden">Cantidad</label>
+                                    <input 
+                                        type="number" 
+                                        id="quantity{{ loop.index0 }}" 
+                                        min="1" 
+                                        value="{{ item.cantidad }}" 
+                                        class="cart-quantity"
+                                        disabled
+                                        itemprop="orderQuantity"
+                                    >
+                                    <p class="cart-price">
+                                        Precio: <span itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                                            <span itemprop="priceCurrency">ARS</span>
+                                            <span itemprop="price">{{ item.precio|number_format(2, ',', '.') }}</span>
+                                        </span>
+                                    </p>
+                                    <p class="subtotal">
+                                        Subtotal: <span itemprop="price">{{ subtotal|number_format(2, ',', '.') }}</span>
+                                        <meta itemprop="priceCurrency" content="ARS">
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                        {% set total = total + subtotal %}
+                    {% endfor %}
+    
+                    <p class="total">
+                        Total: <span itemprop="totalPrice">{{ total|number_format(2, ',', '.') }}</span>
+                        <meta itemprop="priceCurrency" content="ARS">
+                    </p>
+    
+                    <form action="/checkout-form" method="GET" itemprop="potentialAction" itemscope itemtype="https://schema.org/CheckoutAction">
+                        <button type="submit" class="checkout-button" itemprop="actionStatus">
+                            Finalizar compra
+                        </button>
+                    </form>
+                {% endif %}
+            </section>
+        </div>
+    </main>
+
+    {% include 'parts/footer.twig' %}
+</body>
+</html>

@@ -1,0 +1,56 @@
+{# templates/parts/header.twig #}
+<header id="header" itemscope itemtype="https://schema.org/WPHeader">
+    <input type="checkbox" id="hamburger-checkbox" class="hamburger-checkbox">
+    <label for="hamburger-checkbox" class="hamburger-menu">
+        <img src="{{ asset_path }}/icons/hamburguer-menu.png" alt="Menú" class="icon" itemprop="image">
+    </label>
+
+    <h1 itemscope itemtype="https://schema.org/Organization">
+        <a href="{{ path('/') }}" itemprop="url">
+            <span itemprop="name">PAWPrints</span>
+            <img src="{{ asset_path }}/icons/PAWPrintsWhite.svg" id="enterprise-icon" alt="PAWPrints logo" itemprop="logo"/>
+        </a>
+    </h1>
+
+    <div class="header-search" itemscope itemtype="https://schema.org/SearchAction" itemprop="potentialAction">
+        <form id="search-form" class="header-search__form" action="{{ path('/books') }}" method="get" itemprop="target">
+            <input id="search-input" name="q" type="search" placeholder="¿Qué estás buscando?" autocomplete="off" itemprop="query-input">
+            <button type="submit" aria-label="Buscar" itemprop="actionStatus">
+                <img src="{{ asset_path }}/icons/magnifying-glass.png" alt="Buscar" itemprop="image"/>
+            </button>
+        </form>
+        <ul id="search-history" class="header-search__history"></ul>
+    </div>
+
+    <section class="header-my-account" itemscope itemtype="https://schema.org/SiteNavigationElement">
+        <button type="button" aria-label="Abrir menú de cuenta" id="account-button">
+            {% set avatarSrc = asset_path ~ '/icons/UserIcon.png' %}
+            {% if loggedUser is defined and loggedUser.avatar is not empty %}
+                {% set avatarSrc = loggedUser.avatar %}
+            {% endif %}
+            <img src="{{ avatarSrc }}" class="icon" alt="Avatar" itemprop="image">
+            <span itemprop="name">{{ username|e }}</span>
+        </button>
+        <ul id="account-menu">
+            {% if loggedUser %}
+                {% if loggedUser.role != 'cliente' %}
+                    <li><a href="{{ path('/order-list') }}" itemprop="url">Listado de pedidos</a></li>
+                {% endif %}
+                {% if loggedUser.role == 'admin' %}
+                    <li><a href="{{ path('/create-account') }}" itemprop="url">Crear cuenta</a></li>
+                {% endif %}
+                <li><a href="{{ path('/purchase-history') }}" itemprop="url">Historial de compras</a></li>
+                <li><a href="{{ path('/logout') }}" itemprop="url">Cerrar sesión</a></li>
+            {% else %}
+                <li><a href="{{ path('/login') }}" itemprop="url">Iniciar sesión</a></li>
+                <li><a href="{{ path('/create-account') }}" itemprop="url">Crear cuenta</a></li>
+            {% endif %}
+        </ul>
+        <a href="{{ path('/shopping-cart') }}" class="header-shopping-cart-link" itemprop="url">
+            <img src="{{ asset_path }}/icons/shopping-cart.png" alt="Carrito de compras" class="icon" itemprop="image"/>
+        </a>
+    </section>
+
+    {# Incluir el menú de navegación (nav.twig) #}
+    {% include 'parts/nav.twig' %}
+</header>

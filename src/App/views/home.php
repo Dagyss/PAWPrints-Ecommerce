@@ -15,7 +15,6 @@
     
     <main>
         <div id="first-banner"></div>
-
         <section class="carousel-section">
             <h2>Sugerencias</h2>
 
@@ -57,9 +56,7 @@
                 <button class="nav next">&#10095;</button>
             </div>
         </section>
-
         <div id="second-banner"></div>
-
         <section class="carousel-section">
             <h2>Los mas vendidos</h2>
 

@@ -1,0 +1,61 @@
+{# templates/order-list.twig #}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Lista de pedidos realizados en PAWPrints. Consulta la lista de pedidos realizados en PAWPrints." />
+    <meta name="keywords" content="PAWPrints, orden, pedidos, ebooks" />
+    <meta name="author" content="PAWPrints" />
+    <link rel="stylesheet" href="./css/order-list.css" />
+    <link rel="stylesheet" href="./css/parts/pagination.css" />
+    <script src="./js/pages/accountMenu.js"></script>
+    <title>Lista de Pedidos - PAWPrints</title>
+</head>
+<body itemscope itemtype="https://schema.org/WebPage">
+    {% include 'parts/header.twig' with {
+        'loggedUser': loggedUser,
+        'username': username,
+        'menu_nav': menu_nav
+    } %}
+
+    <main>
+        <nav aria-label="breadcrumb">
+            <ul>
+                <li><a href="/" itemprop="url">Home</a></li>
+                <li><span>Pedidos</span></li>
+            </ul>
+        </nav>
+
+        <h2>Listado de pedidos</h2>
+        <section class="content" itemscope itemtype="https://schema.org/OrderList">
+            {% for order in ordersLists %}
+                <article itemscope itemtype="https://schema.org/Order" itemprop="order">
+                    <p><strong>Nº de orden:</strong> <span itemprop="orderNumber">{{ order.order_id | e }}</span></p>
+                    <p><strong>Solicitado por:</strong> 
+                        <span itemprop="customer" itemscope itemtype="https://schema.org/Person">
+                            <span itemprop="name">{{ order.nombre | e }}</span>
+                        </span>
+                    </p>
+                    <p>
+                        <strong>Solicitado el día:</strong>
+                        {% if order.created_at is not null %}
+                            <time datetime="{{ order.created_at }}" itemprop="orderDate">{{ order.getCreatedAt(order.created_at) | e }}</time>
+                        {% else %}
+                            —
+                        {% endif %}
+                    </p>
+                    <p><strong>Tipo de entrega:</strong> <span itemprop="deliveryMethod">{{ order.entrega | e }}</span></p>
+                    <p><strong>Email:</strong> <a href="mailto:{{ order.email | e }}" itemprop="customer.email">{{ order.email | e }}</a></p>
+                    <p><strong>Teléfono:</strong> <span itemprop="customer.telephone">{{ order.telefono | e }}</span></p>
+                </article>
+            {% endfor %}
+        </section>
+
+        {# Paginación #}
+        {% include 'parts/pagination.twig' %}
+    </main>
+
+    {% include 'parts/footer.twig' %}
+</body>
+</html>

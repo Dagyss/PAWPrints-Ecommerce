@@ -1,0 +1,24 @@
+{# templates/parts/nav.twig #}
+<nav class="mobile-menu" itemscope itemtype="https://schema.org/SiteNavigationElement">
+    <label for="hamburger-checkbox" class="close-menu">
+        <img src="{{ asset_path }}/icons/go-back-arrow.png" alt="Cerrar menú" class="icon">
+    </label>
+    <ul>
+        {% for item in menu_nav %}
+            <li itemprop="name">
+                <a href="{{ item.href }}" itemprop="url">{{ item.route_name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <img src="{{ asset_path }}/icons/PAWPrintsWhite.svg" class="enterprise-icon" alt="Logo de la Empresa" itemprop="logo"/>
+</nav>
+
+<nav class="desktop-nav" itemscope itemtype="https://schema.org/SiteNavigationElement">
+    <ul>
+        {% for item in menu_nav %}
+            <li itemprop="name">
+                <a href="{{ item.href }}" itemprop="url">{{ item.route_name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</nav>

@@ -1,0 +1,75 @@
+{# templates/login.twig #}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión - PAWPrints</title>
+    <link rel="stylesheet" href="./css/login.css">
+    <script src="./js/pages/accountMenu.js"></script>
+</head>
+<body itemscope itemtype="https://schema.org/WebPage">
+    {% include 'parts/header.twig' with {
+        'loggedUser': loggedUser,
+        'username': username,
+        'menu_nav': menu_nav
+    } %}
+
+    <main itemscope itemtype="https://schema.org/LoginPage">
+        <nav aria-label="breadcrumb">
+            <ul>
+                <li><a href="/" itemprop="url">Home</a></li>
+                <li><a href="#" itemprop="url">Mi cuenta</a></li>
+                <li><span>Iniciar sesión</span></li>
+            </ul>
+        </nav>
+        
+        <section class="container login-container" itemscope itemtype="https://schema.org/Person">
+            <h1 itemprop="name">Iniciar sesión</h1>
+
+            {% if errors is defined and errors is not empty %}
+                <section class="error-messages">
+                    {% for error in errors %}
+                        <p class="error-text">{{ error | e }}</p>
+                    {% endfor %}
+                </section>
+            {% endif %}
+
+            <form method="POST" action="/login" itemprop="potentialAction" itemscope itemtype="https://schema.org/LoginAction">
+                <div class="form-section">
+                    <label for="email">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="ej: ejemplo@gmail.com"
+                        required
+                        itemprop="identifier"
+                    >
+                </div>
+                
+                <div class="form-section">
+                    <label for="password">Contraseña</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="ej: contraseña123"
+                        required
+                        itemprop="password"
+                    >
+                    <img src="../icons/close-eye.png" alt="Mostrar/Ocultar contraseña" class="icon-forms">
+                </div>
+
+                <button type="submit" itemprop="actionStatus">Iniciar sesión</button>
+            </form>
+
+            <p>
+                ¿No tenés cuenta aún? <a href="/create-account" itemprop="url">Crear cuenta</a>
+            </p>
+        </section>
+    </main>
+    
+    {% include 'parts/footer.twig' %}
+</body>
+</html>

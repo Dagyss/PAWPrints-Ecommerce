@@ -3,24 +3,27 @@
     $loggedUser = getLoggedUser();
 ?>
 <header id="header">
-    <input type="checkbox" id="hamburger-checkbox" class="hamburger-checkbox">
-    <label for="hamburger-checkbox" class="hamburger-menu">
-        <img src="../icons/hamburguer-menu.png" alt="Menú" class="icon">
-    </label>
-    <h1>
-        <a href="./">
-            PAWPrints
-            <img src="../icons/PAWPrintsWhite.svg" id="enterprise-icon"/>
-        </a>
-    </h1>
-
-    <search class="header-search">
-        <form class="header-search__form">
-            <input type="search" placeholder="¿Qué estás buscando?" />
+        <input type="checkbox" id="hamburger-checkbox" class="hamburger-checkbox">
+        <label for="hamburger-checkbox" class="hamburger-menu">
+            <img src="../icons/hamburguer-menu.png" alt="Menú" class="icon">
+        </label>
+        <h1>
+            <a href="./">
+                PAWPrints
+                <img src="../icons/PAWPrintsWhite.svg" id="enterprise-icon"/>
+            </a>
+        </h1>
+    
+        <search class="header-search">
+            <form id="search-form" class="header-search__form" action="/books"  method="get">
+            <input id="search-input" name="q" type="search" placeholder="¿Qué estás buscando?" autocomplete="off" />
             <button type="submit" aria-label="Buscar">
                 <img src="../icons/magnifying-glass.png" alt="Buscar"/>
             </button>
-        </form>
+            </form>
+            <ul id="search-history" class="header-search__history"></ul>
+        </search>
+    
     </search>
 
     <section class="header-my-account">

@@ -64,7 +64,7 @@
                                         class="cart-quantity"
                                         disabled
                                     >
-                                    <p>$<?= $precio ?> c/u</p>
+                                    <p class="cart-price">$<?= $precio ?> c/u</p>
                                     <p class="subtotal">
                                         Subtotal: $<?= number_format($subtotal, 2, ',', '.') ?>
                                     </p>
