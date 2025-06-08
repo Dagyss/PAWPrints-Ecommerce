@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Libros en venta en PAWPrints. Consulta los libros disponibles en PAWPrints." />
-    <meta name="keywords" content="PAWPrints, compra, libros, ebooks, productos" />
+    <meta name="description" content="Catálogo de libros disponibles en PAWPrints." />
+    <meta name="keywords" content="PAWPrints, libros, catálogo, ebooks, compra" />
     <meta name="author" content="PAWPrints" />
     <link rel="stylesheet" href="./css/books.css" />
     <script type="module" src="./js/pages/Books.js"></script>
     <script src="./js/pages/accountMenu.js"></script>
     <title>Libros - PAWPrints</title>
 </head>
-<body>
+<body itemscope itemtype="https://schema.org/WebPage">
     {% include 'parts/header.twig' with {
         'loggedUser': loggedUser,
         'username': username,
@@ -31,8 +31,8 @@
 
         <section class="content">
 
-            <section class="filtros">
-                <button class="buttom-filtros" type="button" aria-label="Abrir menú de filtros">Filtrar</button>
+            <section class="filtros" itemscope itemtype="https://schema.org/SearchAction">
+                <button class="button-filtros" type="button" aria-label="Abrir menú de filtros">Filtrar</button>
                 <button class="button-ordenar" type="button" aria-label="Abrir menú de Ordenar Por">Ordenar Por</button>
             </section>
 
@@ -89,18 +89,12 @@
                         <label><input type="checkbox" name="formatos[]" value="digital"> E-book</label>
                         <label><input type="checkbox" name="formatos[]" value="físico"> Físico</label>
                     </fieldset>
-
-                    {# No hay submit porque la lista se carga con JS #}
                 </form>
             </search>
 
-            <section class="books-wrapper">
-                <section class="books" id="listaLibros">
-                    {# Se cargan los libros a través de JS, así que aquí no hacemos bucle PHP/Twig #}
-                </section>
-                <nav class="pagination" id="paginador">
-                    {# El paginador lo carga JS igual que antes #}
-                </nav>
+            <section class="books-wrapper" itemscope itemtype="https://schema.org/ItemList">
+                <section class="books" id="listaLibros" itemprop="itemListElement"></section>
+                <nav class="pagination" id="paginador"></nav>
             </section>
 
         </section>

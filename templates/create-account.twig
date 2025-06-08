@@ -9,14 +9,14 @@
     <title>Crear Cuenta - PAWPrints</title>
     <link rel="stylesheet" href="./css/create-acount.css">
 </head>
-<body>
+<body itemscope itemtype="https://schema.org/WebPage">
     {% include 'parts/header.twig' with {
         'loggedUser': loggedUser,
         'username': username,
         'menu_nav': menu_nav
     } %}
 
-    <main>
+    <main itemscope itemtype="https://schema.org/SignUpPage">
         <nav aria-label="breadcrumb">
             <ul>
                 <li><a href="./">Home</a></li>
@@ -26,8 +26,8 @@
             </ul>
         </nav>
         
-        <section class="container register-container">
-            <h1>Crear cuenta</h1>
+        <section class="container register-container" itemscope itemtype="https://schema.org/Person">
+            <h1 itemprop="name">Crear cuenta</h1>
 
             {% if errors is defined and errors is not empty %}
                 <section class="error-messages">
@@ -43,36 +43,42 @@
                 </section>
             {% endif %}
 
-            <form action="/register" method="post">
-                <label for="full_name">Nombre y apellido</label>
-                <input
-                    type="text"
-                    id="full_name"
-                    name="full_name"
-                    placeholder="ej: Cosme Fulanito"
-                    required
-                >
+            <form action="/register" method="post" itemprop="potentialAction" itemscope itemtype="https://schema.org/RegisterAction">
+                <div class="form-section">
+                    <label for="full_name">Nombre y apellido</label>
+                    <input
+                        type="text"
+                        id="full_name"
+                        name="full_name"
+                        placeholder="ej: Cosme Fulanito"
+                        required
+                        itemprop="name"
+                    >
+                </div>
 
-                <label for="email">Email</label>
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="ej: email@gmail.com"
-                    required
-                >
+                <div class="form-section">
+                    <label for="email">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="ej: email@gmail.com"
+                        required
+                        itemprop="email"
+                    >
+                </div>
 
                 {% if loggedUser is defined and loggedUser.role == 'admin' %}
-                    <fieldset>
+                    <fieldset itemscope itemtype="https://schema.org/Action">
                         <legend>Roles</legend>
                         <label class="role-label">
                             Empleado
-                            <input type="radio" name="role" value="empleado" required>
+                            <input type="radio" name="role" value="empleado" required itemprop="role">
                             <span class="custom-radio"></span>
                         </label>
                         <label class="role-label">
                             Cliente
-                            <input type="radio" name="role" value="cliente" required>
+                            <input type="radio" name="role" value="cliente" required itemprop="role">
                             <span class="custom-radio"></span>
                         </label>
                     </fieldset>
@@ -86,6 +92,7 @@
                         name="password"
                         placeholder="ej: contraseña123"
                         required
+                        itemprop="password"
                     >
                     <img src="../icons/close-eye.png" alt="Ocultar contraseña" class="icon-forms icon-password">
                 </div>
@@ -98,13 +105,14 @@
                         name="confirm_password"
                         placeholder="ej: contraseña123"
                         required
+                        itemprop="password"
                     >
                     <img src="../icons/close-eye.png" alt="Ocultar contraseña" class="icon-forms icon-confirm-password">
                 </div>
                 
-                <button type="submit">Crear cuenta</button>
+                <button type="submit" itemprop="actionStatus" itemscope itemtype="https://schema.org/FollowAction">Crear cuenta</button>
             </form>
-            <p>¿Ya tenés una cuenta? <a href="/login">Iniciar sesión</a></p>
+            <p>¿Ya tenés una cuenta? <a href="/login" itemprop="url">Iniciar sesión</a></p>
         </section>
     </main>
 

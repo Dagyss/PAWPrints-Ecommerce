@@ -10,23 +10,22 @@
     <link rel="stylesheet" href="./css/about-us.css" />
     <title>Nosotros - PAWPrints</title>
 </head>
-<body>
-    {# Incluir header.twig pasando las variables necesarias #}
+<body itemscope itemtype="https://schema.org/WebPage">
     {% include 'parts/header.twig' with {
         'loggedUser': loggedUser,
         'username': username,
         'menu_nav': menu_nav
     } %}
 
-    <main>
+    <main itemscope itemtype="https://schema.org/AboutPage">
         <nav aria-label="breadcrumb">
             <ul>
                 <li><a href="./">Home</a></li>
                 <li><span>Nosotros</span></li>
             </ul>
         </nav>
-        <h2>Nosotros</h2>
-        <section class="flex-container">
+        <h2 itemprop="headline">Nosotros</h2>
+        <section class="flex-container" itemprop="text">
             <section>
                 <h3>Nuestra Misión</h3>
                 <p>

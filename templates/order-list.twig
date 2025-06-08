@@ -12,7 +12,7 @@
     <script src="./js/pages/accountMenu.js"></script>
     <title>Lista de Pedidos - PAWPrints</title>
 </head>
-<body>
+<body itemscope itemtype="https://schema.org/WebPage">
     {% include 'parts/header.twig' with {
         'loggedUser': loggedUser,
         'username': username,
@@ -22,34 +22,37 @@
     <main>
         <nav aria-label="breadcrumb">
             <ul>
-                <li><a href="./">Home</a></li>
+                <li><a href="/" itemprop="url">Home</a></li>
                 <li><span>Pedidos</span></li>
             </ul>
         </nav>
 
         <h2>Listado de pedidos</h2>
-        <section class="content">
+        <section class="content" itemscope itemtype="https://schema.org/OrderList">
             {% for order in ordersLists %}
-                <article>
-                    <p><strong>Nº de orden:</strong> {{ order.order_id | e }}</p>
-                    <p><strong>Solicitado por:</strong> {{ order.nombre | e }}</p>
+                <article itemscope itemtype="https://schema.org/Order" itemprop="order">
+                    <p><strong>Nº de orden:</strong> <span itemprop="orderNumber">{{ order.order_id | e }}</span></p>
+                    <p><strong>Solicitado por:</strong> 
+                        <span itemprop="customer" itemscope itemtype="https://schema.org/Person">
+                            <span itemprop="name">{{ order.nombre | e }}</span>
+                        </span>
+                    </p>
                     <p>
                         <strong>Solicitado el día:</strong>
-                        {# Sólo llamamos a getCreatedAt() si created_at no es null #}
                         {% if order.created_at is not null %}
-                            {{ order.getCreatedAt(order.created_at) | e }}
+                            <time datetime="{{ order.created_at }}" itemprop="orderDate">{{ order.getCreatedAt(order.created_at) | e }}</time>
                         {% else %}
                             —
                         {% endif %}
                     </p>
-                    <p><strong>Tipo de entrega:</strong> {{ order.entrega | e }}</p>
-                    <p><strong>Email:</strong> {{ order.email | e }}</p>
-                    <p><strong>Teléfono:</strong> {{ order.telefono | e }}</p>
+                    <p><strong>Tipo de entrega:</strong> <span itemprop="deliveryMethod">{{ order.entrega | e }}</span></p>
+                    <p><strong>Email:</strong> <a href="mailto:{{ order.email | e }}" itemprop="customer.email">{{ order.email | e }}</a></p>
+                    <p><strong>Teléfono:</strong> <span itemprop="customer.telephone">{{ order.telefono | e }}</span></p>
                 </article>
             {% endfor %}
         </section>
 
-        {# Incluir paginación (asumiendo que creaste templates/parts/pagination.twig) #}
+        {# Paginación #}
         {% include 'parts/pagination.twig' %}
     </main>
 

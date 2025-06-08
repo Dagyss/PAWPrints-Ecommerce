@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Libros en venta en PAWPrints. Consulta los libros disponibles en PAWPrints." />
-    <meta name="keywords" content="PAWPrints, compra, libros, ebooks, productos" />
+    <meta name="description" content="{{ book.fields.titulo | e }} - Libros en venta en PAWPrints." />
+    <meta name="keywords" content="PAWPrints, compra, libros, ebooks, {{ book.fields.titulo | e }}" />
     <meta name="author" content="PAWPrints" />
     <link rel="stylesheet" href="./css/book-information.css" />
-    <title>Información del Libro - PAWPrints</title>
+    <title>{{ book.fields.titulo | e }} | PAWPrints</title>
 </head>
-<body>
+<body itemscope itemtype="https://schema.org/WebPage">
     {% include 'parts/header.twig' with {
         'loggedUser': loggedUser,
         'username': username,
@@ -22,48 +22,50 @@
             <ul>
                 <li><a href="./">Home</a></li>
                 <li><a href="./books">Libros</a></li>
-                <li><span>Libro</span></li>
+                <li><span>{{ book.fields.titulo | e }}</span></li>
             </ul>
         </nav>
 
-        <h2>Información</h2>
-        <section class="flex-container">
-            <img src="{{ book.fields.imagen | e }}" alt="Portada del Libro" />
-            <section>
-                <h2>{{ book.fields.titulo | e }}</h2>
-                <p>{{ book.fields.autor | e }}</p>
-                <p>${{ book.fields.precio|number_format(2, ',', '.') }}</p>
-                <p>{{ book.fields.id | e }}</p>
+        <article itemscope itemtype="https://schema.org/Book">
+            <h1 itemprop="name">{{ book.fields.titulo | e }}</h1>
+            <p>Autor: <span itemprop="author">{{ book.fields.autor | e }}</span></p>
+            <p>ISBN: <span itemprop="isbn">{{ book.fields.id | e }}</span></p>
+            <p>Editorial: <span itemprop="publisher">{{ book.fields.editorial | e }}</span></p>
 
-                <fieldset>
-                    <legend>Elige el formato:</legend>
+            <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                <span itemprop="priceCurrency">ARS</span>
+                <span itemprop="price">{{ book.fields.precio }}</span>
+                <link itemprop="availability" href="https://schema.org/InStock" />
+            </div>
 
-                    <input type="radio" id="fisico" name="formato-libro" value="f" checked="checked" />
-                    <label for="fisico">Físico</label>
+            <figure>
+                <img src="{{ book.fields.imagen | e }}" alt="Portada de {{ book.fields.titulo | e }}" itemprop="image"/>
+            </figure>
 
-                    <input type="radio" id="electronico" name="formato-libro" value="e" />
-                    <label for="electronico">Electrónico</label>
-                </fieldset>
-
-                <input type="number" id="cantidad" name="cantidad" placeholder="1" min="1" />
-                <input type="button" value="Al carrito" />
-            </section>
-
-            <section>
-                <h2>Descripción</h2>
-                <p>Formato: LIBROS</p>
-                <p>Editorial: {{ book.fields.editorial | e }}</p>
-                <p>Idioma: Español</p>
-                <p>ISBN: 9789878121383</p>
-                <p>N° Páginas: 496</p>
-                <p>Fecha Publicación: xx/xxxx</p>
-            </section>
-
-            <section>
+            <section itemprop="description">
                 <h2>Sinopsis</h2>
                 <p>{{ book.fields.descripcion | e }}</p>
             </section>
-        </section>
+
+            <section>
+                <h2>Descripción del libro</h2>
+                <ul>
+                    <li><strong>N° Páginas:</strong> {{ book.fields.paginas | default('—') }}</li>
+                    <li><strong>Idioma:</strong> <span itemprop="inLanguage">{{ book.fields.idioma | default('—') }}</span></li>
+                    <li><strong>Fecha Publicación:</strong> {{ book.fields.fecha_publicacion | default('—') }}</li>
+                </ul>
+            </section>
+
+            <div class="purchase-actions">
+                <fieldset>
+                    <legend>Elige el formato:</legend>
+                    <label><input type="radio" name="formato-libro" value="f" checked /> Físico</label>
+                    <label><input type="radio" name="formato-libro" value="e" /> Electrónico</label>
+                </fieldset>
+                <input type="number" id="cantidad" name="cantidad" placeholder="1" min="1" value="1" />
+                <button type="button" onclick="addToCart('{{ book.fields.id }}')">Al carrito</button>
+            </div>
+        </article>
     </main>
 
     {% include 'parts/footer.twig' %}

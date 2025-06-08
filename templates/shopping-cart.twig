@@ -10,7 +10,7 @@
     <title>Carrito de Compras - PAWPrints</title>
     <link rel="stylesheet" href="./css/shopping-cart.css">
 </head>
-<body>
+<body itemscope itemtype="https://schema.org/WebPage">
     {% include 'parts/header.twig' with {
         'loggedUser': loggedUser,
         'username': username,
@@ -18,40 +18,32 @@
     } %}
 
     <main>
-        <div class="cart-container">
+        <div class="cart-container" itemscope itemtype="https://schema.org/ShoppingCart">
             <section class="cart">
-                <h2>Carrito de compra</h2>
+                <h2 itemprop="name">Carrito de compra</h2>
     
                 {% if cart is empty %}
                     <p>No hay productos en el carrito.</p>
                 {% else %}
                     {% set total = 0 %}
                     {% for item in cart %}
-                        {# Extraemos datos del ítem; asumimos que item.precio e item.cantidad ya son numéricos #}
-                        {% set id       = item.id %}
-                        {% set titulo   = item.titulo %}
-                        {% set imagen   = (item.imagen is defined and item.imagen) ? item.imagen : '../icons/book.png' %}
-                        {% set cantidad = item.cantidad %}
-                        {# Usamos el filtro number_format para formatear el precio #}
-                        {% set precio   = item.precio|number_format(2, ',', '.') %}
-                        {% set subtotal = (item.precio * cantidad) %}
-                        {% set total    = total + subtotal %}
-                        <article class="cart-item">
+                        {% set subtotal = item.precio * item.cantidad %}
+                        <article class="cart-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/OrderItem">
                             <figure>
-                                <a href="./book?id={{ id | e }}">
-                                    <img src="{{ imagen | e }}" alt="Portada de {{ titulo | e }}">
+                                <a href="/book?id={{ item.id | e }}" itemprop="url">
+                                    <img src="{{ item.imagen | default('/icons/book.png') | e }}" alt="Portada de {{ item.titulo | e }}" itemprop="image">
                                 </a>
                             </figure>
     
                             <div class="cart-item-content">
                                 <div class="cart-item-header">
-                                    <h3>
-                                        <a href="./book?id={{ id | e }}">{{ titulo | e }}</a>
+                                    <h3 itemprop="name">
+                                        <a href="/book?id={{ item.id | e }}">{{ item.titulo | e }}</a>
                                     </h3>
                                     <button 
                                         class="cart-remove-btn" 
                                         aria-label="Eliminar producto"
-                                        onclick="location.href='?remove={{ id | e }}'"
+                                        onclick="location.href='?remove={{ item.id | e }}'"
                                     >
                                         <img src="../icons/trash.png" alt="Eliminar">
                                     </button>
@@ -63,25 +55,34 @@
                                         type="number" 
                                         id="quantity{{ loop.index0 }}" 
                                         min="1" 
-                                        value="{{ cantidad }}" 
+                                        value="{{ item.cantidad }}" 
                                         class="cart-quantity"
                                         disabled
+                                        itemprop="orderQuantity"
                                     >
-                                    <p class="cart-price">$ {{ precio }} c/u</p>
+                                    <p class="cart-price">
+                                        Precio: <span itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                                            <span itemprop="priceCurrency">ARS</span>
+                                            <span itemprop="price">{{ item.precio|number_format(2, ',', '.') }}</span>
+                                        </span>
+                                    </p>
                                     <p class="subtotal">
-                                        Subtotal: $ {{ subtotal|number_format(2, ',', '.') }}
+                                        Subtotal: <span itemprop="price">{{ subtotal|number_format(2, ',', '.') }}</span>
+                                        <meta itemprop="priceCurrency" content="ARS">
                                     </p>
                                 </div>
                             </div>
                         </article>
+                        {% set total = total + subtotal %}
                     {% endfor %}
     
                     <p class="total">
-                        Total: $ {{ total|number_format(2, ',', '.') }}
+                        Total: <span itemprop="totalPrice">{{ total|number_format(2, ',', '.') }}</span>
+                        <meta itemprop="priceCurrency" content="ARS">
                     </p>
     
-                    <form action="/checkout-form" method="GET">
-                        <button type="submit" class="checkout-button">
+                    <form action="/checkout-form" method="GET" itemprop="potentialAction" itemscope itemtype="https://schema.org/CheckoutAction">
+                        <button type="submit" class="checkout-button" itemprop="actionStatus">
                             Finalizar compra
                         </button>
                     </form>

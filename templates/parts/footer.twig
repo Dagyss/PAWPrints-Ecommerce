@@ -1,22 +1,24 @@
 {# templates/parts/footer.twig #}
 
-<footer>
+<footer itemscope itemtype="https://schema.org/Organization">
+    <meta itemprop="name" content="Nombre de tu organización"> {# Reemplaza con el nombre real #}
+
     <section>
         <h2>Seguinos en redes</h2>
         <ul>
             <li>
-                <a href="#" aria-label="Instagram">
-                    <img src="../icons/instagram-icon.png" alt="Instagram" class="icon">
+                <a href="#" aria-label="Instagram" itemprop="sameAs">
+                    <img src="{{ asset_path }}/icons/instagram-icon.png" alt="Instagram" class="icon">
                 </a>
             </li>
             <li>
-                <a href="#" aria-label="Facebook">
-                    <img src="../icons/facebook-icon.png" alt="Facebook" class="icon">
+                <a href="#" aria-label="Facebook" itemprop="sameAs">
+                    <img src="{{ asset_path }}/icons/facebook-icon.png" alt="Facebook" class="icon">
                 </a>
             </li>
             <li>
-                <a href="#" aria-label="YouTube">
-                    <img src="../icons/youtube-icon.png" alt="YouTube" class="icon">
+                <a href="#" aria-label="YouTube" itemprop="sameAs">
+                    <img src="{{ asset_path }}/icons/youtube-icon.png" alt="YouTube" class="icon">
                 </a>
             </li>
         </ul>
@@ -25,20 +27,30 @@
     <nav>
         <h2>Nosotros</h2>
         <ul>
-            <li><a href="#">Quiénes somos</a></li>
+            <li><a href="{{ path('/about-us') }}">Quiénes somos</a></li>
             <li><a href="#">Sucursales</a></li>
             <li><a href="#">Mi cuenta</a></li>
         </ul>
     </nav>
 
-    <section>
+    <section itemprop="contactPoint" itemscope itemtype="https://schema.org/ContactPoint">
         <h2>Atención al cliente</h2>
         <address>
             <ul>
-                <li>Teléfono: <a href="tel:+123456789">+1 234 567 89</a></li>
-                <li>Email: <a href="mailto:mail@mail.com">mail@mail.com</a></li>
-                <li>Dirección: Calle Falsa 123, Ciudad</li>
-                <li>Horario: Lunes a Viernes, 9:00 - 18:00</li>
+                <li>Teléfono: <a href="tel:+123456789" itemprop="telephone">+1 234 567 89</a></li>
+                <li>Email: <a href="mailto:mail@mail.com" itemprop="email">mail@mail.com</a></li>
+                <li itemprop="areaServed">Dirección: Calle Falsa 123, Ciudad</li>
+                <li itemprop="hoursAvailable" itemscope itemtype="https://schema.org/OpeningHoursSpecification">
+                    Horario:
+                    <meta itemprop="dayOfWeek" content="Monday">
+                    <meta itemprop="dayOfWeek" content="Tuesday">
+                    <meta itemprop="dayOfWeek" content="Wednesday">
+                    <meta itemprop="dayOfWeek" content="Thursday">
+                    <meta itemprop="dayOfWeek" content="Friday">
+                    <meta itemprop="opens" content="09:00">
+                    <meta itemprop="closes" content="18:00">
+                    Lunes a Viernes, 9:00 - 18:00
+                </li>
             </ul>
         </address>
     </section>
@@ -51,5 +63,5 @@
         </form>
     </section>
 
-    <p><small>&copy; Copyright</small></p>
+    <p><small>&copy; <span itemprop="name">Nombre de tu organización</span></small></p>
 </footer>

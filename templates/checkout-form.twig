@@ -10,7 +10,7 @@
     <title>Finalizar Compra - PAWPrints</title>
     <link rel="stylesheet" href="./css/checkout-form.css">
 </head>
-<body>
+<body itemscope itemtype="https://schema.org/WebPage">
     {% include 'parts/header.twig' with {
         'loggedUser': loggedUser,
         'username': username,
@@ -25,26 +25,26 @@
             </ul>
         </nav>
         <div class="checkout-container">
-            <section class="order-summary">
+            <section class="order-summary" itemscope itemtype="https://schema.org/Order">
                 <h2>Detalle de tu pedido</h2>
+
                 {% if cart is not empty %}
                     {% set total = 0 %}
                     {% for item in cart %}
-                        {# Calculamos subtotal directamente sin filtros float/int #}
                         {% set subtotal = item.precio * item.cantidad %}
-                        <article class="order-summary-item">
+                        <article class="order-summary-item" itemprop="orderItem" itemscope itemtype="https://schema.org/OrderItem">
                             <figure>
-                                <a href="/book?id={{ item.id | e }}">
-                                    <img src="{{ item.imagen | e }}" alt="Portada de {{ item.titulo | e }}">
+                                <a href="/book?id={{ item.id | e }}" itemprop="url">
+                                    <img src="{{ item.imagen | e }}" alt="Portada de {{ item.titulo | e }}" itemprop="image">
                                 </a>
                             </figure>
                             <div>
-                                <h3>
+                                <h3 itemprop="name">
                                     <a href="/book?id={{ item.id | e }}">{{ item.titulo | e }}</a>
                                 </h3>
                                 <div class="order-summary-details">
-                                    <p>Cantidad: {{ item.cantidad }}</p>
-                                    <p>Formato: {{ item.formato | e }}</p>
+                                    <p>Cantidad: <span itemprop="orderQuantity">{{ item.cantidad }}</span></p>
+                                    <p>Formato: <span>{{ item.formato | e }}</span></p>
 
                                     {% if stockErrors is defined and stockErrors[item.id] is defined %}
                                         <p class="stock-error">
@@ -52,22 +52,21 @@
                                         </p>
                                     {% endif %}
                                 </div>
-                                <div class="order-summary-price">
-                                    <p>$ {{ item.precio|number_format(2, ',', '.') }}</p>
+                                <div class="order-summary-price" itemprop="orderedItem" itemscope itemtype="https://schema.org/Offer">
+                                    <p>$ <span itemprop="price">{{ item.precio|number_format(2, ',', '.') }}</span></p>
+                                    <meta itemprop="priceCurrency" content="ARS">
                                 </div>
                             </div>
                         </article>
-                        {# Acumulamos en total #}
                         {% set total = total + subtotal %}
                     {% endfor %}
-                    <p class="total">Total: $ {{ total|number_format(2, ',', '.') }}</p>
+                    <p class="total">Total: $ <span itemprop="price">{{ total|number_format(2, ',', '.') }}</span> <meta itemprop="priceCurrency" content="ARS"></p>
                 {% else %}
                     <p>No hay productos en tu carrito.</p>
                 {% endif %}
             </section>
 
-            <!-- Resto del formulario de checkout -->
-            <section class="checkout-form">
+            <section class="checkout-form" itemscope itemtype="https://schema.org/CheckoutPage">
                 <h2>Formulario de compra</h2>
 
                 {% if errors is defined and errors is not empty %}
@@ -79,7 +78,7 @@
                 {% endif %}
 
                 <form action="/checkout-form" method="POST" novalidate>
-                    <div class="form-section">
+                    <div class="form-section" itemprop="customer">
                         <label for="nombre">Nombre y apellido</label>
                         <input
                             type="text"
@@ -88,6 +87,7 @@
                             value="{{ data.nombre|default('') | e }}"
                             placeholder="Cosme Fulanito"
                             required
+                            itemprop="name"
                         >
                     </div>
 
@@ -100,6 +100,7 @@
                             value="{{ data.email|default('') | e }}"
                             placeholder="email@gmail.com"
                             required
+                            itemprop="email"
                         >
                     </div>
 
@@ -111,19 +112,18 @@
                             name="telefono"
                             value="{{ data.telefono|default('') | e }}"
                             placeholder="+54 xxxxxxxxxx"
+                            itemprop="telephone"
                         >
                     </div>
 
-                    <fieldset class="form-section">
+                    <fieldset class="form-section" itemprop="hasDeliveryMethod" itemscope itemtype="https://schema.org/DeliveryMethod">
                         <legend>Tipo de entrega</legend>
                         <label>
                             <input
                                 type="radio"
                                 name="entrega"
                                 value="domicilio"
-                                {% if data.entrega is not defined or data.entrega == 'domicilio' %}
-                                    checked
-                                {% endif %}
+                                {% if data.entrega is not defined or data.entrega == 'domicilio' %}checked{% endif %}
                             > Entrega a domicilio
                         </label>
                         <label>
@@ -131,15 +131,13 @@
                                 type="radio"
                                 name="entrega"
                                 value="sucursal"
-                                {% if data.entrega is defined and data.entrega == 'sucursal' %}
-                                    checked
-                                {% endif %}
+                                {% if data.entrega is defined and data.entrega == 'sucursal' %}checked{% endif %}
                             > Retiro en sucursal
                         </label>
                     </fieldset>
 
                     <div class="form-actions">
-                        <button type="submit">Realizar compra</button>
+                        <button type="submit" itemprop="potentialAction" itemscope itemtype="https://schema.org/OrderAction">Realizar compra</button>
                         <p>¿Ya tenés una cuenta? <a href="/login"><u>Iniciar sesión</u></a></p>
                     </div>
                 </form>
