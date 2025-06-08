@@ -1,4 +1,4 @@
-# TP3 - programación backend 1
+# TP5 - programación backend 2
 
 ## Estructura del Proyecto PawPrint
 
@@ -54,7 +54,7 @@ Descripción: Se utiliza Monolog para registrar errores, info de rutas, excepcio
 
 Responsable: Modelos (App/Models/\*.php) y un posible Database en Core/
 
-Descripción: Por ahora, no se implementa, pero se contempla creando un espacio para modelos y conexión a base de datos futura
+Descripción: Se creó una base de datos mysql en docker
 
 ## Configuración
 
@@ -94,7 +94,105 @@ make up
 
 Esto iniciará un servidor PHP local en `http://localhost:9999`, sirviendo desde el directorio `public/`.
 
-## Recursos del proyecto
+## 6- ¿Qué es un ataque de inyección SQL? ¿Cómo puede evitarse? Realice las modificaciones necesarias en su aplicación para protegerse de dichos ataques.
 
-- Trello del Proyecto: https://trello.com/b/LiHe9WLz/tp3-3era-entrega
-- Drive del Proyecto TP3: https://drive.google.com/drive/folders/1-klkiw0SnbFlU5Uoi3_pyPiZa_urC-zp
+
+Un ataque de inyección sql ocurre cuando un usuario malintencionado aprovecha los campos de entrada de una aplicación (como formularios o URLs) para insertar código sql arbitrario. El objetivo suele ser manipular la base de datos, ya sea para robar información, modificarla o incluso eliminarla. Esto puede pasar, por ejemplo, cuando una consulta sql se construye directamente con datos que vienen del usuario, sin filtrarlos ni validarlos correctamente.
+
+Para evitar este tipo de ataques, lo más importante es no concatenar directamente los valores que vienen del usuario dentro de las consultas sql. En su lugar, se deben usar consultas preparadas o "queries parametrizadas", que permiten separar el código sql de los datos.
+
+En nuestra app hicimos las siguientes modificaciones para protegernos:
+
+Reemplazamos las consultas construidas manualmente con strings por consultas parametrizadas utilizando el ORM php.
+
+Validamos y sanitizamos las entradas del usuario donde era necesario.
+
+En los formularios, implementamos validaciones tanto del lado del cliente como del servidor para asegurarnos de que los datos tengan el formato esperado.
+
+De esta manera, nos aseguro de que cualquier dato que llegue desde el usuario no pueda ser interpretado como parte del código sql y, por lo tanto, no tenga forma de alterar la lógica de las consultas.
+
+
+### Ejemmplo de nuestro código:
+
+```bash
+    private PDO $pdo;
+    private function __construct(PDO $pdo)
+    {
+        $this->pdo = $pdo;
+    }
+
+    public static function getInstance(): self
+    {
+        if (self::$instance === null) {
+            $pdo = Database::getConnection();
+            self::$instance = new self($pdo);
+        }
+        return self::$instance;
+    }
+
+    public function getConnection(): PDO
+    {
+        return $this->pdo;
+    }
+
+    public function select(
+        $table,
+        array $params = [],
+        ?string $orderBy = null,
+        ?string $direction = 'ASC',
+        ?int $limit = null,
+        ?int $offset = null
+    ) {
+        $query = "SELECT * FROM {$table}";
+        $values = [];
+
+        if (!empty($params)) {
+            $conditions = [];
+            foreach ($params as $field => $value) {
+                $conditions[] = "$field = ?";
+                $values[] = $value;
+            }
+            $query .= " WHERE " . implode(" AND ", $conditions);
+        } else {
+            $query .= " WHERE 1=1";
+        }
+
+        if ($orderBy) {
+            $query .= " ORDER BY {$orderBy} {$direction}";
+        }
+
+        if ($limit !== null) {
+            $query .= " LIMIT {$limit}";
+            if ($offset !== null) {
+                $query .= " OFFSET {$offset}";
+            }
+        }
+        $statement = $this->pdo->prepare($query);
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $statement->execute($values);
+
+        return $statement->fetchAll();
+    }
+```
+
+## 9- Implementar las funcionalidades necesarias para que cada página tenga la microdata que corresponda. 
+## a- ¿Toda la microdata es estática?
+## b- ¿Cómo decidimos en qué página es importante la microdata de ciertos objetos? Por ejemplo, ¿En todos los sitios pondremos la microdata de la/s sucursal/es? En los listados de libros, ¿Que tipo de objetos son? ¿Son libros, son publicidades, que son?
+
+Para mejorar el SEO y la comprensión de nuestro sitio por parte de los motores de búsqueda, implementamos microdata en distintas páginas del sistema, utilizando las especificaciones de Schema.org. Esta microdata permite etiquetar ciertos elementos del contenido (como productos, autores, direcciones, etc.) para que puedan ser interpretados de forma semántica.
+Por otra parte, no, la microdata no necesariamente es estática. Puede ser dinámica, dependiendo del contenido que se renderice en cada página. Por ejemplo, si tenemos un sistema que lista libros como en nuesto caso, desde una base de datos, la microdata se genera dinámicamente con cada libro que aparece en el listado. En cambio, si tenemos una sección con información fija de una sucursal, como dirección y horario, esa microdata podría ser estática, ya que no cambia frecuentemente.
+
+La microdata se coloca en función del tipo de contenido que tiene valor semántico y que queremos destacar para buscadores o asistentes inteligentes. Por ejemplo:
+En una página de detalle de producto, usamos itemtype="https://schema.org/Book" si se trata de un libro, y marcamos título, autor, editorial, ISBN, etc.
+En un listado de libros, cada ítem puede tener también la microdata del tipo Book, si es relevante para SEO.
+No tiene sentido poner la microdata de una sucursal en cada página del sitio, solo la incluiría en la página de contacto, en el footer o en una sección específica de ubicación, donde tiene más sentido semántico usar itemtype="https://schema.org/LocalBusiness" o PostalAddress.
+
+- Aplicamos microodata usando el vocabulario de Schema.org en el archivo order-list.php, home.php y book.php
+
+- Cada tag <article> ahora declara itemscope itemtype="https://schema.org/Order" para representar un pedido.
+
+- Usamos propiedades coom orderNumber, orderDate, deliveryMethod y customer.
+
+- Encapsulamos la información del cliente dentro de un objeto Person, usando itemprop="customer" junto con name, email, y telephone.
+
+- Mejoramos la semántica del HTML sin afectar la visualización ni la funcionalidda.
