@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="./css/index.css">
 </head>
 <body itemscope itemtype="https://schema.org/WebPage">
-    {# Incluir header.twig: pasándole las variables necesarias #}
     {% include 'parts/header.twig' with {
         'loggedUser': loggedUser,
         'username': username,
@@ -25,27 +24,6 @@
             <div class="carousel-wrapper">
                 <button class="nav prev" aria-label="Anterior suggestions">&#10094;</button>
                 <div class="books-carousel" id="books-carousel">
-                    {% for book in books %}
-                        <article class="book-card" itemscope itemtype="https://schema.org/Book" itemprop="itemListElement">
-                            <figure>
-                                <a href="/book?id={{ book.id | e }}" itemprop="url">
-                                    {% set imagen = (book.imagen is defined and book.imagen|length > 10) ? book.imagen : '/icons/book.png' %}
-                                    <img src="{{ imagen | e }}" alt="Portada de {{ book.titulo | e }}" itemprop="image">
-                                </a>
-                            </figure>
-                            <section class="book-card__footer">
-                                <h3 itemprop="name">
-                                    <a href="/book?id={{ book.id | e }}">{{ book.titulo | e }}</a>
-                                </h3>
-                                <p itemprop="author">{{ book.autor | e }}</p>
-                                <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-                                    <span itemprop="priceCurrency">ARS</span>
-                                    <span itemprop="price">{{ book.precio }}</span>
-                                </div>
-                                <button type="button">Comprar</button>
-                            </section>
-                        </article>
-                    {% endfor %}
                 </div>
                 <button class="nav next" aria-label="Siguiente suggestions">&#10095;</button>
             </div>
@@ -58,27 +36,6 @@
             <div class="carousel-wrapper">
                 <button class="nav prev-best-sales" aria-label="Anterior best-sellers">&#10094;</button>
                 <div class="books-carousel-best-sales" id="books-carousel-best-sales">
-                    {% for book in books %}
-                        <article class="book-card" itemscope itemtype="https://schema.org/Book" itemprop="itemListElement">
-                            <figure>
-                                <a href="/book?id={{ book.id | e }}" itemprop="url">
-                                    {% set imagen = (book.imagen is defined and book.imagen|length > 10) ? book.imagen : '/icons/book.png' %}
-                                    <img src="{{ imagen | e }}" alt="Portada de {{ book.titulo | e }}" itemprop="image">
-                                </a>
-                            </figure>
-                            <section class="book-card__footer">
-                                <h3 itemprop="name">
-                                    <a href="/book?id={{ book.id | e }}">{{ book.titulo | e }}</a>
-                                </h3>
-                                <p itemprop="author">{{ book.autor | e }}</p>
-                                <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-                                    <span itemprop="priceCurrency">ARS</span>
-                                    <span itemprop="price">{{ book.precio }}</span>
-                                </div>
-                                <button type="button">Comprar</button>
-                            </section>
-                        </article>
-                    {% endfor %}
                 </div>
                 <button class="nav next-best-sales" aria-label="Siguiente best-sellers">&#10095;</button>
             </div>
@@ -86,7 +43,7 @@
     </main>
 
     {% include 'parts/footer.twig' %}
-
+    
     <script type="module">
         import { Carousel } from "./js/libraries/carousel.js";
         new Carousel("#first-banner", {
@@ -107,5 +64,6 @@
     </script>
     <script src="./js/pages/homeCarousel.js"></script>
     <script src="./js/pages/accountMenu.js"></script>
+    <script type="module" src="./js/pages/home-books.js"></script>
 </body>
 </html>

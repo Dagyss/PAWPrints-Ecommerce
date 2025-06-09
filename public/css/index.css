@@ -32,19 +32,19 @@
   border-radius: .2rem;
 }
 
-.book-card figure {
+.book figure {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0;
 }
 
-.book-card img {
+.book img {
   width: 20rem;
   height: 30rem;
 }
 
-.book-card img:hover {
+.book img:hover {
   border: .5rem solid var(--primary-color);
 }
 

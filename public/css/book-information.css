@@ -2,83 +2,192 @@
 @import url('./header.css');
 @import url('./footer.css');
 
-main :not(h2) {
-    display: grid;
-}
-
-nav[aria-label="breadcrumb"] {
-    width: 70%;
-    margin: 0 auto;
-    margin-bottom: 20px;
-}
-
-main h2 {
-    width: 70%;
-    margin: 0 auto;
-    margin-bottom: 20px;
-}
-
-
-.content{
+/* Layout container */
+article {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 1rem;
   display: grid;
-  grid-template-columns: auto auto;
-  border: 1px solid var(--primary-color);
-  border-style: solid;
-  padding-right: 25px;
-  padding-left: 25px;
-  width: 70%;
-  margin: 0 auto;
-  gap: 20px;
+  grid-auto-rows: auto;
+  row-gap: 2rem;
 }
 
-  .book-image > img {
-    width: 100%;
-    height: auto;
-   
-  }
+/* Article title */
+article > h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-align: center;
+}
 
-  .book-title {
-    text-align: center;
-    
-  }
-  .book-author {
-    text-align: center;
-  }
+/* Book info grid */
+.book-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  border: 1px solid var(--primary-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  background-color: var(--card-bg, #fff);
+}
 
-  .book-price {
-    text-align: center;
-  }
+.book-details figure {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .book-sinopsis > p {
-    text-align:justify;
+.book-details img {
+  max-width: 100%;
+  border-radius: 4px;
+}
+
+.book-meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.book-meta p,
+.book-meta span {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.book-meta p span {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Sinopsis and description */
+section[itemprop="description"],
+section:nth-of-type(2) {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+p {
+  margin-bottom: 0;
+}
+section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--secondary-color);
+}
+
+section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+section ul li {
+  margin-bottom: 0.5rem;
+}
+
+/* Purchase controls */
+.purchase-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem auto;
+  max-width: 800px;
+  padding: 1rem;
+  background-color: var(--background-contents);
+  border-radius: 8px;
+}
+
+.purchase-actions fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.purchase-actions legend {
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+.purchase-actions input[type="number"] {
+  width: 80px;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.purchase-actions button,
+.check-button {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 28px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.purchase-actions button:hover,
+.check-button:hover {
+  background-color: var(--buttons-color);
+}
+
+/* Responsive adjustments: tablets */
+@media (max-width: 768px) {
+  .book-details {
+    grid-template-columns: 1fr;
   }
+  .purchase-actions {
+    flex-direction: column;
+  }
+}
+
+/* Responsive adjustments: mobile */
+@media (max-width: 480px) {
+  main {
+    padding: 0 0.5rem;
+    row-gap: 1rem;
+  }
+  main > article > h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  nav[aria-label="breadcrumb"] ul {
+    font-size: 0.85rem;
+  }
+  .book-details {
+    padding: 1rem;
+  }
+  .book-details img {
+    max-width: 80%;
+  }
+  section h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  section p,
+  .book-sinopsis p {
+    font-size: 0.9rem;
+  }
+  .purchase-actions {
+    padding: 0.75rem;
+    gap: 0.5rem;
+  }
+  .purchase-actions button,
   .check-button {
-    align-items: center;
-    gap:1rem;
-    margin-top: 2rem;
-    background-color: var(--primary-color);
-    color: #fff;
-    border:1px solid #fff;
-    padding:1rem 2rem;
-    border-radius:28px;
-    font-size: 1rem;
-    cursor: pointer;
-    margin:2rem auto 1rem auto;
-    max-width: 60%;
-
+    width: 100%;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
   }
-
-  .book-quantity {
-    width: 50px;
-    height: 50px;
-    padding:0.25rem;
-    border-radius:5px;
-    border:1px solid #aaa;
-    text-align: center;
+  .purchase-actions input[type="number"] {
+    width: 60px;
   }
-
-  @media (max-width: 1150px) {
-    .content{
-       grid-template-columns: repeat(1, 1fr);
-    }
- }
+}
