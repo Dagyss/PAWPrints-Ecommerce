@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: paw-print
+data:
+  APP_NAME: PAW-print
+
+  # MySQL config
+  DB_NAME: paw_prints_db
+  DB_USER: aeps_user
+  DB_HOST: mysql
+  DB_PORT: "3306"
+  DB_CHARSET: utf8mb4
+
+  CHECKOUT_EMAIL: ventas@pawprints.local
