@@ -6,6 +6,17 @@ use Paw\Core\AbstractController;
 
 class ErrorController extends AbstractController
 {
+    
+    public function notPermission()
+    {
+        http_response_code(403);
+
+        $this->render('errors/403.twig', [
+            'loggedUser' => getLoggedUser() ?? null,
+            'username'   => getLoggedUsername() ?? null,
+        ]);
+    }
+
     public function notFound()
     {
         http_response_code(404);
@@ -13,7 +24,6 @@ class ErrorController extends AbstractController
         $this->render('errors/not-found.twig', [
             'loggedUser' => getLoggedUser() ?? null,
             'username'   => getLoggedUsername() ?? null,
-            // Podrías incluir datos específicos del error si quieres
         ]);
     }
 

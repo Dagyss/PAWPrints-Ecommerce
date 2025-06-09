@@ -26,6 +26,7 @@ return [
         ['path' => '/checkout-form', 'action' => 'CheckoutController@showForm', 'method' => 'GET'],
         ['path' => '/logout', 'action' => 'AuthController@logout', 'method' => 'GET'],
         ['path' => '/order-list', 'action' => 'OrderCollectionController@orderList', 'method' => 'GET'],
+        ['path' => '/error-403', 'action' => 'ErrorController@notPermission', 'method' => 'GET'],
         
         ['path' => '/login', 'action' => 'AuthController@login', 'method' => 'POST'],
         ['path' => '/register', 'action' => 'AuthController@register', 'method' => 'POST'],
