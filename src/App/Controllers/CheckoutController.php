@@ -1,4 +1,5 @@
 <?php
+
 namespace Paw\App\Controllers;
 
 use Paw\Core\AbstractController;
@@ -36,13 +37,16 @@ class CheckoutController extends AbstractController
      */
     public function submit(Request $request)
     {
-        // 1) Recuperar datos del POST
-        $data = [
-            'nombre'   => trim($request->post('nombre')),
-            'email'    => trim($request->post('email')),
-            'telefono' => trim($request->post('telefono')),
-            'entrega'  => $request->post('entrega'),
-        ];
+        // 1) Recuperar y SANEAR datos del POST
+        $nombreRaw = $request->post('nombre') ?? '';
+        $emailRaw = $request->post('email') ?? '';
+        $telefonoRaw = $request->post('telefono') ?? '';
+        $entregaRaw = $request->post('entrega') ?? '';
+
+        $data['nombre'] = filter_var(trim($nombreRaw), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $data['email'] = filter_var(trim($emailRaw), FILTER_SANITIZE_EMAIL);
+        $data['telefono'] = preg_replace('/[^\d\+]/', '', trim($telefonoRaw));
+        $data['entrega'] = in_array($entregaRaw, ['domicilio', 'sucursal'], true) ? $entregaRaw : 'domicilio';
 
         $errors = [];
 
@@ -50,7 +54,7 @@ class CheckoutController extends AbstractController
             $errors['nombre'] = 'Debe ingresar un nombre.';
         }
 
-        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+        if (!$data['email'] || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
             $errors['email'] = 'Email inválido.';
         }
 
@@ -58,7 +62,7 @@ class CheckoutController extends AbstractController
             $errors['telefono'] = 'Teléfono inválido.';
         }
 
-        if (!in_array($data['entrega'], ['domicilio', 'sucursal'])) {
+        if (!in_array($entregaRaw, ['domicilio', 'sucursal'], true)) {
             $errors['entrega'] = 'Opción de entrega inválida.';
         }
 
@@ -120,11 +124,11 @@ class CheckoutController extends AbstractController
         foreach ($cartItems as $ci) {
             $item = new OrderItem();
             $item->set([
-                'book_id'       => $ci['id'],
-                'formato'       => $ci['formato'],
-                'cantidad'      => $ci['cantidad'],
-                'precio_unit'   => $ci['precio'],
-                'descuento_unit'=> $ci['descuento'],
+                'book_id' => (int) $ci['id'],
+                'formato' => filter_var($ci['formato'] ?? '', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+                'cantidad' => (int) $ci['cantidad'],
+                'precio_unit' => (float) $ci['precio'],
+                'descuento_unit' => (float) ($ci['descuento'] ?? 0),
             ]);
             $this->logger->info('Item descuento ' . $ci['descuento']);
             $items[] = $item;
@@ -136,7 +140,7 @@ class CheckoutController extends AbstractController
         try {
             $service->createOrderWithItems($order, $items);
         } catch (\Exception $e) {
-            (new ErrorController())->internalError();
+            (new ErrorController($this->logger))->internalError();
             $this->logger->error($e->getMessage());
             return;
         }
@@ -145,11 +149,11 @@ class CheckoutController extends AbstractController
         $to      = "ventas@pawprints.local";
         $subject = "Nueva reserva de {$data['nombre']}";
         $body    = "Se ha realizado una nueva reserva:\n\n"
-                 . "Nombre: {$data['nombre']}\n"
-                 . "Email: {$data['email']}\n"
-                 . "Teléfono: {$data['telefono']}\n"
-                 . "Entrega: {$data['entrega']}\n\n"
-                 . "Detalle de productos:\n";
+            . "Nombre: {$data['nombre']}\n"
+            . "Email: {$data['email']}\n"
+            . "Teléfono: {$data['telefono']}\n"
+            . "Entrega: {$data['entrega']}\n\n"
+            . "Detalle de productos:\n";
 
         foreach ($cartItems as $item) {
             $titulo   = $item['titulo'] ?? '—';

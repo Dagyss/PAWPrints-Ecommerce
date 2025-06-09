@@ -78,7 +78,7 @@
                 <label for="precio">Precio</label>
                 <input type="number" step="0.01" id="precio" name="precio" placeholder="20.15" required itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                 <meta itemprop="priceCurrency" content="ARS">
-                <meta itemprop="price" content="{{ precio | default('') }}">
+                <meta itemprop="price" content="{{ precio | default('') | e }}">
 
                 <label for="sinopsis">Sinopsis</label>
                 <textarea id="sinopsis" name="sinopsis" rows="4" cols="50" itemprop="description"></textarea>

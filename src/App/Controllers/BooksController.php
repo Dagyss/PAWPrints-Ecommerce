@@ -1,4 +1,5 @@
 <?php
+
 namespace Paw\App\Controllers;
 
 use DateTime;
@@ -6,6 +7,7 @@ use Paw\Core\AbstractController;
 use Paw\App\Models\BooksCollection;
 use Paw\App\Models\Book;
 use Paw\Core\Request;
+
 class BooksController extends AbstractController
 {
     public ?string $modelName = BooksCollection::class;
@@ -15,9 +17,7 @@ class BooksController extends AbstractController
     {
 
 
-        $this->render('books.twig', [
-            
-        ]);
+        $this->render('books.twig', []);
     }
 
     public function indexJson()
@@ -29,7 +29,7 @@ class BooksController extends AbstractController
 
     public function show()
     {
-        $id = $_GET['id'];
+        $id = isset($_GET['id']) ? (int) $_GET['id'] : -1;
         $book = $this->model->getById($id);
 
         if (is_null($book)) {
@@ -48,27 +48,8 @@ class BooksController extends AbstractController
         $this->render('create-book.twig', []);
     }
 
-    private function getFilters(): array {
-        return[
-            'categorias' => $_GET['categorias'] ?? [],
-            'precio_min' => $_GET['precio_min'] ?? null,
-            'precio_max' => $_GET['precio_max'] ?? null,
-            'autor' => $_GET['autor'] ?? null,
-            'coincidencias_autor' => $_GET['coincidencias_autor'] ?? [],
-            'idiomas' => $_GET['idiomas'] ?? [],
-            'formatos' => $_GET['formatos'] ?? [],
-            'orden' => $_GET['orden'] ?? null,
-        ]; 
-    }
-
-    private function getPaginationData(): array{
-        return [
-            isset($_GET['page']) ? (int) $_GET['page'] : 1 ,
-            isset($_GET['size']) ? (int) $_GET['size'] : $this->sizePage
-        ];
-    }
-
-    private function exportCsv($books) {
+    private function exportCsv($books)
+    {
         header('Content-Type: text/csv; charset=utf-8');
         header('Content-Disposition: attachment; filename=catalogo.csv');
 
@@ -93,27 +74,38 @@ class BooksController extends AbstractController
 
     public function save(): void
     {
-        // 1) Leer datos del formulario ($_POST)
-        $titulo            = $_POST['titulo'] ?? '';
-        $autor             = $_POST['autor'] ?? '';
-        $editorial         = $_POST['editorial'] ?? '';
-        $isbn              = $_POST['isbn'] ?? '';
-        $idioma            = $_POST['idioma'] ?? '';
-        $fecha_publicacion = $_POST['fecha_publicacion'] ?? null; // “YYYY-MM-DD”
-        $numero_paginas    = $_POST['numero_paginas'] ?? 0;
-        $formato           = $_POST['formato'] ?? '';
-        $categoria         = $_POST['categoria'] ?? '';
-        $precio            = $_POST['precio'] ?? 0.0;
-        $sinopsis          = $_POST['sinopsis'] ?? '';
-        // El formulario no envía stock, cantidad_ventas ni descuento: 
-        // podemos inicializarlos en cero o un valor por defecto.
-        $stock             = 0;
-        $cantidad_ventas   = 0;
-        $descuento         = 0.0;
+        $titulo = filter_var(trim($_POST['titulo'] ?? ''), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $autor = filter_var(trim($_POST['autor'] ?? ''), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $editorial = $_POST['editorial'] ?? '';
+        $isbn = $_POST['isbn'] ?? '';
+        $idioma = $_POST['idioma'] ?? '';
+        $fecha_publicacion = $_POST['fecha_publicacion'] ?? null;
+        $numero_paginas = $_POST['numero_paginas'] ?? 0;
+        $formato = $_POST['formato'] ?? '';
+        $categoria = $_POST['categoria'] ?? '';
+        $precio = $_POST['precio'] ?? 0.0;
+        $sinopsis = $_POST['sinopsis'] ?? '';
+        $sinopsis = $_POST['sinopsis'] ?? '';
+        $stock = 0;
+        $cantidad_ventas = 0;
+        $descuento = 0.0;
+
+        if (!$titulo) {
+            $_SESSION['error'] = 'El título es obligatorio';
+            header('Location: /books');
+            exit;
+        }
+        
+        if ($fecha_publicacion && !preg_match('/^\d{4}-\d{2}-\d{2}$/', $fecha_publicacion)) {
+            $_SESSION['error'] = 'Formato de fecha inválido';
+            header('Location: /books');
+            exit;
+        }
 
         $book = new Book();
         try {
             $book->setTitulo($titulo);
+            $book->setAutor($autor);
             $book->setAutor($autor);
             $book->setEditorial($editorial);
             $book->setPrecio((float) $precio);
@@ -191,7 +183,7 @@ class BooksController extends AbstractController
 
     public function fetchIsbn(Request $request)
     {
-        $isbn = $_GET['isbn'] ?? null;
+        $isbn = isset($_GET['isbn']) ? preg_replace('/[^0-9Xx-]/', '', $_GET['isbn']) : null;
 
         if (!$isbn) {
             http_response_code(400);
@@ -235,7 +227,4 @@ class BooksController extends AbstractController
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode($data);
     }
-
 }
-
-?>

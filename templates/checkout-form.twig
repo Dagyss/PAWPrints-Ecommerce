@@ -43,7 +43,7 @@
                                     <a href="/book?id={{ item.id | e }}">{{ item.titulo | e }}</a>
                                 </h3>
                                 <div class="order-summary-details">
-                                    <p>Cantidad: <span itemprop="orderQuantity">{{ item.cantidad }}</span></p>
+                                    <p>Cantidad: <span itemprop="orderQuantity">{{ item.cantidad | e}}</span></p>
                                     <p>Formato: <span>{{ item.formato | e }}</span></p>
 
                                     {% if stockErrors is defined and stockErrors[item.id] is defined %}

@@ -1,6 +1,11 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../src/Core/helpers.php';
+
+header('X-Content-Type-Options: nosniff');
+header('X-Frame-Options: SAMEORIGIN');
+header('Referrer-Policy: no-referrer');
+header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://covers.openlibrary.org https://images.cdn3.buscalibre.com https://archive.org https://*.archive.org https://proassetspdlcom.cdnstatics2.com https://http2.mlstatic.com https://lavenamisteriosa.com https://images.cdn1.buscalibre.com; font-src 'self' https://fonts.gstatic.com; object-src 'none'; frame-ancestors 'self'; base-uri 'self'");
 // Evitamos acceso por JS
 ini_set('session.cookie_httponly', 1); 
 ini_set('session.cookie_secure', isset($_SERVER['HTTPS']) ? 1 : 0); // Solo por HTTPS si aplica
@@ -22,6 +27,7 @@ use Paw\Core\Request;
 use Paw\Core\Database\Database;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
+use Twig\TwigFilter;
 use Twig\TwigFunction;
 
 // Cargamos configuración
@@ -53,7 +59,8 @@ $loader = new FilesystemLoader(__DIR__ . '/../templates');
 
 $twig = new Environment($loader, [
     'cache' => false,    
-    'debug' => DEBUG,    
+    'debug' => DEBUG,
+    'autoescape' => 'html'   
 ]);
 
 if (DEBUG) {
@@ -69,6 +76,11 @@ $pathFunction = new TwigFunction('path', function(string $route) use ($baseUrl) 
     // Por ejemplo, si $route = '/books', esto devuelve 'http://localhost:9999/books'
     return $prefix . $route;
 });
+$twigFilter = new TwigFilter('escape', function($str) {
+    return htmlspecialchars((string)$str, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+}, ['is_safe' => ['html']]);
+
+$twig->addFilter($twigFilter);
 $twig->addFunction($pathFunction);
 
 // Cargamos rutas desde config

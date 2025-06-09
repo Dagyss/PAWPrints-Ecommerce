@@ -34,7 +34,7 @@
 
             <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                 <span itemprop="priceCurrency">ARS</span>
-                <span itemprop="price">{{ book.fields.precio }}</span>
+                <span itemprop="price">{{ book.fields.precio | e }}</span>
                 <link itemprop="availability" href="https://schema.org/InStock" />
             </div>
 
@@ -50,9 +50,9 @@
             <section>
                 <h2>Descripción del libro</h2>
                 <ul>
-                    <li><strong>N° Páginas:</strong> {{ book.fields.paginas | default('—') }}</li>
-                    <li><strong>Idioma:</strong> <span itemprop="inLanguage">{{ book.fields.idioma | default('—') }}</span></li>
-                    <li><strong>Fecha Publicación:</strong> {{ book.fields.fecha_publicacion | default('—') }}</li>
+                    <li><strong>N° Páginas:</strong> {{ book.fields.paginas | default('—') | e }}</li>
+                    <li><strong>Idioma:</strong> <span itemprop="inLanguage">{{ book.fields.idioma | default('—') | e }}</span></li>
+                    <li><strong>Fecha Publicación:</strong> {{ book.fields.fecha_publicacion | default('—') | e}}</li>
                 </ul>
             </section>
 
@@ -63,7 +63,7 @@
                     <label><input type="radio" name="formato-libro" value="e" /> Electrónico</label>
                 </fieldset>
                 <input type="number" id="cantidad" name="cantidad" placeholder="1" min="1" value="1" />
-                <button type="button" onclick="addToCart('{{ book.fields.id }}')">Al carrito</button>
+                <button type="button" onclick="addToCart('{{ book.fields.id | e }}')">Al carrito</button>
             </div>
         </article>
     </main>

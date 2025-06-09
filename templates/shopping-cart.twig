@@ -50,12 +50,12 @@
                                 </div>
     
                                 <div class="cart-controls">
-                                    <label for="quantity{{ loop.index0 }}" class="visually-hidden">Cantidad</label>
+                                    <label for="quantity{{ loop.index0 | e }}" class="visually-hidden">Cantidad</label>
                                     <input 
                                         type="number" 
-                                        id="quantity{{ loop.index0 }}" 
+                                        id="quantity{{ loop.index0 | e }}" 
                                         min="1" 
-                                        value="{{ item.cantidad }}" 
+                                        value="{{ item.cantidad | e }}" 
                                         class="cart-quantity"
                                         disabled
                                         itemprop="orderQuantity"
@@ -63,11 +63,11 @@
                                     <p class="cart-price">
                                         Precio: <span itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                                             <span itemprop="priceCurrency">ARS</span>
-                                            <span itemprop="price">{{ item.precio|number_format(2, ',', '.') }}</span>
+                                            <span itemprop="price">{{ item.precio|number_format(2, ',', '.') | e }}</span>
                                         </span>
                                     </p>
                                     <p class="subtotal">
-                                        Subtotal: <span itemprop="price">{{ subtotal|number_format(2, ',', '.') }}</span>
+                                        Subtotal: <span itemprop="price">{{ subtotal|number_format(2, ',', '.') | e }}</span>
                                         <meta itemprop="priceCurrency" content="ARS">
                                     </p>
                                 </div>
@@ -77,7 +77,7 @@
                     {% endfor %}
     
                     <p class="total">
-                        Total: <span itemprop="totalPrice">{{ total|number_format(2, ',', '.') }}</span>
+                        Total: <span itemprop="totalPrice">{{ total|number_format(2, ',', '.') | e }}</span>
                         <meta itemprop="priceCurrency" content="ARS">
                     </p>
     

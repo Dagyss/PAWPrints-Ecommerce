@@ -96,7 +96,6 @@ Esto iniciará un servidor PHP local en `http://localhost:9999`, sirviendo desde
 
 ## 6- ¿Qué es un ataque de inyección SQL? ¿Cómo puede evitarse? Realice las modificaciones necesarias en su aplicación para protegerse de dichos ataques.
 
-
 Un ataque de inyección sql ocurre cuando un usuario malintencionado aprovecha los campos de entrada de una aplicación (como formularios o URLs) para insertar código sql arbitrario. El objetivo suele ser manipular la base de datos, ya sea para robar información, modificarla o incluso eliminarla. Esto puede pasar, por ejemplo, cuando una consulta sql se construye directamente con datos que vienen del usuario, sin filtrarlos ni validarlos correctamente.
 
 Para evitar este tipo de ataques, lo más importante es no concatenar directamente los valores que vienen del usuario dentro de las consultas sql. En su lugar, se deben usar consultas preparadas o "queries parametrizadas", que permiten separar el código sql de los datos.
@@ -110,7 +109,6 @@ Validamos y sanitizamos las entradas del usuario donde era necesario.
 En los formularios, implementamos validaciones tanto del lado del cliente como del servidor para asegurarnos de que los datos tengan el formato esperado.
 
 De esta manera, nos aseguro de que cualquier dato que llegue desde el usuario no pueda ser interpretado como parte del código sql y, por lo tanto, no tenga forma de alterar la lógica de las consultas.
-
 
 ### Ejemmplo de nuestro código:
 
@@ -175,8 +173,99 @@ De esta manera, nos aseguro de que cualquier dato que llegue desde el usuario no
     }
 ```
 
-## 9- Implementar las funcionalidades necesarias para que cada página tenga la microdata que corresponda. 
+## 7- ¿Qué implica un ataque XSS? ¿Cómo puede evitarse?
+
+Un ataque **Cross-Site Scripting (XSS)** es una vulnerabilidad de seguridad que permite a un atacante inyectar código malicioso en aplicaciones web. Este código, generalmente en JavaScript, puede ejecutarse en el navegador de la víctima, comprometiendo la seguridad de sus datos y sesiones.
+
+Los ataques XSS pueden clasificarse en tres tipos principales:
+
+- **Reflejado:** Se ejecuta cuando el usuario hace clic en un enlace manipulado.
+- **Almacenado:** Se guarda en el servidor y afecta a múltiples usuarios cuando cargan la página comprometida.
+- **DOM-based:** Se aprovecha de modificaciones del DOM en el navegador para ejecutar el código malicioso.
+
+### Prevención y cambios aplicados
+
+1. **Encabezado CSP** En el archivo `src/bootstrap.php` se agrega el siguiente encabezado:
+
+   ```php
+   header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://covers.openlibrary.org https://images.cdn3.buscalibre.com https://archive.org https://*.archive.org https://proassetspdlcom.cdnstatics2.com https://http2.mlstatic.com https://lavenamisteriosa.com https://images.cdn1.buscalibre.com; font-src 'self' https://fonts.gstatic.com; object-src 'none'; frame-ancestors 'self'; base-uri 'self'");
+   ```
+
+1. **Auto-escape en Twig**  
+    En `src/bootstrap.php`:
+
+   ```php
+   $twig = new Environment($loader, [
+    'cache' => false,
+    'debug' => DEBUG,
+    'autoescape' => 'html'
+   ]);
+   ```
+
+1. **Escape explícito en plantillas `.twig`**  
+   Todos los datos dinámicos van con `|e`. Ejemplos en `src/templates/book.twig`:
+
+   ```diff
+   -<p>{{ book.fields.descripcion }}</p>
+   +<p>{{ book.fields.descripcion|e }}</p>
+
+   -<a href="./book?id={{ book.fields.id }}">
+   +<a href="./book?id={{ book.fields.id|e }}">
+   ```
+
+   Y en `src/templates/checkout-form.twig` los errores y valores previos:
+
+   ```twig
+   {% for error in errors %}
+     <li>{{ error|e }}</li>
+   {% endfor %}
+   <input value="{{ data.nombre|default('')|e }}">
+   ```
+
+1. **Sanitización y validación en controladores PHP**
+
+   - **BooksController::save()**:
+     ```php
+     $titulo = filter_var(trim($_POST['titulo'] ?? ''), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+     $precio = isset($_POST['precio']) ? (float) $_POST['precio'] : 0.0;
+     $fechaPub = $_POST['fecha_publicacion'] ?? '';
+     if ($fechaPub && !preg_match('/^\d{4}-\d{2}-\d{2}$/', $fechaPub)) {
+         throw new Exception('Fecha inválida');
+     }
+     ```
+   - **AuthController::register()**:
+     ```php
+     $email = filter_var(trim($_POST['email'] ?? ''), FILTER_SANITIZE_EMAIL);
+     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+         $errors[] = 'Email no válido';
+     }
+     ```
+   - **CheckoutController::submit()**:
+     ```php
+     $data['nombre']   = filter_var(trim($request->post('nombre')), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+     $data['telefono'] = preg_replace('/[^\d\+]/', '', $request->post('telefono'));
+     $data['entrega']  = in_array($request->post('entrega'), ['domicilio','sucursal'], true)
+                        ? $request->post('entrega')
+                        : 'domicilio';
+     ```
+
+1. **Buenas prácticas en JavaScript**  
+   Dentro de `public/js/components/BookComponent.js` usamos `textContent` y `encodeURIComponent` para URLs:
+
+   ```js
+   linkTitle.href = `./book?id=${encodeURIComponent(book.id)}`;
+   linkTitle.textContent = book.titulo;
+
+   const pAuthor = document.createElement("p");
+   pAuthor.textContent = book.autor;
+   ```
+
+Implementando estos cambios — **CSP**, **sanitización**, **validación** y **escape de salida** — Tenemos la APP protegída contra ataques XSS.
+
+## 9- Implementar las funcionalidades necesarias para que cada página tenga la microdata que corresponda.
+
 ## a- ¿Toda la microdata es estática?
+
 ## b- ¿Cómo decidimos en qué página es importante la microdata de ciertos objetos? Por ejemplo, ¿En todos los sitios pondremos la microdata de la/s sucursal/es? En los listados de libros, ¿Que tipo de objetos son? ¿Son libros, son publicidades, que son?
 
 Para mejorar el SEO y la comprensión de nuestro sitio por parte de los motores de búsqueda, implementamos microdata en distintas páginas del sistema, utilizando las especificaciones de Schema.org. Esta microdata permite etiquetar ciertos elementos del contenido (como productos, autores, direcciones, etc.) para que puedan ser interpretados de forma semántica.

@@ -9,10 +9,10 @@ class AuthController extends AbstractController {
 
     public function register(){
 
-        $email = $_POST['email'] ?? null;
+        $email = filter_var(trim($_POST['email'] ?? ''), FILTER_SANITIZE_EMAIL);
+        $full_name = filter_var(trim($_POST['full_name'] ?? ''), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $password = $_POST['password'] ?? null;
         $confirmPassword = $_POST['confirm_password'] ?? null;
-        $full_name = $_POST['full_name'] ?? null;
         $role = $_POST['role'] ?? 'cliente';
 
         $userModel = $this->getModel(Users::class);
@@ -65,7 +65,7 @@ class AuthController extends AbstractController {
 
     public function login(){
 
-        $email = trim($_POST['email'] ?? '');
+        $email = filter_var(trim($_POST['email'] ?? ''), FILTER_SANITIZE_EMAIL);
         $password = $_POST['password'] ?? '';
         
         if (empty($email) || empty($password)) {

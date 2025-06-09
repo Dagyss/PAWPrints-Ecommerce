@@ -28,6 +28,10 @@ class OrderCollectionController extends AbstractController
 
         // 2) Obtener página actual y offset
         $paginaActual = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $pageRaw = $_GET['page'] ?? '1';
+        $paginaActual = filter_var($pageRaw, FILTER_VALIDATE_INT, [
+            'options' => ['default' => 1, 'min_range' => 1]
+        ]);
         $offset       = ($paginaActual - 1) * $this->porPagina;
 
         // 3) Traer todas las órdenes y aplicar paginación
@@ -38,7 +42,7 @@ class OrderCollectionController extends AbstractController
         $totalPaginas    = (int) ceil($totalOrderLists / $this->porPagina);
 
         // Si la página pedida es inválida, devolvemos 404
-        if ($paginaActual < 1 || $paginaActual > $totalPaginas) {
+        if ($paginaActual > $totalPaginas) {
             http_response_code(404);
             $this->render('errors/not-found.twig', [
                 'loggedUser' => getLoggedUser() ?? null,

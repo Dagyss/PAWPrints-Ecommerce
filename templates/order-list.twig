@@ -40,7 +40,7 @@
                     <p>
                         <strong>Solicitado el día:</strong>
                         {% if order.created_at is not null %}
-                            <time datetime="{{ order.created_at }}" itemprop="orderDate">{{ order.getCreatedAt(order.created_at) | e }}</time>
+                            <time datetime="{{ order.created_at | e }}" itemprop="orderDate">{{ order.getCreatedAt(order.created_at) | e }}</time>
                         {% else %}
                             —
                         {% endif %}
