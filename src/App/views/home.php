@@ -116,8 +116,8 @@
         });
 
     </script>
+
 <script src="./js/pages/homeCarousel.js"></script>
 <script src="./js/pages/accountMenu.js"></script>
-
 </body>
 </html>

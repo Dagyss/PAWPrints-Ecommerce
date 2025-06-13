@@ -1,21 +1,22 @@
 /* HEADER */
-#header{
+#header {
     background-color: var(--primary-color);
     width: 100%;
     height: 8rem;
 }
-#header h1{
+
+#header h1 {
     display: inline-block;
-    position: relative;
-    top: .5rem;
+    margin: 1rem 0 0 1rem;
 }
-#enterprise-icon{
-    width: 10rem;
+
+#enterprise-icon {
+    width: 8rem;
     display: inline-block;
 }
 
-.hamburger-menu{
-    margin: 0 1rem;
+.hamburger-menu {
+    margin: 0 .2rem 0 1rem;
     display: inline-block;
 }
 
@@ -25,68 +26,69 @@
     cursor: pointer;
 }
 
-h1 a{
+h1 a {
     font-size: 0;
 }
 
-.header-search{
+.header-search {
     width: 100%;
     position: absolute;
-    
+
 }
 
-.header-search__form{
+.header-search__form {
     width: 100%;
     height: 3rem;
 }
 
-.header-search__form input{
+.header-search__form input {
     border: 3px solid var(--muted-text-color);
     width: inherit;
     height: inherit;
     background-color: var(--footer-background-color);
 }
 
-.header-search__form  input::placeholder{
+.header-search__form input::placeholder {
     padding: 0 1rem;
     color: var(--contrast-text-color);
 }
 
-.header-search__form img{
+.header-search__form img {
     position: absolute;
     width: 2rem;
     right: 1rem;
     bottom: .5rem;
 }
 
-.header-search__form button{
+.header-search__form button {
     padding: 0;
 }
-.header-my-account .icon{
-        border-radius: 50%;
-    }
 
-.header-my-account{
-    width: 9rem;
+.header-my-account .icon {
+    border-radius: 50%;
+}
+
+.header-my-account {
+    width: 7rem;
     display: inline-block;
-    position:absolute;
-    top: 2rem;
+    position: absolute;
+    top: 1rem;
     right: 0;
 }
 
-.icon{
-    width: 3rem;
+.icon {
+    width: 2.5rem;
 }
 
-.header-my-account button{
+.header-my-account button {
     padding: 0;
     border: none;
     font-size: 0;
     background: none;
-    margin: 0 1rem 0 .5rem;
+    margin: 0 .5rem 0 .5rem;
 }
 
-.header-my-account ul{
+.header-my-account ul {
     display: none;
 }
 
@@ -141,15 +143,15 @@ h1 a{
     padding: 0;
     margin-top: 5rem;
     display: block;
-} 
+}
 
 .mobile-menu ul li {
     padding: 1rem;
     border-bottom: 1px solid #ccc;
 }
 
-.enterprise-icon{
-    width: 10rem;
+.enterprise-icon {
+    width: 8rem;
     display: block;
     margin: 0 auto;
     padding-bottom: 2rem;
@@ -161,7 +163,7 @@ h1 a{
     font-weight: bold;
 }
 
-.hamburger-checkbox:checked ~ .mobile-menu {
+.hamburger-checkbox:checked~.mobile-menu {
     left: 0;
 }
 
@@ -213,9 +215,9 @@ h1 a{
 
 .header-search {
     position: relative;
-  }
-  
-  .header-search__history {
+}
+
+.header-search__history {
     position: absolute;
     top: 100%;
     left: 0;
@@ -226,22 +228,23 @@ h1 a{
     margin: 0;
     padding: 0;
     z-index: 10;
-  }
-  
-  .header-search__history .history-item {
+}
+
+.header-search__history .history-item {
     padding: 0.5rem;
     cursor: pointer;
-  }
-  
-  .header-search__history .history-item:hover {
+}
+
+.header-search__history .history-item:hover {
     background-color: var(--background-contents);
-  }  
+}
 
 @media (min-width: 814px) {
-    .hamburger-checkbox{
+    .hamburger-checkbox {
         display: none;
     }
-    .hamburger-menu{
+
+    .hamburger-menu {
         display: none;
     }
 
@@ -268,7 +271,7 @@ h1 a{
     .header-search {
         flex-grow: 1;
         max-width: 40rem;
-        margin: 0 4rem 0 1.5rem ;
+        margin: 0 4rem 0 1.5rem;
         position: static;
     }
 
@@ -298,10 +301,10 @@ h1 a{
         align-items: center;
         justify-content: flex-end;
         gap: 1rem;
-        margin-right: 1rem;
+        margin-right: .5rem;
     }
 
-    .header-my-account button{
+    .header-my-account button {
         font-size: 1.2rem;
         margin: 0;
         width: 70%;
@@ -317,10 +320,12 @@ h1 a{
     .header-shopping-cart-link {
         margin-right: .5rem;
     }
+
     .header-search__form img {
         right: 0;
         bottom: -1rem;
     }
+
     .desktop-nav {
         display: block;
         background-color: var(--footer-background-color);
@@ -341,8 +346,8 @@ h1 a{
     .desktop-nav ul li a {
         text-decoration: none;
         color: var(--contrast-text-color);
-        font-weight: 500;
-        padding: 0.5rem 1rem;
+        font-weight: 400;
+        padding: 0.5rem 0.5rem;
         border-right: 1px solid var(--contrast-text-color);
     }
 

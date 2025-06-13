@@ -23,8 +23,6 @@
             </form>
             <ul id="search-history" class="header-search__history"></ul>
         </search>
-    
-    </search>
 
     <section class="header-my-account">
         <button type="button" aria-label="Abrir menú de cuenta" id="account-button">
