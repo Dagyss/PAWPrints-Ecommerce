@@ -2,17 +2,6 @@
 @import url('./header.css');
 @import url('./footer.css');
 
-
-/* MAIN */
-
-.login-container form .icon-forms {
-    top: 62%;
-}
-
-.login-container form input[type="password"] + .icon-forms {
-    display: block;
-}
-
 #email, #password{
     padding-left: 1rem;
 }
@@ -22,9 +11,25 @@
   margin-bottom: .5rem;
 }
 
-@media (min-width: 814px) {
-    .login-container form input[type="password"] + .icon-forms {
-        position: absolute;
-        right: 1rem
-    }
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 2.5rem;
+}
+
+.password-wrapper button {
+    position: absolute;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

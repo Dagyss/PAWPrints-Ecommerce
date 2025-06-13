@@ -24,6 +24,10 @@ form .role-label input {
 .role-label input[type="radio"] {
   display: none;
 }
+.icon-forms {
+    right: 1rem;
+    top: 1rem;
+  }
 
 .custom-radio {
   display: inline-block;
@@ -43,38 +47,36 @@ form .role-label input {
   background-color: var(--secondary-color);
 }
 
-.input-wrapper {
-  position: relative;
-}
-
-.input-wrapper input {
-  width: 100%;
-  padding-right: 2.5rem;
-}
-
-.icon-forms {
-  position: absolute;
-  top: 54%;
-  right: 1.8rem;
-  transform: translateY(-50%);
-  width: 1.5rem;
-  height: 1.5rem;
-  cursor: pointer;
-}
-
 .error-messages .error-text {
   color: red;
   margin-bottom: 0.5rem;
 }
 
+.toggle-password {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    position: absolute;
+    right: 10px;
+    top: 35px;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+
 @media (min-width: 842px) and (max-width: 1139px) {
   .icon-forms {
     right: 0.8rem;
+    top: 1.3rem;
   }
 }
 
 @media (min-width: 1140px) {
   .icon-forms {
     right: 0.8rem;
+    top: 1.5rem;
   }
 }

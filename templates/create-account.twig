@@ -8,6 +8,8 @@
     <meta name="keywords" content="Registro, Crear cuenta, PAWPrints, Libros">
     <title>Crear Cuenta - PAWPrints</title>
     <link rel="stylesheet" href="./css/create-acount.css">
+    <script src="./js/pages/accountMenu.js"></script>
+    <script src="./js/components/helper.js"></script>
 </head>
 <body itemscope itemtype="https://schema.org/WebPage">
     {% include 'parts/header.twig' with {
@@ -94,7 +96,9 @@
                         required
                         itemprop="password"
                     >
-                    <img src="../icons/close-eye.png" alt="Ocultar contraseña" class="icon-forms icon-password">
+                    <button type="button" class="toggle-password" aria-label="Mostrar contraseña" data-target="password">
+                        <img src="../icons/close-eye.png" alt="Mostrar contraseña" class="icon-forms">
+                    </button>
                 </div>
 
                 <div class="input-wrapper">
@@ -107,7 +111,9 @@
                         required
                         itemprop="password"
                     >
-                    <img src="../icons/close-eye.png" alt="Ocultar contraseña" class="icon-forms icon-confirm-password">
+                    <button type="button" class="toggle-password" aria-label="Mostrar contraseña" data-target="confirm_password">
+                        <img src="../icons/close-eye.png" alt="Mostrar contraseña" class="icon-forms">
+                    </button>
                 </div>
                 
                 <button type="submit" itemprop="actionStatus" itemscope itemtype="https://schema.org/FollowAction">Crear cuenta</button>
@@ -117,6 +123,6 @@
     </main>
 
     {% include 'parts/footer.twig' %}
-    <script src="./js/pages/accountMenu.js"></script>
+ 
 </body>
 </html>
