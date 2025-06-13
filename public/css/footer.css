@@ -5,13 +5,14 @@ footer {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    color: var(--contrast-text-color);
 }
 footer section h2, footer nav{
     padding: 0 1rem;
 }
 
 footer h2{
-    color: var(--text-color)
+    color: var(--contrast-text-color);
 }
 
 footer section:first-of-type ul {
@@ -30,6 +31,7 @@ footer address ul {
 }
 
 footer a {
+    color: var(--contrast-text-color);
     text-decoration: none;
 }
 
