@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: php
-          image: gcr.io/matchmaking-app-paw/php-app:20250606-paw-print-v2
+          image: gcr.io/matchmaking-app-paw/php-app:20250606-paw-print-v4
           ports:
             - containerPort: 9000
           envFrom:
@@ -33,6 +33,6 @@ spec:
                   name: app-secrets
                   key: DB_PASSWORD
         - name: nginx
-          image: gcr.io/matchmaking-app-paw/nginx-app:latest
+          image: gcr.io/matchmaking-app-paw/nginx-app:v1
           ports:
             - containerPort: 80
