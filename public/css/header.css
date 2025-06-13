@@ -344,15 +344,34 @@ h1 a {
     }
 
     .desktop-nav ul li a {
+        position: relative;
         text-decoration: none;
         color: var(--contrast-text-color);
         font-weight: 400;
         padding: 0.5rem 0.5rem;
         border-right: 1px solid var(--contrast-text-color);
+        overflow: hidden;
+    }
+
+    .desktop-nav ul li a::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--background-contents);
+        clip-path: polygon(0 100%, 0 0, 50% 0);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .desktop-nav ul li a:hover::before {
+        opacity: .5;
     }
 
     .desktop-nav ul li a:hover {
-        background-color: var(--background-contents);
-        border-radius: 0.5rem;
+        color: var(--contrast-text-color);
     }
+
 }
