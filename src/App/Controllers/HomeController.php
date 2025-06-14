@@ -13,7 +13,6 @@ class HomeController extends AbstractController
     public function index()
     {
         AuthMiddelware::checkSessionTimeout();
-
         $booksModel = $this->getModel(BooksCollection::class);
         $books = $booksModel->getAll();
 
@@ -21,9 +20,8 @@ class HomeController extends AbstractController
         // Pasamos la lista de libros a la plantilla 'home.twig'
         $this->render('home.twig', [
             'books' => $books,
-            // Si necesitas pasar el usuario autenticado, 
-            // podrías usar getLoggedUser() y pasarlo aquí.
-            // 'loggedUser' => getLoggedUser(),
+            'loggedUser' => getLoggedUser() ?? null,
+            'username'   => getLoggedUsername() ?? null,
         ]);
     }
 }

@@ -27,14 +27,15 @@ return [
         ['path' => '/logout', 'action' => 'AuthController@logout', 'method' => 'GET'],
         ['path' => '/order-list', 'action' => 'OrderCollectionController@orderList', 'method' => 'GET'],
         ['path' => '/error-403', 'action' => 'ErrorController@notPermission', 'method' => 'GET'],
+        ['path' => '/books/isbn',    'action' => 'BooksController@fetchIsbn', 'method' => 'GET'],
+        ['path' => '/create-book',   'action' => 'BooksController@createBook', 'method' => 'GET'],
+
         
-        ['path' => '/login', 'action' => 'AuthController@login', 'method' => 'POST'],
-        ['path' => '/register', 'action' => 'AuthController@register', 'method' => 'POST'],
+        ['path' => '/login',         'action' => 'AuthController@login', 'method' => 'POST'],
+        ['path' => '/register',      'action' => 'AuthController@register', 'method' => 'POST'],
         ['path' => '/checkout-form', 'action' => 'CheckoutController@submit', 'method' => 'POST'],
         ['path' => '/checkout-form', 'action' => 'CheckoutController@submit', 'method' => 'POST'],
-        ['path'   => '/books/isbn', 'action' => 'BooksController@fetchIsbn', 'method' => 'GET'],
-        ['path' => '/create-book', 'action' => 'BooksController@createBook', 'method' => 'GET'],
-        ['path' => '/create-book', 'action' => 'BooksController@save', 'method' => 'POST']
+        ['path' => '/create-book',   'action' => 'BooksController@save', 'method' => 'POST']
     ],
 
 

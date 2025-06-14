@@ -15,9 +15,10 @@ class BooksController extends AbstractController
 
     public function index()
     {
-
-
-        $this->render('books.twig', []);
+        $this->render('books.twig', [
+            'loggedUser' => getLoggedUser() ?? null,
+            'username'   => getLoggedUsername() ?? null,
+        ]);
     }
 
     public function indexJson()
@@ -40,12 +41,17 @@ class BooksController extends AbstractController
 
         $this->render('book.twig', [
             'book' => $book,
+            'loggedUser' => getLoggedUser() ?? null,
+            'username'   => getLoggedUsername() ?? null,
         ]);
     }
 
     public function createBook(): void
     {
-        $this->render('create-book.twig', []);
+        $this->render('create-book.twig', [
+            'loggedUser' => getLoggedUser() ?? null,
+            'username'   => getLoggedUsername() ?? null,
+        ]);
     }
 
     private function exportCsv($books)
