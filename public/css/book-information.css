@@ -4,43 +4,26 @@
 
 /* Layout container */
 article {
-  max-width: 1000px;
-  margin: 2rem auto;
+  background-color: var(--background-contents);
+  border: .1rem solid var(--primary-color);
+  border-radius: .5rem;
+  margin: 1rem auto;
+  width: 80%;
   padding: 0 1rem;
-  display: grid;
-  grid-auto-rows: auto;
-  row-gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Article title */
 article > h1 {
   font-size: 2rem;
   font-weight: 700;
-  color: var(--primary-color);
   text-align: center;
 }
 
-/* Book info grid */
-.book-details {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  border: 1px solid var(--primary-color);
-  border-radius: 8px;
-  padding: 1.5rem;
-  background-color: var(--card-bg, #fff);
-}
-
-.book-details figure {
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.book-details img {
-  max-width: 100%;
-  border-radius: 4px;
+article figure img{
+  width: 25rem;
 }
 
 .book-meta {
@@ -64,17 +47,11 @@ article > h1 {
 /* Sinopsis and description */
 section[itemprop="description"],
 section:nth-of-type(2) {
-  max-width: 800px;
-  margin: 0 auto;
+  text-align: center;
 }
 
 p {
   margin-bottom: 0;
-}
-section h2 {
-  font-size: 1.5rem;
-  margin-bottom: 0.75rem;
-  color: var(--secondary-color);
 }
 
 section ul {
@@ -142,8 +119,8 @@ section ul li {
 
 /* Responsive adjustments: tablets */
 @media (max-width: 768px) {
-  .book-details {
-    grid-template-columns: 1fr;
+  article figure img{
+    width: 20rem;
   }
   .purchase-actions {
     flex-direction: column;
@@ -163,12 +140,10 @@ section ul li {
   nav[aria-label="breadcrumb"] ul {
     font-size: 0.85rem;
   }
-  .book-details {
-    padding: 1rem;
+  article figure img{
+    width: 12rem;
   }
-  .book-details img {
-    max-width: 80%;
-  }
+
   section h2 {
     font-size: 1.25rem;
     margin-bottom: 0.5rem;

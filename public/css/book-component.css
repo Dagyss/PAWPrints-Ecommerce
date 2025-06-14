@@ -19,19 +19,23 @@
 }
 
 .book figure img {
+    border-radius: .5rem;
     max-width: 100%;
     width: 80vw;
 
 }
 
 .book h3 {
+    text-align: center;
     font-size: 1rem;
 }
 
 .book button {
     border-radius: 0;
-    padding: 5px;
-    margin: 5px 0;
+    padding: .4rem 4rem;
+    border-radius: .5rem;
+    display: flex;
+    margin: .5rem auto;
     font-size: 0.9rem;
 }
 
