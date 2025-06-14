@@ -13,7 +13,7 @@ export default class BookController {
         this.filterForm = filterForm;
         this.paginationContainer = paginationContainer;
 
-        this.pageSize = 8;
+        this.setPageSizeBasedOnWidth();
         this.currentPage = 1;
         // libros originales
         this.originalBooks = [];
@@ -98,6 +98,18 @@ export default class BookController {
         this.filteredBooks = [...this.originalBooks];
         // evento que decide si se muestra la paginación tradicional o el infinito
         this.handleViewportChange(this.mql);
+    }
+
+    setPageSizeBasedOnWidth() {
+        const width = window.innerWidth;
+
+        if (width >= 1230) {
+            this.pageSize = 9;
+        } else if (width >= 900 && width <= 1229) {
+            this.pageSize = 10;
+        } else {
+            this.pageSize = 5;
+        }
     }
 
     handleViewportChange(e) {

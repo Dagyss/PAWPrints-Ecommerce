@@ -51,8 +51,7 @@ fieldset {
 fieldset ul {
     display: flex;
     list-style: none;
-    padding: 0;
-    margin: 0;
+    flex-wrap: wrap;
     gap: 10px;
 }
 
@@ -75,11 +74,10 @@ form button[type="submit"] {
 .books {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 10px;
-    margin: 10px;
+    align-items: center;
+    gap: 1rem;
     justify-content: space-between;
+    flex-direction: column;
 }
 
 .no_content {
@@ -176,7 +174,7 @@ form button[type="submit"] {
     .content {
         display: flex;
         flex-direction: row;
-        width: 70%;
+        width: 90%;
         margin: 0 auto;
         gap: 20px;
         align-items: flex-start;
@@ -197,7 +195,7 @@ form button[type="submit"] {
 
     .books {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         align-items: start;
         gap: 10px;
         justify-content: start;
@@ -227,18 +225,18 @@ form button[type="submit"] {
 
 }
 
-@media (min-width: 1230px) {
-    .books {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 10px;
-        justify-content: start;
-        margin-top: 10px;
-    }
-}
-
 @media (max-width: 1150px) {
     .books {
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1400px) {
+    .books {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        justify-content: start;
+        margin-top: 10px;
     }
 }

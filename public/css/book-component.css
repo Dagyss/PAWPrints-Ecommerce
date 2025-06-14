@@ -1,15 +1,11 @@
 .book {
-    position: relative;
     background-color: var(--background-contents);
     padding: 10px 15px 5px;
     margin: 2px;
     box-shadow: 0px 5px 4px 1px rgba(0, 0, 0, 0.4);
-    display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 45%;
-    max-width: 250px;
+    max-width: 100%;
 }
 
 .book p {
@@ -18,24 +14,21 @@
     font-size: 0.8rem;
 }
 
-.book figure img {
-    width: 100%;
+.book figure {
+    max-width: 100%;
 }
 
-.book h3{
+.book figure img {
+    max-width: 100%;
+    width: 80vw;
+
+}
+
+.book h3 {
     font-size: 1rem;
 }
 
-.book figure {
-    width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden; 
-}
-
-.book button{
+.book button {
     border-radius: 0;
     padding: 5px;
     margin: 5px 0;
@@ -43,7 +36,22 @@
 }
 
 @media (min-width: 900px) {
+    .book{
+        height: 30rem;
+    }
+    
+    .book figure img {
+        height: 17rem;
+    }
+}
+
+@media (min-width: 1200px) {
     .book {
         width: 100%;
+        height: 100%;
+    }
+
+    .book figure img {
+        height: 20rem;
     }
 }
