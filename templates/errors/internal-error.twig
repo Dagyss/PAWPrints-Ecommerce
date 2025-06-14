@@ -4,13 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Error 500 - Servidor</title>
-    <link rel="stylesheet" href="/css/not-found.css">
+    <link rel="stylesheet" href="/css/errors/not-found.css">
+    <script src="./js/pages/accountMenu.js"></script>
 </head>
 <body itemscope itemtype="https://schema.org/WebPage">
+    {% include 'parts/header.twig' with {
+        'loggedUser': loggedUser,
+        'username': username,
+        'menu_nav': menu_nav
+    } %}
     <section class="not-found-container" itemscope itemtype="https://schema.org/CreativeWork">
         <h1>Error 500</h1>
         <p>Error interno del servidor.</p>
         <a href="/" class="back-home">Volver al inicio</a>
     </section>
+    {% include 'parts/footer.twig' %}
 </body>
 </html>
