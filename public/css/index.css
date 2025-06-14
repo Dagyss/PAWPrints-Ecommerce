@@ -4,11 +4,12 @@
 @import url("./carousel.css");
 @import url('./footer.css');
 
-.carousel-section{
+.carousel-section {
   margin: 2rem 0;
 }
-.carousel-section h2{
-  margin-left: 2rem;
+
+.carousel-section h2 {
+  text-align: center;
 }
 
 .carousel-wrapper {
@@ -16,13 +17,49 @@
   overflow: hidden;
 }
 
-.books-carousel, .books-carousel-best-sales {
-  margin: 0 4rem;
+.books-carousel,
+.books-carousel-best-sales {
+  margin: 0 2rem;
   display: flex;
   gap: 1rem;
   scroll-behavior: smooth;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+}
+
+.books-carousel::-webkit-scrollbar,
+.books-carousel-best-sales::-webkit-scrollbar {
+  height: .8rem;
+}
+
+.books-carousel::-webkit-scrollbar-track,
+.books-carousel-best-sales::-webkit-scrollbar-track {
+  background: var(--contrast-text-color);
+  border-radius: .5rem;
+}
+
+.books-carousel::-webkit-scrollbar-thumb,
+.books-carousel-best-sales::-webkit-scrollbar-thumb {
+  background-color: var(--background-contents); 
+  border-radius: .5rem;
+  border: 2px solid var(--contrast-text-color);
+}
+
+.books-carousel::-webkit-scrollbar-thumb:hover,
+.books-carousel-best-sales::-webkit-scrollbar-thumb:hover {
+  background-color: var(--primary-color);
+}
+
+.books-carousel .book {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.books-carousel-best-sales .book {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .book-card {
@@ -39,17 +76,39 @@
   margin: 0;
 }
 
+.carousel-wrapper button:hover{
+  border: .2rem solid var(--contrast-text-color);
+}
+
 .book img {
-  width: 20rem;
-  height: 30rem;
+  object-fit: cover;
+  width: 16rem;
+  height: 26rem;
 }
 
 .book img:hover {
-  border: .5rem solid var(--primary-color);
+  animation: zoomIn 0.8s;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.book img:hover {
+  border: .2rem solid var(--primary-color);
+  border-radius: .5rem;
 }
 
 
-.book-card__footer{
+.book-card__footer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -68,10 +127,14 @@
   font-size: 1.5rem;
 }
 
-.nav.prev, .nav.prev-best-sales {
+.nav.prev,
+.nav.prev-best-sales {
   left: .2rem;
+  opacity: .7;
 }
 
-.nav.next, .nav.next-best-sales {
+.nav.next,
+.nav.next-best-sales {
   right: .2rem;
+  opacity: .7;
 }

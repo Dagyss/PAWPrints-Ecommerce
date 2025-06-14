@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     bestsellersComponent.render();
 
     const setupNav = (container, btnPrev, btnNext) => {
-        const scrollAmount = container.clientWidth; // ancho visible
+        const scrollAmount = container.clientWidth + 11; // ancho visible
         btnPrev.addEventListener('click', () =>
           container.scrollBy({ left: -scrollAmount, behavior: 'smooth' })
         );

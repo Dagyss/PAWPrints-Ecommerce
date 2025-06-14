@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   nextBestSales.addEventListener("click", () => {
+    
     booksCarouselBestSales.scrollBy({
       left: cardWidthBestSales,
       behavior: "smooth",

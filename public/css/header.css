@@ -354,6 +354,22 @@ h1 a {
         overflow: hidden;
     }
 
+    .desktop-nav ul li a:hover {
+      animation: zoomIn 0.8s;
+    }
+
+    @keyframes zoomIn {
+        from {
+            transform: scale(1.2);
+            opacity: 0;
+        }
+
+        to {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
     .desktop-nav ul li a::before {
         content: '';
         position: absolute;

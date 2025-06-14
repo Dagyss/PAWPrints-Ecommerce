@@ -58,4 +58,19 @@
     .book figure img {
         height: 20rem;
     }
+    .book figure img:hover {
+      animation: zoomIn 0.8s;
+    }
+
+    @keyframes zoomIn {
+        from {
+            transform: scale(1.2);
+            opacity: 0;
+        }
+
+        to {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
 }
