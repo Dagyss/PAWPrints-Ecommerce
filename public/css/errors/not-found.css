@@ -2,6 +2,11 @@
 @import url('../header.css');
 @import url('../footer.css');
 
+
+main :not(h2) {
+    display: grid;
+}
+
 .not-found-container {
     text-align: center;
     padding: 40px;
@@ -28,8 +33,19 @@
     border: 1px solid var(--contrast-text-color);
     border-radius: 2rem;
     cursor: pointer;
+    width: 60%;
+    justify-self: center;
 }
 
 .back-home:hover {
     background-color: var(--background-contents);
+}
+
+main search{
+    display: none;
+}
+
+main h2 {
+    margin-top: 1rem;
+    width: 90%;
 }

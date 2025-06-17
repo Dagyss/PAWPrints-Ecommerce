@@ -25,25 +25,32 @@ document.addEventListener('DOMContentLoaded', async () => {
     bestsellersComponent.render();
 
     const setupNav = (container, btnPrev, btnNext) => {
-        const scrollAmount = container.clientWidth + 11; // ancho visible
-        btnPrev.addEventListener('click', () =>
-          container.scrollBy({ left: -scrollAmount, behavior: 'smooth' })
-        );
-        btnNext.addEventListener('click', () =>
-          container.scrollBy({ left: scrollAmount, behavior: 'smooth' })
-        );
-      };
+      const card = container.querySelector('.book');
+      if (!card) return;
     
-      setupNav(
-        sugerenciasContainer,
-        document.querySelector('.prev'),
-        document.querySelector('.next')
+      // ancho de la tarjeta incluyendo margin/gap
+      const style = getComputedStyle(container);
+      const gap   = parseInt(style.gap) || 0;
+      const scrollAmount = card.offsetWidth + gap;
+    
+      btnPrev.addEventListener('click', () =>
+        container.scrollBy({ left: -scrollAmount, behavior: 'smooth' })
       );
-      setupNav(
-        bestsellersContainer,
-        document.querySelector('.prev-best-sales'),
-        document.querySelector('.next-best-sales')
+      btnNext.addEventListener('click', () =>
+        container.scrollBy({ left: scrollAmount, behavior: 'smooth' })
       );
+    };
+    
+    setupNav(
+      sugerenciasContainer,
+      document.querySelector('.prev'),
+      document.querySelector('.next')
+    );
+    setupNav(
+      bestsellersContainer,
+      document.querySelector('.prev-best-sales'),
+      document.querySelector('.next-best-sales')
+    );
 
   } catch (err) {
     console.error('No se pudieron cargar los libros para el home:', err);

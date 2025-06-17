@@ -181,11 +181,11 @@
 
 @media (min-width: 769px) {
     #first-banner, #second-banner {
-        height: 70vh;
+        height: 100vh;
     }
 
     .carousel-images img {
-        height: 70vh;
+        height: 100vh;
     }
 
     .carousel-button {

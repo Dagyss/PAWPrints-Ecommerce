@@ -25,11 +25,13 @@
   scroll-behavior: smooth;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  scrollbar-width: none;        
+  -ms-overflow-style: none;  
 }
 
 .books-carousel::-webkit-scrollbar,
 .books-carousel-best-sales::-webkit-scrollbar {
-  height: .8rem;
+  display: none;
 }
 
 .books-carousel::-webkit-scrollbar-track,
@@ -64,9 +66,13 @@
 
 .book-card {
   flex: 0 0 calc((100% - 4rem) / 5);
-  scroll-snap-align: start;
   background-color: var(--background-contents);
   border-radius: .2rem;
+}
+
+.books-carousel .book,
+.books-carousel-best-sales .book {
+  scroll-snap-align: start;
 }
 
 .book figure {
@@ -137,4 +143,49 @@
 .nav.next-best-sales {
   right: .2rem;
   opacity: .7;
+}
+
+
+
+.carousel-wrapper {
+  position: relative;
+}
+
+.carousel-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 2rem;
+  width: 3rem;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(to left, var(--background-contents), transparent);
+}
+
+
+@media screen and (max-width: 900px) {
+  .carousel-thumbnails{
+    display: none;
+  }
+  .carousel-images img{
+    height: 100vh;
+    object-fit: fill;
+  }
+
+  #first-banner, #second-banner{
+    height: 100vh;
+  }
+
+  .carousel-button{
+    display: none;
+  }
+
+ 
+}
+
+@media screen and (max-width: 1024px){
+  .nav.next, .nav.prev, .nav.next-best-sales, .nav.prev-best-sales{
+    display: none;
+  }
+  
 }

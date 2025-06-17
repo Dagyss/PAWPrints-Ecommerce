@@ -100,6 +100,8 @@ form button[type="submit"] {
     align-items: center;
     gap: 0.5rem;
     margin-top: 1rem;
+    flex-direction: row;
+    margin-bottom: 1rem;
 }
 
 .page-btn {
@@ -154,15 +156,25 @@ form button[type="submit"] {
     font-weight: bold;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 899px) {
     main :not(h2) {
-        display: grid;
+        display: flex;
+        flex-direction: column;
     }
 
     nav[aria-label="breadcrumb"] {
         width: 70%;
         margin: 0 auto;
         margin-bottom: 20px;
+        flex-direction: row;
+    }
+
+    .breadcrumb-ul{
+        flex-direction: row;
+    }
+
+    .breadcrumb-li{
+        flex-direction: row;
     }
 
     main h2 {
@@ -185,6 +197,7 @@ form button[type="submit"] {
     }
 
     .content search {
+        
         margin: 0;
         border-radius: 20px 0 0;
     }
@@ -210,6 +223,8 @@ form button[type="submit"] {
     fieldset li label,
     fieldset label {
         display: flex;
+        flex-direction: row;
+        gap: 5px;
     }
 
     label input {
@@ -231,12 +246,18 @@ form button[type="submit"] {
     }
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 1640px) {
     .books {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 10px;
         justify-content: start;
         margin-top: 10px;
+    }
+}
+
+@media (max-width: 1640px) {
+    .books {
+        
     }
 }
