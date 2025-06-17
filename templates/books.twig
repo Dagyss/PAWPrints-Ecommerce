@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./css/books.css" />
     <script type="module" src="./js/pages/Books.js"></script>
     <script src="./js/pages/accountMenu.js"></script>
+    <script src="./js/pages/matchFilterHeight.js"></script>
     <title>Libros - PAWPrints</title>
 </head>
 <body itemscope itemtype="https://schema.org/WebPage">
@@ -21,9 +22,9 @@
 
     <main>
         <nav aria-label="breadcrumb">
-            <ul>
-                <li><a href="./">Home</a></li>
-                <li><span>Libros</span></li>
+            <ul class="breadcrumb-ul">
+                <li class="breadcrumb-li"><a href="./">Home</a></li>
+                <li class="breadcrumb-li"><span>Libros</span></li>
             </ul>
         </nav>
 
@@ -35,7 +36,7 @@
                 <button class="button-filtros" type="button" aria-label="Abrir menú de filtros">Filtrar</button>
                 <button class="button-ordenar" type="button" aria-label="Abrir menú de Ordenar Por">Ordenar Por</button>
             </section>
-
+        
             <search>
                 <form id="form-filtros">
                     <fieldset class="filtro">
@@ -125,5 +126,6 @@
     </main>
 
     {% include 'parts/footer.twig' %}
+    
 </body>
 </html>

@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const filterBtn = document.querySelector('.button-filtros');
   const orderBtn = document.querySelector('.button-ordenar');
 
-  const mql = window.matchMedia('(max-width: 900px)');
+  const mql = window.matchMedia('(max-width: 901x)');
   // evento para saber si estamos en mobile
   const setupMobileToggle = e => {
     if (e.matches) {

@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Error 404 - Página no encontrada</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/books.css" />
     <link rel="stylesheet" href="/css/errors/not-found.css">
+    <script type="module" src="./js/pages/Books.js"></script>
     <script src="./js/pages/accountMenu.js"></script>
 </head>
 <body itemscope itemtype="https://schema.org/WebPage">
@@ -13,11 +16,97 @@
         'username': username,
         'menu_nav': menu_nav
     } %}
-    <section class="not-found-container" itemscope itemtype="https://schema.org/CreativeWork">
-        <h1>Error 404</h1>
-        <p>La página que estás buscando no existe.</p>
-        <a href="/" class="back-home">Volver al inicio</a>
-    </section>
+    <main>
+        <section class="not-found-container" itemscope itemtype="https://schema.org/CreativeWork">
+            <h1>Error 404</h1>
+            <p>La página que estás buscando no existe.</p>
+            <a href="javascript:history.back()" class="back-home">Volver atras</a>
+        </section>
+        <h2>Tambien te puede interesar: </h2>
+        <search>
+                <form id="form-filtros">
+                    <fieldset class="filtro">
+                        <legend>
+                            <strong>
+                                Ordenar
+                            </strong>
+                        </legend>
+                        <label>Ordenar por:</label>
+                        <select id="orden" name="orden">
+                            <option value="novedades" selected>Novedades</option>
+                            <option value="ofertas">Ofertas</option>
+                            <option value="mas_vendidos">Más vendidos</option>
+                            <option value="precio_asc">Precio: Menor a mayor</option>
+                            <option value="precio_desc">Precio: Mayor a menor</option>
+                        </select>
+                    </fieldset>
+
+                    <fieldset class="filtro">
+                        <legend>
+                            <strong>
+                                Categorías
+                            </strong>
+                        </legend>
+                        <ul>
+                            <li><label><input type="checkbox" name="categorias[]" value="terror"> Terror</label></li>
+                            <li><label><input type="checkbox" name="categorias[]" value="ciencia ficción"> Ciencia Ficción</label></li>
+                            <li><label><input type="checkbox" name="categorias[]" value="misterio"> Misterio</label></li>
+                            <li><label><input type="checkbox" name="categorias[]" value="romance"> Romance</label></li>
+                        </ul>
+                    </fieldset>
+
+                    <fieldset class="filtro">
+                        <legend>
+                            <strong>
+                                Precio
+                            </strong>
+                        </legend>
+                        <label>Desde</label>
+                        <input id="precioMin" type="number" name="precio_min" placeholder="$ Precio mínimo">
+                        <label>Hasta</label>
+                        <input id="precioMax" type="number" name="precio_max" placeholder="$ Precio máximo">
+                    </fieldset>
+
+                    <fieldset class="filtro">
+                        <legend>
+                            <strong>
+                                Autor
+                            </strong>
+                        </legend>
+                        <label>Buscar autor:</label>
+                        <input id="autor" type="text" name="autor" placeholder="Buscar autor">
+                    </fieldset>
+
+                    <fieldset class="filtro" id="filtro-idioma">
+                        <legend>
+                            <strong>
+                                Idioma
+                            </strong>
+                        </legend>
+                        <ul>
+                            <li><label><input type="checkbox" name="idiomas[]" value="ingles"> Inglés</label></li>
+                            <li><label><input type="checkbox" name="idiomas[]" value="español"> Español</label></li>
+                            <li><label><input type="checkbox" name="idiomas[]" value="frances"> Francés</label></li>
+                            <li><label><input type="checkbox" name="idiomas[]" value="portugues"> Portugués</label></li>
+                        </ul>
+                    </fieldset>
+
+                    <fieldset class="filtro">
+                        <legend>
+                            <strong>
+                                Formato
+                            </strong>
+                        </legend>
+                        <label><input type="checkbox" name="formatos[]" value="digital"> E-book</label>
+                        <label><input type="checkbox" name="formatos[]" value="físico"> Físico</label>
+                    </fieldset>
+                </form>
+            </search>
+        <section class="books-wrapper" itemscope itemtype="https://schema.org/ItemList">
+                <section class="books" id="listaLibros" itemprop="itemListElement"></section>
+                <nav class="pagination" id="paginador"></nav>
+        </section>
+    </main>
     {% include 'parts/footer.twig' %}
 </body>
 </html>
