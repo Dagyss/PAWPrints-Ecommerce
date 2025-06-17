@@ -145,9 +145,7 @@
   opacity: .7;
 }
 
-.nav.next, .nav.prev, .nav.next-best-sales, .nav.prev-best-sales{
-  display: none;
-}
+
 
 .carousel-wrapper {
   position: relative;
@@ -183,5 +181,11 @@
   }
 
  
+}
 
+@media screen and (max-width: 1024px){
+  .nav.next, .nav.prev, .nav.next-best-sales, .nav.prev-best-sales{
+    display: none;
+  }
+  
 }
