@@ -24,8 +24,12 @@ class PageController extends AbstractController
 
     public function login()
     {
+        $errors = $_SESSION['errors'] ?? [];
+        $success = $_SESSION['success'] ?? null;
+
         $this->render('login.twig', [
-            'errors'     => $_SESSION['errors'] ?? [],
+            'errors'     => $errors,
+            'success'    => $success,
             'loggedUser' => getLoggedUser() ?? null,
             'username'   => getLoggedUsername() ?? null,
         ]);
@@ -34,14 +38,21 @@ class PageController extends AbstractController
 
     public function createAccount()
     {
+        $errors = $_SESSION['errors'] ?? [];
+        $success = $_SESSION['success'] ?? null;
+        $old = $_SESSION['old'] ?? [];
+
+        unset($_SESSION['errors'], $_SESSION['success'], $_SESSION['old']);
+
         $this->render('create-account.twig', [
-            'errors'     => $_SESSION['errors'] ?? [],
-            'success'    => $_SESSION['success'] ?? null,
+            'errors'     => $errors,
+            'success'    => $success,
+            'old'        => $old,
             'loggedUser' => getLoggedUser() ?? null,
             'username'   => getLoggedUsername() ?? null,
         ]);
-        unset($_SESSION['errors'], $_SESSION['success']);
     }
+
 }
 
 ?>
