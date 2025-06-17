@@ -29,6 +29,7 @@
                     {% set total = 0 %}
                     {% for item in cart %}
                         {% set subtotal = item.precio * item.cantidad %}
+                        {% set total = total + subtotal %}
                         <article class="cart-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/OrderItem">
                             <figure>
                                 <a href="/book?id={{ item.id | e }}" itemprop="url">
@@ -51,14 +52,13 @@
                                 </div>
     
                                 <div class="cart-controls">
-                                    <label for="quantity{{ loop.index0 | e }}" class="visually-hidden">Cantidad</label>
                                     <input 
                                         type="number" 
                                         id="quantity{{ loop.index0 | e }}" 
                                         min="1" 
+                                        max="10"  
                                         value="{{ item.cantidad | e }}" 
                                         class="cart-quantity"
-                                        disabled
                                         itemprop="orderQuantity"
                                     >
                                     <p class="cart-price">
@@ -66,11 +66,6 @@
                                             <span itemprop="priceCurrency">ARS</span>
                                             <span itemprop="price">{{ item.precio|number_format(2, ',', '.') | e }}</span>
                                         </span>
-                                    </p>
-                                    <p class="subtotal">
-                                        Subtotal: <span itemprop="price">{{ subtotal|number_format(2, ',', '.') | e }}</span>
-                                        <meta itemprop="priceCurrency" content="ARS">
-                                    </p>
                                 </div>
                             </div>
                         </article>
@@ -91,7 +86,8 @@
             </section>
         </div>
     </main>
-
     {% include 'parts/footer.twig' %}
+    <script src="/js/pages/calcularTotal.js"></script>
+
 </body>
 </html>
