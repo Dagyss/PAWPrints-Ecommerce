@@ -30,6 +30,7 @@
 
                 {% if cart is not empty %}
                     {% set total = 0 %}
+                    <div id="order-items-container">
                     {% for item in cart %}
                         {% set subtotal = item.precio * item.cantidad %}
                         <article class="order-summary-item" itemprop="orderItem" itemscope itemtype="https://schema.org/OrderItem">
@@ -60,11 +61,15 @@
                         </article>
                         {% set total = total + subtotal %}
                     {% endfor %}
-                    <p class="total">Total: $ <span itemprop="price">{{ total|number_format(2, ',', '.') }}</span> <meta itemprop="priceCurrency" content="ARS"></p>
+                    </div>
+
+                    <div id="order-pagination"></div>
+
+                    <p class="total">Total: $ <span itemprop="price">{{ total|number_format(2, ',', '.') }}</span> …</p>
                 {% else %}
                     <p>No hay productos en tu carrito.</p>
                 {% endif %}
-            </section>
+                </section>
 
             <section class="checkout-form" itemscope itemtype="https://schema.org/CheckoutPage">
                 <h2>Formulario de compra</h2>
@@ -146,5 +151,6 @@
     </main>
 
     {% include 'parts/footer.twig' %}
+<script type="module" src="/js/pages/checkoutPagination.js"></script>
 </body>
 </html>

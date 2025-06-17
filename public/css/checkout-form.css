@@ -141,7 +141,7 @@ fieldset.form-section label {
     text-align: right;
 }
 
-.pagination {
+.pagination-buttons {
     display: flex;
     justify-content: center;
     gap: 0.5rem;
@@ -167,6 +167,8 @@ fieldset.form-section label {
     padding-top: 1rem;
 }
 
+
+
 @media screen and (max-width: 768px) {
     .checkout-container {
         flex-direction: column;
@@ -186,7 +188,7 @@ fieldset.form-section label {
 @media screen and (max-width: 1024px) and (orientation:landscape){
     .checkout-container {
         flex-direction: column;
-        max-width: 50%;
+        max-width: 100%;
     }
 
 }
