@@ -55,6 +55,7 @@
                         placeholder="ej: Cosme Fulanito"
                         required
                         itemprop="name"
+                        value="{{ old.full_name|default('')|e }}"
                     >
                 </div>
 
@@ -67,6 +68,7 @@
                         placeholder="ej: email@gmail.com"
                         required
                         itemprop="email"
+                        value="{{ old.email|default('')|e }}"
                     >
                 </div>
 

@@ -41,7 +41,17 @@ class AuthController extends AbstractController {
         }
 
         if ($errors) {
-            $_SESSION['errors'] = $errors;
+           $_SESSION['errors'] = $errors;
+    
+            $_SESSION['old'] = [
+                'full_name' => $full_name,
+                'email'     => $email
+            ];
+
+            if (in_array("El email ingresado ya se encuentra en uso.", $errors)) {
+                $_SESSION['old']['email'] = '';
+            }
+
             header('Location: /create-account');
             exit;
         }
@@ -57,8 +67,10 @@ class AuthController extends AbstractController {
             exit;
             
         }
-        $_SESSION['success'] = "Se creo correctamente el usuario " . $email;
-        header('Location: /create-account');
+        $_SESSION['success'] = [
+            'email'     => $email
+        ];
+        header('Location: /login');
         exit;
     }
 
