@@ -20,6 +20,7 @@ main h2 {
 
 
 .form-content{
+  background: var(--background-contents);
   display: flex;
   flex-direction: column;
   border: 1px solid var(--primary-color);
@@ -39,8 +40,9 @@ main h2 {
 .form-content input, select {
   height: 2rem;
   margin-bottom: 1rem;
-  padding-right: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 5rem;
+  width: 100%;
+  padding-left: 1rem;
 }
 
 .form-content textarea {
@@ -59,15 +61,77 @@ main h2 {
   border:1px solid #fff;
   padding:1rem 2rem;
   border-radius:28px;
-  font-size: 1rem;
+  font-size: 2rem;
   cursor: pointer;
   margin:2rem auto 1rem auto;
   max-width: 60%;
-
+  width: 40%;
 }
 
-  /*@media (max-width: 1150px) {
-    .content{
-       grid-template-columns: repeat(1, 1fr);
+.isbn-input{
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.isbn-button{
+
+  margin-top: 2rem;
+  padding: 0.5rem 0.5rem;
+
+}
+.error-message {
+  color: #c00;
+  font-size: 0.9em;
+  margin-top: 4px;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+
+.hidden {
+  display: none !important;
+}
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #FFF;
+  border-bottom-color: var(--primary-color);
+  border-radius: 100%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  justify-self: center;
+  }
+
+  
+
+  @keyframes rotation {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+  } 
+
+  @media (max-width: 1024px) {
+    .form-content{
+      width: 90%;
     }
- }*/
+
+    .accept-button{
+      width: 50%;
+    }
+ }
+
+  @media (max-width: 840px) {
+    nav[aria-label="breadcrumb"] {
+      visibility:hidden;
+      height: 1px;
+    }
+
+    .accept-button{
+      width: 70%;
+    }
+ }

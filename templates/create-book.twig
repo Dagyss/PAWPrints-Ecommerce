@@ -35,20 +35,27 @@
         <form action="/create-book" method="post" class="form-content" enctype="multipart/form-data" itemprop="actionStatus" itemscope itemtype="https://schema.org/PublishAction">
 
             <div class="form-section" itemscope itemtype="https://schema.org/Book">
+
+                <div class="isbn-input">
+                    <label for="isbn">ISBN</label>
+                    <input type="text" id="isbn" name="isbn" placeholder="9780136006176" itemprop="isbn">
+
+                    <button type="button" id="buscar-isbn" class="isbn-button" itemprop="result">Buscar</button>
+                    
+                </div>
+                <span id="isbn-spinner" class="loader hidden"></span>
+                <div id="isbn-error" class="error-message hidden"></div>
                 <label for="titulo">Título</label>
-                <input type="text" id="titulo" name="titulo" placeholder="El Gran Gatsby" required itemprop="name">
+                <input type="text" id="titulo" name="titulo" placeholder="El Gran Gatsby" required itemprop="name" disabled>
 
                 <label for="autor">Autor</label>
-                <input type="text" id="autor" name="autor" placeholder="F. Scott Fitzgerald" required itemprop="author">
+                <input type="text" id="autor" name="autor" placeholder="F. Scott Fitzgerald" required itemprop="author" disabled>
 
                 <label for="editorial">Editorial</label>
-                <input type="text" id="editorial" name="editorial" placeholder="Scribner" itemprop="publisher">
+                <input type="text" id="editorial" name="editorial" placeholder="Scribner" itemprop="publisher" disabled >
 
-                <label for="isbn">ISBN</label>
-                <input type="text" id="isbn" name="isbn" placeholder="9780136006176" itemprop="isbn">
-
-                <label for="idioma">Idioma</label>
-                <select name="idioma" id="idioma" itemprop="inLanguage">
+                <label for="idioma">Idioma</label >
+                <select name="idioma" id="idioma" itemprop="inLanguage" disabled>
                     <option value="espanol">Español</option>
                     <option value="frances">Francés</option>
                     <option value="ingles">Inglés</option>
@@ -57,32 +64,33 @@
                 </select>
 
                 <label for="fecha_publicacion">Fecha de Publicación</label>
-                <input type="date" id="fecha_publicacion" name="fecha_publicacion" itemprop="datePublished">
+                <input type="date" id="fecha_publicacion" name="fecha_publicacion" itemprop="datePublished" disabled>
 
                 <label for="numero_paginas">Número de Páginas</label>
-                <input type="number" id="numero_paginas" name="numero_paginas" placeholder="100" itemprop="numberOfPages">
+                <input type="number" id="numero_paginas" name="numero_paginas" placeholder="100" itemprop="numberOfPages" disabled>
 
                 <label for="formato">Formato</label>
-                <select name="formato" id="formato" itemprop="bookFormat" itemscope itemtype="https://schema.org/BookFormatType">
+                <select name="formato" id="formato" itemprop="bookFormat" itemscope itemtype="https://schema.org/BookFormatType" style="background: white;">
                     <option value="digital">Digital</option>
                     <option value="fisico">Físico</option>
                 </select>
 
                 <label for="categoria">Categoría</label>
-                <select name="categoria" id="categoria" itemprop="genre">
+                <select name="categoria" id="categoria" itemprop="genre" disabled>
                     <option value="ciencia ficcion">Ciencia Ficción</option>
                     <option value="misterio">Misterio</option>
                     <option value="romance">Romance</option>
                     <option value="terror">Terror</option>
+                    <option value="otros"> Otros</option>
                 </select>
 
                 <label for="precio">Precio</label>
-                <input type="number" step="0.01" id="precio" name="precio" placeholder="20.15" required itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                <input type="number" step="100" id="precio" name="precio" placeholder="3500" required itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                 <meta itemprop="priceCurrency" content="ARS">
                 <meta itemprop="price" content="{{ precio | default('') | e }}">
 
                 <label for="sinopsis">Sinopsis</label>
-                <textarea id="sinopsis" name="sinopsis" rows="4" cols="50" itemprop="description"></textarea>
+                <textarea id="sinopsis" name="sinopsis" rows="4" cols="50" itemprop="description" disabled></textarea>
 
                 <label for="portada">Portada</label>
                 <input type="file" id="portada" name="portada" accept=".jpeg, .jpg, .png" hidden itemprop="image">
@@ -95,7 +103,7 @@
 
             </div>
 
-            <button type="submit" class="accept-button" itemprop="result">Aceptar</button>
+            <button type="submit" class="accept-button" itemprop="result">Crear</button>
         </form>
     </main>
 

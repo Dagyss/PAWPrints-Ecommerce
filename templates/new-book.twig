@@ -7,12 +7,16 @@
     <link rel="stylesheet" href="/css/not-found.css">
 </head>
 <body itemscope itemtype="https://schema.org/WebPage">
-
+ {% include 'parts/header.twig' with {
+        'loggedUser': loggedUser,
+        'username': username,
+        'menu_nav': menu_nav
+    } %}
     <section class="not-found-container" itemscope itemtype="https://schema.org/CreativeWork">
         <h1>¡Libro Creado!</h1>
         <p>El libro se creó correctamente.</p>
         <a href="/" class="back-home">Volver al inicio</a>
     </section>
-
+    {% include 'parts/footer.twig' %}
 </body>
 </html>
