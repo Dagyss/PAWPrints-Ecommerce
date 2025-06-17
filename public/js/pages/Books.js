@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // inicio el controlador
   controller.init().catch(console.error);
 
-  const filterBtn = document.querySelector('.buttom-filtros');
+  const filterBtn = document.querySelector('.button-filtros');
   const orderBtn = document.querySelector('.button-ordenar');
 
   const mql = window.matchMedia('(max-width: 900px)');
