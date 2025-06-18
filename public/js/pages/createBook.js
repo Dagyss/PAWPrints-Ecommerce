@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
       fre: 'frances',
       por: 'portugues'
     };
-  
+
     buscarBtn.addEventListener('click', async () => {
       const isbn = isbnInput.value.trim();
       if (!isbn) {

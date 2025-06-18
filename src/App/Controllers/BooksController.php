@@ -46,14 +46,6 @@ class BooksController extends AbstractController
         ]);
     }
 
-    public function createBook(): void
-    {
-        $this->render('create-book.twig', [
-            'loggedUser' => getLoggedUser() ?? null,
-            'username'   => getLoggedUsername() ?? null,
-        ]);
-    }
-
     private function exportCsv($books)
     {
         header('Content-Type: text/csv; charset=utf-8');
@@ -77,7 +69,15 @@ class BooksController extends AbstractController
         exit;
     }
 
-
+    public function createBook(): void
+    {
+        $this->render('create-book.twig', [
+            'error' => $_SESSION['error'] ?? null,
+            'loggedUser' => getLoggedUser() ?? null,
+            'username'   => getLoggedUsername() ?? null,
+        ]);
+        unset($_SESSION['error']);
+    }
     public function save(): void
     {
         $titulo = filter_var(trim($_POST['titulo'] ?? ''), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -98,13 +98,13 @@ class BooksController extends AbstractController
 
         if (!$titulo) {
             $_SESSION['error'] = 'El título es obligatorio';
-            header('Location: /books');
+            header('Location: /create-book');
             exit;
         }
         
         if ($fecha_publicacion && !preg_match('/^\d{4}-\d{2}-\d{2}$/', $fecha_publicacion)) {
             $_SESSION['error'] = 'Formato de fecha inválido';
-            header('Location: /books');
+            header('Location: /create-book');
             exit;
         }
 
@@ -171,11 +171,15 @@ class BooksController extends AbstractController
         $newId = $this->model->insertBook($book);
 
         if ($newId) {
-            $_SESSION['success'] = "Libro creado correctamente (ID: $newId).";
-            $this->render('new-book.twig', [
+            $_SESSION['success'] = "Libro creado correctamente:";
+            $this->render('create-book.twig', [
+                'success' => $_SESSION['success'],
+                'bookId' => $newId,
+                'bookTitle' => $book->__get('titulo'),
                 'loggedUser' => getLoggedUser() ?? null,
                 'username'   => getLoggedUsername() ?? null,
             ]);
+            unset($_SESSION['error']);
             exit;
         } else {
             $_SESSION['error'] = "Error al guardar el libro en la base de datos.";
