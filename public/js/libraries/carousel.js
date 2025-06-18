@@ -49,20 +49,29 @@ export class Carousel {
     }
   }
 
-  renderStructure() {
-    this.container.innerHTML = `
-      <div class="carousel-images"></div>
-      <div class="carousel-thumbnails"></div>
-      <button class="carousel-button prev">&#10094;</button>
-      <button class="carousel-button next">&#10095;</button>
-    `;
 
-    this.imageContainer = this.container.querySelector(".carousel-images");
-    this.thumbnailsContainer = this.container.querySelector(
-      ".carousel-thumbnails"
-    );
-    this.prevBtn = this.container.querySelector(".carousel-button.prev");
-    this.nextBtn = this.container.querySelector(".carousel-button.next");
+  renderStructure() {
+    while (this.container.firstChild) {
+      this.container.removeChild(this.container.firstChild);
+    }
+
+    this.imageContainer = document.createElement("div");
+    this.imageContainer.className = "carousel-images";
+    this.container.appendChild(this.imageContainer);
+
+    this.thumbnailsContainer = document.createElement("div");
+    this.thumbnailsContainer.className = "carousel-thumbnails";
+    this.container.appendChild(this.thumbnailsContainer);
+
+    this.prevBtn = document.createElement("button");
+    this.prevBtn.className = "carousel-button prev";
+    this.prevBtn.innerText = "❮";
+    this.container.appendChild(this.prevBtn);
+
+    this.nextBtn = document.createElement("button");
+    this.nextBtn.className = "carousel-button next";
+    this.nextBtn.innerText = "❯";
+    this.container.appendChild(this.nextBtn);
 
     this.images.forEach((img, i) => {
       const slide = document.createElement("img");
